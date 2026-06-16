@@ -435,6 +435,56 @@ const DEFAULTS=[
 {id:'s_elephant',name:'Elephant walks',area:'legs',desc:'Hinge to a forward fold, hands down, alternately bend each knee.',cues:'Walk it out — bend one knee, straighten the other, swap.',dur:30,bilateral:false,dynamic:true},
 {id:'s_scappush',name:'Scapular pushups',area:'shoulders',desc:'In a plank or against a wall, push and pinch the shoulder blades.',cues:'Keep arms straight — move only the shoulder blades.',dur:30,bilateral:false,dynamic:true},
 {id:'s_windmill',name:'Windmills / low-back rotations',area:'back',desc:'Stand wide, hinge forward, rotate to touch hand to opposite foot.',cues:'Reach one hand down, the other up. Alternate sides.',dur:30,bilateral:false,dynamic:true},
+// ── Additions from Lift Manual ──
+{id:'s_camel',name:'Camel pose',area:'back',desc:'Kneel, hands to heels, press hips forward and arch back.',cues:'Lift the chest, keep the neck long. Don\u2019t crunch the low back.',dur:30,bilateral:false},
+{id:'s_bridge',name:'Bridge pose',area:'back',desc:'On back, knees bent, lift hips toward the ceiling.',cues:'Press through the heels, squeeze the glutes.',dur:30,bilateral:false},
+{id:'s_wheel',name:'Wheel pose',area:'back',desc:'On back, hands by ears, press up into a full backbend.',cues:'Advanced. Warm up first. Press evenly through hands and feet.',dur:20,bilateral:false},
+{id:'s_bow',name:'Bow pose',area:'back',desc:'Face down, hold ankles, lift chest and thighs.',cues:'Kick the feet back into the hands to lift.',dur:25,bilateral:false},
+{id:'s_fish',name:'Fish pose',area:'shoulders',desc:'On back, prop onto forearms, lift chest, crown toward floor.',cues:'Open the chest and throat. Breathe into the ribs.',dur:30,bilateral:false},
+{id:'s_dancer',name:'Dancer pose',area:'legs',desc:'Stand on one leg, hold the other foot behind, reach forward.',cues:'Kick the back foot into the hand and lift. Switch sides.',dur:30,bilateral:true},
+{id:'s_eagle',name:'Eagle pose',area:'hips',desc:'Wrap one leg over the other, sink into a one-leg squat.',cues:'Wrap arms too for a full-body bind. Switch sides.',dur:30,bilateral:true},
+{id:'s_tree',name:'Tree pose',area:'hips',desc:'Foot to inner thigh or calf, balance and open the hip.',cues:'Press foot and leg together. Find a still gaze.',dur:30,bilateral:true},
+{id:'s_halfmoon',name:'Half moon pose',area:'core',desc:'Balance on one hand and leg, top leg parallel to floor.',cues:'Stack the hips, open the chest skyward.',dur:25,bilateral:true},
+{id:'s_warrior1',name:'Warrior I',area:'hips',desc:'Lunge with back foot angled, arms overhead.',cues:'Sink the front knee, lift through the arms.',dur:35,bilateral:true},
+{id:'s_warrior2',name:'Warrior II',area:'hips',desc:'Wide stance, front knee bent, arms reaching out.',cues:'Gaze over the front hand, sink the hips.',dur:35,bilateral:true},
+{id:'s_warrior3',name:'Warrior III',area:'legs',desc:'Balance on one leg, torso and back leg parallel to floor.',cues:'Reach forward and back to lengthen. Switch sides.',dur:25,bilateral:true},
+{id:'s_revwarrior',name:'Reverse warrior',area:'core',desc:'From Warrior II, reach the front arm up and back.',cues:'Side-body opener. Keep the front knee bent.',dur:30,bilateral:true},
+{id:'s_humblewarrior',name:'Humble warrior',area:'shoulders',desc:'From Warrior I, clasp hands behind, fold inside the front leg.',cues:'Let the shoulders open as you fold forward.',dur:30,bilateral:true},
+{id:'s_extside',name:'Extended side angle',area:'core',desc:'Bent front knee, forearm to thigh, top arm reaches over.',cues:'One long line from back heel to top hand.',dur:35,bilateral:true},
+{id:'s_revtriangle',name:'Revolved triangle',area:'core',desc:'Straight legs, opposite hand to front foot, top arm up, twist.',cues:'Square the hips, rotate from the spine.',dur:35,bilateral:true},
+{id:'s_pyramid',name:'Pyramid pose',area:'legs',desc:'Front leg straight, fold over it with hips square.',cues:'Hinge from the hips, keep both legs straight.',dur:35,bilateral:true},
+{id:'s_runnerslunge',name:'Runner\u2019s lunge',area:'hips',desc:'Deep lunge, hands frame the front foot.',cues:'Drop the hips low, lengthen the back leg.',dur:40,bilateral:true},
+{id:'s_lizardtwist',name:'Twisted lizard',area:'hips',desc:'Lizard lunge with a quad-catch twist.',cues:'Reach back for the rear foot if you can. Switch.',dur:40,bilateral:true},
+{id:'s_seatedwide',name:'Seated wide-leg fold',area:'hips',desc:'Upavistha — wide legs, walk hands forward.',cues:'Hinge from the hips, keep the spine long.',dur:50,bilateral:false},
+{id:'s_headtoknee',name:'Head-to-knee fold',area:'legs',desc:'Janu sirsasana — one leg in, fold over the straight leg.',cues:'Lead with the chest toward the foot. Switch.',dur:45,bilateral:true},
+{id:'s_cowface',name:'Cow-face legs',area:'hips',desc:'Stack knees, fold forward over the legs.',cues:'Deep outer-hip stretch. Ease in slowly.',dur:45,bilateral:true},
+{id:'s_doublepigeon',name:'Double pigeon',area:'hips',desc:'Stack shins parallel, fold forward.',cues:'Fire-log pose. Flex both feet to protect knees.',dur:45,bilateral:true},
+{id:'s_seatedtwist',name:'Seated half twist',area:'back',desc:'Ardha Matsyendrasana — sit, cross one leg, twist.',cues:'Inhale tall, exhale deeper into the twist.',dur:35,bilateral:true},
+{id:'s_gate',name:'Gate pose',area:'core',desc:'Kneel, extend one leg out, side-bend over it.',cues:'Reach over the straight leg, open the side body.',dur:35,bilateral:true},
+{id:'s_crescentlunge',name:'Crescent moon lunge',area:'hips',desc:'High lunge, arms overhead, slight backbend.',cues:'Reach up and lift the chest. Sink the hips.',dur:35,bilateral:true},
+{id:'s_plow',name:'Plow pose',area:'back',desc:'On back, take legs overhead, toes toward floor.',cues:'Support the back with hands. Go gently.',dur:40,bilateral:false},
+{id:'s_legsupwall',name:'Legs up the wall',area:'legs',desc:'Lie on back, legs resting up the wall.',cues:'Fully restorative. Just breathe.',dur:90,bilateral:false},
+{id:'s_happybaby2',name:'Happy baby',area:'hips',desc:'On back, hold the outsides of the feet, knees wide.',cues:'Rock gently side to side. Relax the low back.',dur:40,bilateral:false},
+{id:'s_pancake',name:'Pancake fold',area:'hips',desc:'Wide seated legs, fold the torso toward the floor.',cues:'Patience pose \u2014 breathe and soften over time.',dur:60,bilateral:false},
+{id:'s_seatedfig4',name:'Seated figure-four (chair)',area:'hips',desc:'Sit, ankle over opposite knee, hinge forward.',cues:'Great at a desk. Keep the back flat.',dur:35,bilateral:true},
+{id:'s_shinbox',name:'Shin box switch',area:'hips',desc:'Seated, rotate knees side to side between 90/90.',cues:'Control the movement through the middle.',dur:40,bilateral:false,dynamic:true},
+{id:'s_squatmob',name:'Squat mobility twist',area:'hips',desc:'Deep squat, reach one arm up and rotate open.',cues:'Use the elbow to press the knee open.',dur:35,bilateral:true},
+{id:'s_toysoldier',name:'Toy soldier',area:'legs',desc:'Walk forward kicking straight legs up to opposite hand.',cues:'Dynamic hamstring \u2014 keep the leg straight.',dur:30,bilateral:false,dynamic:true},
+{id:'s_scapretract',name:'Scapula retraction',area:'shoulders',desc:'Pinch the shoulder blades together and release.',cues:'Slow squeezes \u2014 set the shoulders back and down.',dur:30,bilateral:false,dynamic:true},
+{id:'s_serratus',name:'Serratus wall slide',area:'shoulders',desc:'Forearms on wall, slide up while pushing in.',cues:'Push into the wall and reach tall.',dur:35,bilateral:false,dynamic:true},
+{id:'s_tspine',name:'Kneeling T-spine rotation',area:'back',desc:'Hand behind head, rotate the elbow up and open.',cues:'Follow the elbow with your eyes. Switch sides.',dur:35,bilateral:true,dynamic:true},
+{id:'s_openbook2',name:'Open book',area:'back',desc:'Side-lying, knees bent, sweep the top arm open.',cues:'Let the chest rotate toward the floor.',dur:40,bilateral:true,dynamic:true},
+{id:'s_wristcircles',name:'Wrist circles',area:'shoulders',desc:'Interlace fingers, circle the wrists both ways.',cues:'Full slow circles to warm the wrists.',dur:20,bilateral:false,dynamic:true},
+{id:'s_fingerext',name:'Finger extension stretch',area:'shoulders',desc:'Gently pull the fingers back, one hand then the other.',cues:'Open the palm and fingers fully. Switch.',dur:20,bilateral:true},
+{id:'s_thumb',name:'Thumb stretch',area:'shoulders',desc:'Gently draw the thumb back and down.',cues:'Light pressure \u2014 the thumb is delicate.',dur:15,bilateral:true},
+{id:'s_pelvictilt',name:'Pelvic tilt',area:'hips',desc:'On back, gently rock the pelvis flat and arched.',cues:'Small controlled movement. Find the neutral middle.',dur:30,bilateral:false,dynamic:true},
+{id:'s_anklerock',name:'Rocking ankle stretch',area:'legs',desc:'Kneel on one knee, rock the front knee over the toes.',cues:'Mobilize the ankle forward. Keep heel down.',dur:30,bilateral:true,dynamic:true},
+// ── NERVE FLOSSES (neural glides) ──
+{id:'s_floss_sciatic',name:'Sciatic nerve floss',area:'nerve',desc:'Seated, extend one knee while looking up, then bend knee and tuck chin.',cues:'GLIDE don\u2019t hold. Move smoothly, stop before any tingling. 8\u201310 slow reps.',dur:40,bilateral:true,floss:true},
+{id:'s_floss_median',name:'Median nerve floss',area:'nerve',desc:'Arm out to the side, palm up, extend wrist back; tilt head away then toward.',cues:'Gentle glide \u2014 never into pins/needles. Sync head and wrist. 8\u201310 reps.',dur:35,bilateral:true,floss:true},
+{id:'s_floss_ulnar',name:'Ulnar nerve floss',area:'nerve',desc:'Make an \u201cOK\u201d sign, bring it to the eye like a monocle, then extend arm out.',cues:'Light and smooth. Back off if you feel tingling. 8\u201310 reps.',dur:35,bilateral:true,floss:true},
+{id:'s_floss_radial',name:'Radial nerve floss',area:'nerve',desc:'Arm down and back, palm rotated out, flex the wrist; tilt head away.',cues:'Glide gently in and out. No holding, no pain. 8\u201310 reps.',dur:35,bilateral:true,floss:true},
+{id:'s_floss_femoral',name:'Femoral nerve floss',area:'nerve',desc:'Side-lying or standing, bend knee to grab foot behind, tuck and lift chin.',cues:'Combine hip extension with neck movement. Smooth glides, 8\u201310 reps.',dur:40,bilateral:true,floss:true},
 ];
 // Pre-built routines — reference stretch IDs from the library
 const PREBUILT=[
@@ -471,6 +521,7 @@ const GUIDE=[
   {q:'How long to hold?',a:'Static holds: 15–30s for general flexibility, 45–90s for deeper release (yin-style). PNF: cycle for 45–60s total. Dynamic: 30s of controlled reps. Consistency matters more than duration — daily short sessions beat occasional long ones.'},
   {q:'When to stretch',a:'Dynamic stretches before activity as a warm-up. Static and PNF after activity or as a standalone session when muscles are warm. Gentle stretching before bed can aid relaxation. Avoid deep static stretching of cold muscles.'},
   {q:'Bilateral stretches',a:'Stretches marked ↔ work one side at a time. Limber alerts you at the halfway point to switch sides so each side gets equal time.'},
+  {q:'Nerve flossing (neural glides)',a:'A gentle technique to mobilize a nerve through its range — useful for tightness, mild nerve irritation, or sciatica-type symptoms. Unlike stretching, you do NOT hold: you glide smoothly back and forth, usually 8–10 reps. Golden rule: stay out of pain and tingling. If you feel pins and needles, you\u2019ve gone too far — ease off. Move slowly and breathe. If symptoms are severe or persistent, see a physio rather than self-treating.'},
 ];
 
 /* ── STATE ── */
@@ -1080,12 +1131,13 @@ function assignBatch(i,id){if(!id)return;userImgs[id]=batchQueue[i];save();rende
 
 /* ── LIBRARY ── */
 function renderLib(){
-  const areas=['neck','shoulders','back','hips','legs','core'];
-  document.getElementById('lib-chips').innerHTML=['',...areas,'dynamic','pnf'].map(a=>`<button class="chip ${libArea===a?'on':''}" onclick="setArea('${a}')">${a||'all'}</button>`).join('');
+  const areas=['neck','shoulders','back','hips','legs','core','nerve'];
+  document.getElementById('lib-chips').innerHTML=['',...areas,'dynamic','pnf','floss'].map(a=>`<button class="chip ${libArea===a?'on':''}" onclick="setArea('${a}')">${a||'all'}</button>`).join('');
   const q=(document.getElementById('lib-search')?.value||'').toLowerCase();
   const filtered=lib.filter(s=>{
     if(libArea==='dynamic')return s.dynamic&&(!q||s.name.toLowerCase().includes(q));
     if(libArea==='pnf')return s.pnf&&(!q||s.name.toLowerCase().includes(q));
+    if(libArea==='floss')return s.floss&&(!q||s.name.toLowerCase().includes(q));
     return (!libArea||s.area===libArea)&&(!q||s.name.toLowerCase().includes(q)||s.area.includes(q)||(s.desc||'').toLowerCase().includes(q));
   });
   const el=document.getElementById('lib-list');
@@ -1094,7 +1146,7 @@ function renderLib(){
     const inS=session.some(q=>q.id===s.id);
     return`<div class="row">
       ${imgTag(s.id)}
-      <div class="ri" onclick="editStretchModal('${s.id}')" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}${s.dynamic?' · ⟳':''}</div></div>
+      <div class="ri" onclick="editStretchModal('${s.id}')" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}${s.floss?' · floss':''}${s.dynamic?' · ⟳':''}</div></div>
       ${inS?'<div class="qdot"></div>':''}
       <button class="btn sm ${inS?'red':''}" onclick="toggleSession('${s.id}')">${inS?'remove':'add'}</button>
     </div>`;
