@@ -171,6 +171,13 @@ select.fi{appearance:none}textarea.fi{resize:none}
 .snd-play{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--accent)}
 .snd-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-left:auto}
 .snd-check.on{background:var(--accent);border-color:var(--accent)}
+/* roomier two-line setup row */
+.qi2{padding:12px 16px;border-bottom:1px solid var(--border)}
+.qi2:last-child{border-bottom:none}
+.qi2-top{display:flex;align-items:center;gap:12px}
+.qi2-top .rn{font-size:15px;white-space:normal;line-height:1.25}
+.qi2-bot{display:flex;align-items:center;gap:10px;margin-top:8px;padding-left:34px}
+.qi2 .rn{white-space:normal}
 </style>
 </head>
 <body>
@@ -871,12 +878,16 @@ function renderSetup(){
   const el=document.getElementById('setup-list');
   if(!session.length){el.innerHTML='<div class="empty">Empty. Add stretches from the library.</div>';return;}
   el.innerHTML=session.map((s,i)=>`
-    <div class="qi" draggable="true" ondragstart="ds(event,${i})" ondragover="dov(event)" ondrop="dp(event,${i})">
-      <span class="dh">⠿</span>
-      ${imgTag(s.id)}
-      <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span>${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}</div></div>
-      <div class="stepper"><button onclick="adjDur(${i},-5)">−</button><span id="sd-${i}">${s.dur}s</span><button onclick="adjDur(${i},5)">+</button></div>
-      <button class="xbtn" onclick="removeSetup(${i})">✕</button>
+    <div class="qi2" draggable="true" ondragstart="ds(event,${i})" ondragover="dov(event)" ondrop="dp(event,${i})">
+      <div class="qi2-top">
+        <span class="dh">⠿</span>
+        ${imgTag(s.id)}
+        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span>${s.bilateral?' · ↔':''}</div></div>
+        <button class="xbtn" onclick="removeSetup(${i})">✕</button>
+      </div>
+      <div class="qi2-bot">
+        <div class="stepper"><button onclick="adjDur(${i},-5)">−</button><span id="sd-${i}">${s.dur}s</span><button onclick="adjDur(${i},5)">+</button></div>
+      </div>
     </div>`).join('');
 }
 function adjDur(i,d){session[i].dur=Math.max(5,Math.min(300,session[i].dur+d));document.getElementById('sd-'+i).textContent=session[i].dur+'s';save();}
