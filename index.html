@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" id="theme-color-meta" content="#0f0f0f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Limber</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+[data-theme="dark"]{--bg:#0f0f0f;--surface:#1a1a1a;--surface2:#242424;--border:#2e2e2e;--text:#f0ede8;--muted:#7a7570;--accent:#c8f060;--accent-dim:rgba(200,240,96,0.12);--danger:#ff6b6b;}
+[data-theme="light"]{--bg:#f5f3ef;--surface:#ffffff;--surface2:#f0ede8;--border:#e0dcd6;--text:#1a1814;--muted:#8a8480;--accent:#5a8a00;--accent-dim:rgba(90,138,0,0.1);--danger:#cc3333;}
+:root{--r:14px;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;padding-bottom:90px;max-width:480px;margin:0 auto;transition:background 0.2s,color 0.2s}
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:var(--bg);border-top:1px solid var(--border);z-index:99;padding-bottom:env(safe-area-inset-bottom,0)}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;letter-spacing:0.03em}
+.nb.on{color:var(--accent)}.nb svg{width:21px;height:21px;stroke-width:1.6}
+.pg{display:none;padding-top:16px}.pg.on{display:block}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 14px}
+.htitle{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;letter-spacing:-0.02em}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border)}
+.row:last-child{border-bottom:none}
+.ri{flex:1;min-width:0}.rn{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rm{font-size:12px;color:var(--muted);margin-top:2px}
+.pill{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);display:inline-block}
+.btn{padding:7px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;white-space:nowrap}
+.btn.ac{background:var(--accent);color:#0f0f0f;border-color:var(--accent);font-weight:500}
+[data-theme="light"] .btn.ac{color:#fff}
+.btn.sm{padding:5px 11px;font-size:12px;border-radius:8px}
+.btn.ghost{background:none;border-color:transparent;color:var(--muted)}
+.btn.red{color:var(--danger);background:none;border-color:transparent}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;padding:15px 16px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.rc:active{background:var(--surface2)}
+.search-wrap{padding:0 16px 10px}
+.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none}
+.search-input:focus{border-color:var(--accent)}
+.chips{display:flex;gap:6px;padding:0 16px 10px;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.qi{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.qi:last-child{border-bottom:none}
+.dh{color:var(--border);font-size:22px;flex-shrink:0;cursor:grab;user-select:none}
+.xbtn{background:none;border:none;color:var(--muted);font-size:18px;padding:4px;cursor:pointer;flex-shrink:0}
+.stepper{display:flex;align-items:center;flex-shrink:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.stepper button{width:34px;height:34px;background:var(--surface2);border:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.stepper button:active{background:var(--border)}
+.stepper span{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);min-width:36px;text-align:center;background:var(--surface)}
+.img-box{width:100%;height:180px;background:var(--surface2);position:relative;overflow:hidden;flex-shrink:0}
+.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.img-box .iph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:13px;cursor:pointer}
+.img-change{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:11px;padding:4px 9px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.timer-body{padding:10px 16px 0;display:flex;flex-direction:column;align-items:center}
+.tlabel{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:2px}
+.tname{font-family:'DM Mono',monospace;font-size:19px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;text-align:center}
+.cue-box{width:100%;margin-top:6px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted);line-height:1.5;min-height:36px;text-align:center}
+.phase-banner{width:100%;margin-top:6px;border-radius:10px;padding:7px 12px;text-align:center;font-size:13px;font-weight:500}
+.phase-banner.prep{background:rgba(255,200,50,0.12);color:#ffc832;border:1px solid rgba(255,200,50,0.25)}
+.phase-banner.side{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,240,96,0.3)}
+.phase-banner.pnf{background:rgba(120,180,255,0.12);color:#78b4ff;border:1px solid rgba(120,180,255,0.3)}
+.timer-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px;margin-bottom:6px}
+.ring-wrap{position:relative;width:120px;height:120px;flex-shrink:0;cursor:pointer;touch-action:none}
+.ring-wrap svg{transform:rotate(-90deg);width:120px;height:120px}
+.tnum{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Mono',monospace;font-size:32px;font-weight:300;letter-spacing:-0.04em;pointer-events:none}
+.breath-ring{position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;background:var(--accent-dim);transform:translate(-50%,-50%);pointer-events:none;opacity:0}
+.tctrl{display:flex;flex-direction:column;gap:8px;align-items:center}
+.pbtn{width:54px;height:54px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pbtn:active{transform:scale(0.93)}
+.pbtn svg{width:20px;height:20px;fill:#0f0f0f;stroke:none;margin-left:3px}
+.pbtn.playing svg{margin-left:0}
+[data-theme="light"] .pbtn svg{fill:#fff}
+.skip-row{display:flex;gap:8px}
+.sbtn{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sbtn:active{background:var(--surface2)}
+.sbtn svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
+.progbar{height:4px;background:var(--border);border-radius:2px;margin:6px 16px 0;overflow:hidden}
+.progbar-fill{height:100%;background:var(--accent);transition:width 0.5s}
+.plist{padding:8px 16px 20px;margin-top:4px}
+.pl-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:var(--muted)}
+.pl-row.cur{color:var(--text);font-weight:500}
+.pl-row.done{opacity:0.3;text-decoration:line-through}
+.pl-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0}
+.pl-row.done .pl-dot{background:#4a7c22}.pl-row.cur .pl-dot{background:var(--accent)}
+.pl-dur{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px}
+.done-pg{text-align:center;padding:60px 24px}
+.done-pg .big{font-size:60px;margin-bottom:12px}
+.done-pg h2{font-family:'DM Mono',monospace;font-size:26px;font-weight:300;margin-bottom:8px}
+.done-pg p{color:var(--muted);font-size:14px;margin-bottom:20px}
+.thumb{width:40px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--surface2)}
+.thumb-ph{width:40px;height:40px;border-radius:8px;background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--border);font-size:18px;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;align-items:flex-end;justify-content:center}
+.overlay.on{display:flex}
+.sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0));width:100%;max-width:480px;max-height:85vh;overflow-y:auto}
+.fl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;display:block;margin-top:12px}
+.fl:first-child{margin-top:0}
+.fi{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;margin-bottom:4px}
+.fi:focus{border-color:var(--accent)}
+select.fi{appearance:none}textarea.fi{resize:none}
+.srow{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border)}
+.srow:last-child{border-bottom:none}
+.slbl{font-size:14px}.ssub{font-size:12px;color:var(--muted);margin-top:2px}
+.empty{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;line-height:1.7}
+.slabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:0 20px 8px;font-family:'DM Mono',monospace;display:block}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.tog{position:relative;width:44px;height:26px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0;position:absolute}
+.tog-sl{position:absolute;inset:0;background:var(--border);border-radius:13px;cursor:pointer;transition:0.2s}
+.tog input:checked+.tog-sl{background:var(--accent)}
+.tog-sl:before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:0.2s}
+.tog input:checked+.tog-sl:before{transform:translateX(18px)}
+.build-stretch{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.build-stretch:last-child{border-bottom:none}
+.check-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.check-circle.on{background:var(--accent);border-color:var(--accent)}
+.check-circle.on::after{content:'✓';font-size:12px;color:#0f0f0f;font-weight:700}
+[data-theme="light"] .check-circle.on::after{color:#fff}
+.sec-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:8px 16px 6px;font-family:'DM Mono',monospace;display:block}
+.stat-grid{display:flex;gap:10px;margin:0 16px 10px}
+.stat-box{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.stat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:300;color:var(--accent)}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
+.guide-section{margin-bottom:8px}
+.guide-q{padding:14px 16px;font-size:15px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.guide-a{padding:0 16px 14px;font-size:14px;color:var(--muted);line-height:1.6;display:none}
+.guide-a.open{display:block}
+.cal-grid{display:flex;flex-wrap:wrap;gap:4px;padding:12px 16px}
+.cal-day{width:13px;height:13px;border-radius:3px;background:var(--surface2)}
+.cal-day.done{background:var(--accent)}
+</style>
+</head>
+<body>
+<!-- ROUTINES -->
+<div id="pg-routines" class="pg on">
+  <div class="hdr"><span class="htitle">routines</span>
+    <div style="display:flex;gap:6px">
+      <button class="btn sm" onclick="randomModal()">🎲 random</button>
+      <button class="btn sm ac" onclick="buildRoutineModal()">+ build</button>
+    </div>
+  </div>
+  <div id="today-banner"></div>
+  <div id="routine-list"></div>
+</div>
+
+<!-- SESSION SETUP (replaces queue) -->
+<div id="pg-setup" class="pg">
+  <div class="hdr"><span class="htitle" id="setup-title">session</span>
+    <button class="btn sm ac" onclick="startGo()">go →</button>
+  </div>
+  <span class="slabel" id="setup-count">0 stretches</span>
+  <div id="setup-list" class="card"></div>
+  <div style="padding:8px 16px"><button class="btn" style="width:100%" onclick="show('library')">+ add stretches</button></div>
+  <div id="setup-save-slot" style="padding:0 16px"><button class="btn" style="width:100%" onclick="saveSetupAsRoutine()">save as routine</button></div>
+</div>
+
+<!-- GO -->
+<div id="pg-go" class="pg"><div id="go-inner"></div></div>
+
+<!-- LIBRARY -->
+<div id="pg-library" class="pg">
+  <div class="hdr"><span class="htitle">library</span>
+    <div style="display:flex;gap:6px">
+      <button class="btn sm" onclick="show('guide')">? guide</button>
+      <button class="btn sm" onclick="batchImageModal()">⊞ images</button>
+      <button class="btn sm ac" onclick="addStretchModal()">+ custom</button>
+    </div>
+  </div>
+  <div class="search-wrap"><input class="search-input" id="lib-search" placeholder="Search 150+ stretches…" oninput="renderLib()"></div>
+  <div class="chips" id="lib-chips"></div>
+  <div id="lib-list" class="card"></div>
+</div>
+
+<!-- PROGRESS -->
+<div id="pg-progress" class="pg">
+  <div class="hdr"><span class="htitle">progress</span></div>
+  <div class="stat-grid">
+    <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-lbl">day streak</div></div>
+    <div class="stat-box"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl">sessions</div></div>
+    <div class="stat-box"><div class="stat-num" id="stat-mins">0</div><div class="stat-lbl">minutes</div></div>
+  </div>
+  <span class="sec-lbl">Last 35 days</span>
+  <div class="card"><div class="cal-grid" id="cal-grid"></div></div>
+  <span class="sec-lbl">Recent sessions</span>
+  <div id="history-list" class="card"></div>
+</div>
+
+<!-- GUIDE -->
+<div id="pg-guide" class="pg">
+  <div class="hdr"><span class="htitle">guide</span><button class="btn sm" onclick="show('library')">← back</button></div>
+  <div class="card" id="guide-content"></div>
+  <div style="padding:0 16px 20px"><p style="font-size:12px;color:var(--muted);line-height:1.6">Always warm up before deep stretching. Never bounce into a stretch (except controlled dynamic moves). Sharp pain means stop — stretching should feel like tension, not pain.</p></div>
+</div>
+
+<!-- SETTINGS -->
+<div id="pg-settings" class="pg">
+  <div class="hdr"><span class="htitle">settings</span></div>
+  <span class="sec-lbl">Appearance</span>
+  <div class="card"><div class="srow">
+    <div><div class="slbl">Theme</div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn sm" id="btn-dark" onclick="setTheme('dark')">Dark</button>
+      <button class="btn sm" id="btn-light" onclick="setTheme('light')">Light</button>
+    </div>
+  </div></div>
+  <span class="sec-lbl">Timing</span>
+  <div class="card"><div class="srow">
+    <div><div class="slbl">Prep time between stretches</div><div class="ssub">Adjustable to the second</div></div>
+    <div class="stepper"><button onclick="adjPrepTime(-1)">−</button><span id="set-prep">5s</span><button onclick="adjPrepTime(1)">+</button></div>
+  </div></div>
+  <span class="sec-lbl">Sounds &amp; Voice</span>
+  <div class="card">
+    <div class="srow"><div><div class="slbl">Voice cues</div><div class="ssub">Speaks switch-side, countdown, prompts</div></div>
+      <label class="tog"><input type="checkbox" id="tog-voice" onchange="saveSetting('voiceOn',this.checked)"><span class="tog-sl"></span></label></div>
+    <div class="srow"><div><div class="slbl">Countdown beeps</div><div class="ssub">Last 3 seconds of each stretch</div></div>
+      <label class="tog"><input type="checkbox" id="tog-beep" onchange="saveSetting('beepOn',this.checked)"><span class="tog-sl"></span></label></div>
+    <div class="srow"><div><div class="slbl">Switch-side alert</div><div class="ssub">Halfway cue for bilateral stretches</div></div>
+      <label class="tog"><input type="checkbox" id="tog-side" onchange="saveSetting('sideOn',this.checked)"><span class="tog-sl"></span></label></div>
+    <div class="srow"><div><div class="slbl">Prep-end beep</div><div class="ssub">Beep when stretch starts</div></div>
+      <label class="tog"><input type="checkbox" id="tog-prepbeep" onchange="saveSetting('prepBeepOn',this.checked)"><span class="tog-sl"></span></label></div>
+    <div class="srow"><div><div class="slbl">Breathing pacer</div><div class="ssub">Pulsing circle on holds over 40s</div></div>
+      <label class="tog"><input type="checkbox" id="tog-breath" onchange="saveSetting('breathOn',this.checked)"><span class="tog-sl"></span></label></div>
+    <div class="srow"><div><div class="slbl">Volume</div><div class="ssub" id="vol-label">80%</div></div>
+      <input type="range" min="0" max="1" step="0.05" id="set-vol" oninput="setVol(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+    <div class="srow"><div><div class="slbl">Tone</div><div class="ssub">Beep character</div></div>
+      <select id="set-wave" onchange="saveSetting('soundWave',this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:5px 10px;font-size:13px;font-family:'DM Sans',sans-serif">
+        <option value="sine">Sine (soft)</option><option value="triangle">Triangle (warm)</option><option value="square">Square (sharp)</option><option value="sawtooth">Sawtooth (buzz)</option>
+      </select></div>
+    <div class="srow"><div><div class="slbl">Pitch</div><div class="ssub" id="pitch-label">Normal</div></div>
+      <input type="range" min="0.5" max="2" step="0.1" id="set-pitch" oninput="setPitch(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+    <div class="srow"><button class="btn sm" onclick="testSounds()">▶ test sounds</button></div>
+  </div>
+  <span class="sec-lbl">Data</span>
+  <div class="card">
+    <div class="srow"><div><div class="slbl">Backup / export</div><div class="ssub">Download all your data as a file</div></div>
+      <button class="btn sm" onclick="exportData()">Export</button></div>
+    <div class="srow"><div><div class="slbl">Restore</div><div class="ssub">Import a backup file</div></div>
+      <button class="btn sm" onclick="document.getElementById('import-input').click()">Import</button></div>
+  </div>
+  <div style="padding:8px 16px 0"><span style="font-size:11px;color:var(--muted)">Limber · all data saved on this device</span></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nb on" data-p="routines" onclick="show('routines')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>routines</button>
+  <button class="nb" data-p="library" onclick="show('library')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>library</button>
+  <button class="nb" data-p="go" onclick="quickStart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>go</button>
+  <button class="nb" data-p="progress" onclick="show('progress')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>progress</button>
+  <button class="nb" data-p="settings" onclick="show('settings')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>settings</button>
+</nav>
+
+<div id="overlay" class="overlay" onclick="maybeClose(event)"><div class="sheet" id="sheet"></div></div>
+<input type="file" id="img-input" accept="image/*" style="display:none" onchange="onImgFile(event)">
+<input type="file" id="batch-input" accept="image/*" multiple style="display:none" onchange="onBatchFiles(event)">
+<input type="file" id="import-input" accept="application/json,.json" style="display:none" onchange="onImportFile(event)">
+
+<script>
+// ~150 stretch library
+const DEFAULTS=[
+// NECK
+{id:'s1',name:'Neck side tilt',area:'neck',desc:'Tilt ear toward shoulder. Hold each side.',cues:'Drop the shoulder away from your ear. Breathe.',dur:30,bilateral:true},
+{id:'s2',name:'Neck rotation',area:'neck',desc:'Slowly rotate chin toward each shoulder.',cues:'Move slowly, no forcing. Keep shoulders down.',dur:30,bilateral:true},
+{id:'s3',name:'Neck flexion',area:'neck',desc:'Drop chin to chest, hold.',cues:'Let the weight of your head do the work.',dur:30,bilateral:false},
+{id:'s4',name:'Chin tuck',area:'neck',desc:'Draw chin straight back, making a double chin.',cues:'Lengthen the back of the neck. Hold gently.',dur:20,bilateral:false},
+{id:'s5',name:'Upper trap stretch',area:'neck',desc:'Sit on one hand, tilt head to opposite side.',cues:'Gentle pressure with the free hand. Relax.',dur:30,bilateral:true},
+{id:'s6',name:'Levator scapulae stretch',area:'neck',desc:'Turn head 45°, look down toward armpit.',cues:'Feel it along the side-back of the neck.',dur:30,bilateral:true},
+{id:'s7',name:'Neck extension',area:'neck',desc:'Gently tip head back, look up.',cues:'Small range. Stop if any pinching.',dur:20,bilateral:false},
+// SHOULDERS
+{id:'s8',name:'Cross-body shoulder',area:'shoulders',desc:'Pull one arm across chest with the other.',cues:'Keep the shoulder down, away from the ear.',dur:30,bilateral:true},
+{id:'s9',name:'Overhead tricep',area:'shoulders',desc:'Reach arm overhead, bend elbow, push down.',cues:'Hand reaches down the spine. Gentle press.',dur:30,bilateral:true},
+{id:'s10',name:'Chest opener',area:'shoulders',desc:'Clasp hands behind back, lift and open chest.',cues:'Squeeze shoulder blades together.',dur:40,bilateral:false},
+{id:'s11',name:'Doorway pec stretch',area:'shoulders',desc:'Forearms on doorframe, step through.',cues:'Lean until you feel the chest open.',dur:30,bilateral:false},
+{id:'s12',name:'Wall chest stretch',area:'shoulders',desc:'Forearm on wall at 90°, rotate body away.',cues:'Turn the chest away from the wall.',dur:30,bilateral:true},
+{id:'s13',name:'Reverse prayer',area:'shoulders',desc:'Palms together behind back, fingers up.',cues:'Draw the elbows back and down.',dur:45,bilateral:false},
+{id:'s14',name:'Eagle arms',area:'shoulders',desc:'Cross arms at elbows, wrap forearms, lift.',cues:'Lift the elbows, spread the upper back.',dur:30,bilateral:true},
+{id:'s15',name:'Shoulder rolls',area:'shoulders',desc:'Roll shoulders backward in big circles.',cues:'Slow, full circles. Loosen up.',dur:25,bilateral:false},
+{id:'s16',name:'Behind-back clasp',area:'shoulders',desc:'One hand over shoulder, one up the back, clasp.',cues:'Use a towel if hands don\u2019t meet.',dur:35,bilateral:true},
+{id:'s17',name:'Cow-face arms',area:'shoulders',desc:'Gomukhasana arms — top elbow up, bottom elbow down.',cues:'Ease toward the clasp, don\u2019t force.',dur:35,bilateral:true},
+{id:'s18',name:'Wall angel',area:'shoulders',desc:'Back to wall, slide arms up and down.',cues:'Keep wrists and back touching the wall.',dur:40,bilateral:false},
+// WRISTS / ARMS
+{id:'s19',name:'Wrist flexor stretch',area:'shoulders',desc:'Arm out, palm up, pull fingers down gently.',cues:'Feel it along the inner forearm.',dur:20,bilateral:true},
+{id:'s20',name:'Wrist extensor stretch',area:'shoulders',desc:'Arm out, palm down, pull fingers down.',cues:'Feel it along the top of the forearm.',dur:20,bilateral:true},
+{id:'s21',name:'Prayer wrist stretch',area:'shoulders',desc:'Palms together, lower hands toward waist.',cues:'Keep palms pressed as you lower.',dur:25,bilateral:false},
+{id:'s22',name:'Reverse prayer wrist',area:'shoulders',desc:'Backs of hands together, point fingers down.',cues:'Gentle \u2014 wrists are delicate.',dur:25,bilateral:false},
+{id:'s23',name:'Wrist circles',area:'shoulders',desc:'Make fists, circle wrists both directions.',cues:'Slow circles, full range.',dur:20,bilateral:false},
+{id:'s24',name:'Bicep wall stretch',area:'shoulders',desc:'Palm on wall behind you, turn away.',cues:'Feel the front of the arm and shoulder.',dur:30,bilateral:true},
+// BACK
+{id:'s25',name:'Cat-cow',area:'back',desc:'On all fours, alternate arching and rounding.',cues:'Move with your breath \u2014 inhale open, exhale round.',dur:45,bilateral:false},
+{id:'s26',name:"Child's pose",area:'back',desc:'Sit back on heels, reach arms forward.',cues:'Let the chest melt toward the floor.',dur:60,bilateral:false},
+{id:'s27',name:'Seated forward fold',area:'back',desc:'Legs out, hinge at hips, reach for feet.',cues:'Lead with the chest, not the head.',dur:45,bilateral:false},
+{id:'s28',name:'Supine twist',area:'back',desc:'On back, drop one knee across the body.',cues:'Keep both shoulders on the floor.',dur:45,bilateral:true},
+{id:'s29',name:'Cobra pose',area:'back',desc:'Face down, press up, arch the back.',cues:'Keep hips down, shoulders away from ears.',dur:30,bilateral:false},
+{id:'s30',name:'Sphinx pose',area:'back',desc:'On forearms, elbows under shoulders, lift chest.',cues:'Gentle, sustained backbend. Relax glutes.',dur:60,bilateral:false},
+{id:'s31',name:'Prone press-up',area:'back',desc:'Press up through hands, hips stay down.',cues:'Let the lower back relax into the arch.',dur:30,bilateral:false},
+{id:'s32',name:'Knee-to-chest',area:'back',desc:'On back, pull one knee into chest.',cues:'Keep the other leg relaxed. Switch sides.',dur:30,bilateral:true},
+{id:'s33',name:'Double knee-to-chest',area:'back',desc:'Pull both knees into chest, rock gently.',cues:'Massage the lower back into the floor.',dur:30,bilateral:false},
+{id:'s34',name:'Thread the needle',area:'back',desc:'On all fours, slide one arm under, rotate.',cues:'Rest the shoulder and temple down.',dur:45,bilateral:true},
+{id:'s35',name:'Thoracic rotation',area:'back',desc:'Hands behind head, rotate upper body.',cues:'Rotate from the mid-back, not the lower.',dur:40,bilateral:false},
+{id:'s36',name:'Lat side bend',area:'back',desc:'Reach arm overhead, lean to the side.',cues:'Lengthen, don\u2019t collapse. Both sides.',dur:30,bilateral:true},
+{id:'s37',name:'Puppy pose',area:'back',desc:'Hands forward, hips over knees, chest down.',cues:'Melt the chest, keep hips high.',dur:60,bilateral:false},
+{id:'s38',name:'Standing forward fold',area:'back',desc:'Hinge at hips, let head and arms hang.',cues:'Soft knees. Let the spine decompress.',dur:45,bilateral:false},
+{id:'s39',name:'Seated cat-cow',area:'back',desc:'In a chair, arch and round the spine.',cues:'Great at a desk. Move with breath.',dur:40,bilateral:false},
+{id:'s40',name:'Scorpion stretch',area:'back',desc:'Face down, foot reaches across to opposite side.',cues:'Keep shoulders down. Gentle rotation.',dur:45,bilateral:true},
+{id:'s41',name:'Bird dog reach',area:'back',desc:'On all fours, extend opposite arm and leg.',cues:'Long from fingertips to heel. Steady.',dur:30,bilateral:true},
+{id:'s42',name:'Lower back rotation',area:'back',desc:'On back, knees bent, rock knees side to side.',cues:'Gentle windshield-wiper motion.',dur:40,bilateral:false},
+{id:'s43',name:'Seated spinal twist',area:'back',desc:'Sit tall, twist torso, hand on opposite knee.',cues:'Lengthen up on the inhale, twist on exhale.',dur:35,bilateral:true},
+{id:'s44',name:'Quadruped rock-back',area:'back',desc:'On all fours, rock hips back toward heels.',cues:'Mobilize the spine and hips together.',dur:35,bilateral:false},
+// HIPS
+{id:'s45',name:'Low lunge',area:'hips',desc:'Front foot forward, back knee down, sink hips.',cues:'Press the hips forward and down.',dur:45,bilateral:true},
+{id:'s46',name:'Kneeling hip flexor',area:'hips',desc:'Back knee down, shift forward, squeeze glute.',cues:'Tuck the tailbone, then press forward.',dur:40,bilateral:true},
+{id:'s47',name:'Pigeon pose',area:'hips',desc:'Front shin angled, fold over it.',cues:'Square the hips. Breathe into the glute.',dur:60,bilateral:true},
+{id:'s48',name:'Figure-four stretch',area:'hips',desc:'On back, ankle over knee, pull legs in.',cues:'Flex the top foot to protect the knee.',dur:45,bilateral:true},
+{id:'s49',name:'Seated figure-four',area:'hips',desc:'Seated, ankle over opposite knee, lean forward.',cues:'Keep the back flat as you hinge.',dur:35,bilateral:true},
+{id:'s50',name:'Butterfly',area:'hips',desc:'Soles together, knees open, fold forward.',cues:'Lead with the chest, relax the inner thighs.',dur:45,bilateral:false},
+{id:'s51',name:'Reclined butterfly',area:'hips',desc:'On back, soles together, knees fall open.',cues:'Totally passive. Let gravity work.',dur:60,bilateral:false},
+{id:'s52',name:'Frog stretch',area:'hips',desc:'Wide knees, hips back and down.',cues:'Ease back slowly \u2014 frog is intense.',dur:60,bilateral:false},
+{id:'s53',name:'Happy baby',area:'hips',desc:'On back, hold feet, knees toward armpits.',cues:'Rock gently side to side.',dur:45,bilateral:false},
+{id:'s54',name:'90/90 hip',area:'hips',desc:'Both legs at 90°, hinge over front shin.',cues:'Sit tall first, then fold. Switch sides.',dur:45,bilateral:true},
+{id:'s55',name:'90/90 transitions',area:'hips',desc:'Rotate between 90/90 sides slowly.',cues:'Control the movement through the middle.',dur:45,bilateral:false},
+{id:'s56',name:'Lizard pose',area:'hips',desc:'Low lunge, foot outside hand, drop down.',cues:'Forearms down if you can. Breathe.',dur:45,bilateral:true},
+{id:'s57',name:'Couch stretch',area:'hips',desc:'Back foot up wall/couch, front foot forward.',cues:'Tuck the pelvis. Intense hip flexor stretch.',dur:45,bilateral:true},
+{id:'s58',name:'Deep squat hold',area:'hips',desc:'Squat all the way down and hold.',cues:'Elbows can press the knees open.',dur:45,bilateral:false},
+{id:'s59',name:'Seated hip stretch',area:'hips',desc:'In a chair, ankle on knee, lean forward.',cues:'Desk-friendly glute opener.',dur:35,bilateral:true},
+{id:'s60',name:'Standing figure-four',area:'hips',desc:'Ankle over knee, sit back like a chair.',cues:'Use a wall for balance if needed.',dur:35,bilateral:true},
+{id:'s61',name:'Fire log pose',area:'hips',desc:'Stack shins one over the other, fold.',cues:'Deep glute stretch. Go slow.',dur:45,bilateral:true},
+{id:'s62',name:'Garland pose',area:'hips',desc:'Deep squat, elbows inside knees, palms together.',cues:'Lengthen the spine upward.',dur:45,bilateral:false},
+{id:'s63',name:'Cossack stretch',area:'hips',desc:'Wide stance, shift to one bent knee.',cues:'Keep the straight leg\u2019s heel down.',dur:35,bilateral:true},
+{id:'s64',name:'Standing pigeon',area:'hips',desc:'Ankle on opposite thigh, hinge forward.',cues:'Use support. Sink the hips back.',dur:40,bilateral:true},
+{id:'s65',name:'Psoas lunge stretch',area:'hips',desc:'Deep lunge, reach overhead, lean back.',cues:'Reach up and slightly back for the psoas.',dur:40,bilateral:true},
+// LEGS
+{id:'s66',name:'Standing quad',area:'legs',desc:'Pull foot to glutes, knees together.',cues:'Tuck the pelvis to deepen it.',dur:30,bilateral:true},
+{id:'s67',name:'Standing hamstring',area:'legs',desc:'Heel forward on a surface, hinge over.',cues:'Keep the back flat, hinge from hips.',dur:40,bilateral:true},
+{id:'s68',name:'Seated hamstring',area:'legs',desc:'One leg out, reach toward the foot.',cues:'Lead with the chest toward the toes.',dur:40,bilateral:true},
+{id:'s69',name:'Wall hamstring',area:'legs',desc:'On back, leg up the wall.',cues:'Straighten the leg as much as comfortable.',dur:45,bilateral:true},
+{id:'s70',name:'Lying hamstring (strap)',area:'legs',desc:'On back, strap around foot, leg up.',cues:'Use a belt or towel. Keep hips down.',dur:45,bilateral:true},
+{id:'s71',name:'Calf stretch (wall)',area:'legs',desc:'Hands on wall, one foot back, heel down.',cues:'Straight back leg targets the calf.',dur:30,bilateral:true},
+{id:'s72',name:'Calf stretch (double)',area:'legs',desc:'Both feet back, press both heels down.',cues:'Lean into the wall, heels heavy.',dur:45,bilateral:false},
+{id:'s73',name:'Soleus stretch',area:'legs',desc:'Like calf stretch but back knee bent.',cues:'Bent knee targets the lower calf.',dur:30,bilateral:true},
+{id:'s74',name:'Adductor stretch',area:'legs',desc:'Wide stance, shift to one bent knee.',cues:'Sink toward the bent side. Switch.',dur:35,bilateral:true},
+{id:'s75',name:'Half-split',area:'legs',desc:'From lunge, straighten front leg, fold.',cues:'Flex the front foot, hinge forward.',dur:40,bilateral:true},
+{id:'s76',name:'IT band stretch',area:'legs',desc:'Cross leg behind, lean to the side.',cues:'Push the hip out to the side.',dur:30,bilateral:true},
+{id:'s77',name:'Standing IT band',area:'legs',desc:'Cross ankles, fold forward over legs.',cues:'Feel it down the outer leg.',dur:30,bilateral:true},
+{id:'s78',name:'Ankle circles',area:'legs',desc:'Lift foot, circle the ankle both ways.',cues:'Full slow circles each direction.',dur:25,bilateral:true},
+{id:'s79',name:'Toe squat',area:'legs',desc:'Kneel, tuck toes under, sit back.',cues:'Stretches the soles \u2014 intense, go easy.',dur:30,bilateral:false},
+{id:'s80',name:'Shin stretch',area:'legs',desc:'Kneel with tops of feet down, lean back.',cues:'Feel it along the front of the shins.',dur:30,bilateral:false},
+{id:'s81',name:'Standing splits prep',area:'legs',desc:'Hands down, lift one leg back and up.',cues:'Square the hips, lengthen the leg.',dur:35,bilateral:true},
+{id:'s82',name:'Wide-leg forward fold',area:'legs',desc:'Wide stance, fold forward from hips.',cues:'Hinge from the hips, spine long.',dur:45,bilateral:false},
+{id:'s83',name:'Gastroc step stretch',area:'legs',desc:'Heel off a step, let it drop.',cues:'Controlled drop, feel the calf lengthen.',dur:30,bilateral:true},
+{id:'s84',name:'Hamstring (chair)',area:'legs',desc:'Heel on a chair, hinge forward.',cues:'Great for stiff mornings. Back flat.',dur:40,bilateral:true},
+// CORE / FULL
+{id:'s85',name:'Core twist',area:'core',desc:'Cross-legged, rotate and look behind.',cues:'Grow tall, then rotate. Both sides.',dur:30,bilateral:false},
+{id:'s86',name:'Triangle pose',area:'core',desc:'Wide stance, reach front hand down, top arm up.',cues:'Open the chest to the ceiling.',dur:35,bilateral:true},
+{id:'s87',name:'Revolved triangle',area:'core',desc:'Opposite hand to front foot, top arm up, twisted.',cues:'Square hips, rotate from the spine.',dur:35,bilateral:true},
+{id:'s88',name:'Extended side angle',area:'core',desc:'Bent front knee, forearm on thigh, top arm over.',cues:'Make one long line from heel to hand.',dur:35,bilateral:true},
+{id:'s89',name:'Half-moon prep',area:'core',desc:'Hand and gaze find balance, top leg lifts.',cues:'Stack the hips, open the chest.',dur:30,bilateral:true},
+{id:'s90',name:'Gate pose',area:'core',desc:'Kneel, extend one leg out, side bend over it.',cues:'Reach over the straight leg.',dur:35,bilateral:true},
+{id:'s91',name:'Standing side bend',area:'core',desc:'Reach overhead, bend to one side.',cues:'Lengthen up and over, don\u2019t fold forward.',dur:30,bilateral:true},
+{id:'s92',name:'Seated side bend',area:'core',desc:'Cross-legged, reach over to one side.',cues:'Keep both sit bones grounded.',dur:30,bilateral:true},
+{id:'s93',name:'Cobra to child flow',area:'core',desc:'Flow between cobra and child\u2019s pose.',cues:'Move slowly with the breath.',dur:45,bilateral:false},
+{id:'s94',name:'Sphinx twist',area:'core',desc:'From sphinx, reach one arm under and across.',cues:'Gentle thoracic rotation.',dur:35,bilateral:true},
+// PNF-FRIENDLY / DEEP
+{id:'s95',name:'PNF hamstring',area:'legs',desc:'Strap on foot, contract then relax deeper.',cues:'Push into the strap 6s, then ease deeper.',dur:60,bilateral:true,pnf:true},
+{id:'s96',name:'PNF chest (doorway)',area:'shoulders',desc:'Doorway stretch, press then relax.',cues:'Press into the frame 6s, then open more.',dur:50,bilateral:false,pnf:true},
+{id:'s97',name:'PNF hip flexor',area:'hips',desc:'Kneeling lunge, contract glute then sink.',cues:'Squeeze glute 6s, then press the hip forward.',dur:60,bilateral:true,pnf:true},
+{id:'s98',name:'PNF calf',area:'legs',desc:'Calf stretch, push then relax deeper.',cues:'Press the ball of foot 6s, then lean in.',dur:50,bilateral:true,pnf:true},
+{id:'s99',name:'PNF adductor',area:'legs',desc:'Butterfly, press knees up then relax open.',cues:'Press knees into hands 6s, then open.',dur:60,bilateral:false,pnf:true},
+// DYNAMIC / MOBILITY
+{id:'s100',name:'Leg swings (front)',area:'hips',desc:'Hold support, swing leg front to back.',cues:'Controlled swings, gradually bigger.',dur:30,bilateral:true,dynamic:true},
+{id:'s101',name:'Leg swings (side)',area:'hips',desc:'Swing leg side to side across the body.',cues:'Keep the torso still, swing from the hip.',dur:30,bilateral:true,dynamic:true},
+{id:'s102',name:'Arm circles',area:'shoulders',desc:'Big circles forward then backward.',cues:'Full range, both directions.',dur:30,bilateral:false,dynamic:true},
+{id:'s103',name:'Hip circles',area:'hips',desc:'Hands on hips, circle the hips.',cues:'Big slow circles each way.',dur:30,bilateral:false,dynamic:true},
+{id:'s104',name:'Walking lunges',area:'legs',desc:'Step forward into alternating lunges.',cues:'Control the depth, drive through the heel.',dur:40,bilateral:false,dynamic:true},
+{id:'s105',name:'Inchworm',area:'back',desc:'Fold, walk hands out to plank, walk back.',cues:'Move slowly, feel the whole chain.',dur:40,bilateral:false,dynamic:true},
+{id:'s106',name:'World\u2019s greatest stretch',area:'hips',desc:'Lunge, elbow to floor, rotate up.',cues:'Hits hips, spine, hamstrings in one.',dur:45,bilateral:true,dynamic:true},
+{id:'s107',name:'Spinal wave',area:'back',desc:'Roll down and up through the spine.',cues:'Articulate one vertebra at a time.',dur:35,bilateral:false,dynamic:true},
+{id:'s108',name:'Ankle bounces',area:'legs',desc:'Gentle bounces to mobilize ankles.',cues:'Light and springy, no force.',dur:25,bilateral:false,dynamic:true},
+{id:'s109',name:'Cat-cow flow (dynamic)',area:'back',desc:'Faster flowing cat-cow with breath.',cues:'Find a rhythm with the breath.',dur:40,bilateral:false,dynamic:true},
+{id:'s110',name:'Torso twists',area:'core',desc:'Stand, swing arms and twist side to side.',cues:'Loose arms, rotate from the waist.',dur:30,bilateral:false,dynamic:true},
+// MORE STATIC FILLERS / VARIATIONS
+{id:'s111',name:'Reclined hamstring',area:'legs',desc:'On back, one leg up, hold behind thigh.',cues:'Keep the other leg flat if possible.',dur:40,bilateral:true},
+{id:'s112',name:'Reclined figure-four',area:'hips',desc:'On back, ankle over knee, pull in.',cues:'Flex the top foot. Switch sides.',dur:45,bilateral:true},
+{id:'s113',name:'Reclined spinal twist (bent)',area:'back',desc:'On back, knees bent, drop to one side.',cues:'Arms wide, gaze opposite the knees.',dur:45,bilateral:true},
+{id:'s114',name:'Banana stretch',area:'core',desc:'On back, reach long, curve body to one side.',cues:'Feel the whole side body open.',dur:40,bilateral:true},
+{id:'s115',name:'Supported fish',area:'shoulders',desc:'Lie back over a rolled towel/block.',cues:'Open the chest, relax completely.',dur:60,bilateral:false},
+{id:'s116',name:'Legs up the wall',area:'legs',desc:'Lie on back, legs resting up a wall.',cues:'Totally restful. Just breathe.',dur:90,bilateral:false},
+{id:'s117',name:'Wind-relieving pose',area:'back',desc:'On back, hug one knee, extend other leg.',cues:'Gentle low-back release. Switch.',dur:35,bilateral:true},
+{id:'s118',name:'Seated neck release',area:'neck',desc:'Hand over head, ease into a side stretch.',cues:'Very gentle. Let the arm be heavy.',dur:30,bilateral:true},
+{id:'s119',name:'Quad pull (side-lying)',area:'legs',desc:'Lie on side, pull top foot to glute.',cues:'Keep knees stacked, hips forward.',dur:35,bilateral:true},
+{id:'s120',name:'Glute bridge hold',area:'hips',desc:'On back, lift hips and hold.',cues:'Squeeze glutes \u2014 mild hip-flexor counter.',dur:30,bilateral:false},
+{id:'s121',name:'Standing hamstring (crossed)',area:'legs',desc:'Cross ankles, fold over straight legs.',cues:'Soft knees, let the head hang.',dur:35,bilateral:true},
+{id:'s122',name:'Wall lat stretch',area:'back',desc:'Hands on wall, hips back, chest drops.',cues:'Sink the chest, lengthen the lats.',dur:40,bilateral:false},
+{id:'s123',name:'Thread-the-needle (deep)',area:'back',desc:'Thread arm through, walk top hand forward.',cues:'Deeper shoulder and upper-back release.',dur:45,bilateral:true},
+{id:'s124',name:'Pancake fold',area:'hips',desc:'Wide legs seated, fold forward.',cues:'Hinge from hips, chest leads.',dur:60,bilateral:false},
+{id:'s125',name:'Dragon pose',area:'hips',desc:'Deep low lunge, hips sink low.',cues:'Yin-style. Settle and breathe.',dur:60,bilateral:true},
+{id:'s126',name:'Saddle pose',area:'legs',desc:'Kneel and lean back (quads/hip flexors).',cues:'Go only as far as comfortable.',dur:60,bilateral:false},
+{id:'s127',name:'Melting heart',area:'back',desc:'Hips high, chest and arms melt down.',cues:'Anahatasana \u2014 heart toward the floor.',dur:60,bilateral:false},
+{id:'s128',name:'Seated wide-leg twist',area:'core',desc:'Wide legs, twist and reach to one foot.',cues:'Rotate from the spine, reach long.',dur:35,bilateral:true},
+{id:'s129',name:'Standing quad (wall)',area:'legs',desc:'Foot on wall behind, sink into lunge.',cues:'Couch-stretch lite. Tuck the pelvis.',dur:40,bilateral:true},
+{id:'s130',name:'Neck half-circles',area:'neck',desc:'Roll chin from shoulder to chest to shoulder.',cues:'Front half only \u2014 avoid rolling back.',dur:30,bilateral:false},
+{id:'s131',name:'Shoulder flossing',area:'shoulders',desc:'Towel overhead, pass front to back.',cues:'Wide grip, keep arms straight.',dur:35,bilateral:false,dynamic:true},
+{id:'s132',name:'Wrist prayer pulse',area:'shoulders',desc:'Prayer hands, pulse lower gently.',cues:'Small pulses, build the stretch.',dur:25,bilateral:false},
+{id:'s133',name:'Side-lying open book',area:'back',desc:'On side, knees bent, open top arm across.',cues:'Follow the hand with the eyes.',dur:40,bilateral:true,dynamic:true},
+{id:'s134',name:'Prone scorpion (gentle)',area:'back',desc:'Face down, reach foot toward opposite hand.',cues:'Only as far as the spine allows.',dur:40,bilateral:true},
+{id:'s135',name:'Supported squat (heels up)',area:'hips',desc:'Deep squat with heels on a rolled towel.',cues:'Helps if ankles are tight.',dur:45,bilateral:false},
+{id:'s136',name:'Calf raise + hold',area:'legs',desc:'Rise onto toes, lower slowly, hold the stretch.',cues:'Slow eccentric, then stretch at the bottom.',dur:30,bilateral:false},
+{id:'s137',name:'Hip flexor (couch, reach)',area:'hips',desc:'Couch stretch with overhead reach.',cues:'Reach up to deepen the front-line stretch.',dur:50,bilateral:true},
+{id:'s138',name:'Seated forward fold (one leg)',area:'legs',desc:'Janu sirsasana \u2014 one leg in, fold over the other.',cues:'Square the chest to the straight leg.',dur:45,bilateral:true},
+{id:'s139',name:'Bound angle fold',area:'hips',desc:'Butterfly with a deeper forward fold.',cues:'Relax the inner thighs, breathe down.',dur:50,bilateral:false},
+{id:'s140',name:'Downward dog',area:'legs',desc:'Inverted V, heels reach toward floor.',cues:'Long spine, pedal the heels if stiff.',dur:45,bilateral:false},
+{id:'s141',name:'Down dog calf pedal',area:'legs',desc:'In down dog, bend one knee then the other.',cues:'Alternate to stretch each calf.',dur:40,bilateral:false,dynamic:true},
+{id:'s142',name:'Upward dog',area:'back',desc:'Thighs lifted, chest open, shoulders back.',cues:'Press down through the hands, lift up.',dur:30,bilateral:false},
+{id:'s143',name:'Twisted lunge',area:'hips',desc:'Low lunge with a spinal twist toward front leg.',cues:'Open the chest toward the bent knee.',dur:40,bilateral:true},
+{id:'s144',name:'Standing chest expansion',area:'shoulders',desc:'Clasp behind, hinge forward, arms lift.',cues:'Let the arms fall overhead as you fold.',dur:40,bilateral:false},
+{id:'s145',name:'Neck isometric press',area:'neck',desc:'Press head gently into hand, no movement.',cues:'Light pressure, builds and releases tension.',dur:25,bilateral:true},
+{id:'s146',name:'Seated eagle (legs)',area:'hips',desc:'Cross one thigh over the other, sit tall.',cues:'Outer-hip stretch. Hug the legs in.',dur:35,bilateral:true},
+{id:'s147',name:'Reclined hand-to-big-toe',area:'legs',desc:'On back, extend leg up holding foot/strap.',cues:'Straighten the leg, keep shoulders down.',dur:45,bilateral:true},
+{id:'s148',name:'Half happy baby',area:'hips',desc:'One knee toward armpit, hold the foot.',cues:'Other leg stays long. Switch sides.',dur:40,bilateral:true},
+{id:'s149',name:'Reclined twist (eagle legs)',area:'back',desc:'Wrap legs, drop both knees to one side.',cues:'Deep wrung-out spinal twist.',dur:45,bilateral:true},
+{id:'s150',name:'Corpse / full relax',area:'core',desc:'Lie flat, arms open, fully release.',cues:'Let everything go. Slow breathing.',dur:90,bilateral:false},
+{id:'s_deadhang',name:'Dead hang',area:'shoulders',desc:'Hang from a bar with full bodyweight, shoulders relaxed.',cues:'Let the shoulders and spine decompress.',dur:60,bilateral:false},
+{id:'s_neckbicep',name:'Neck + bicep combo',area:'neck',desc:'Tilt ear to shoulder while reaching same-side arm down.',cues:'Reach the arm long as you tilt away.',dur:45,bilateral:true},
+];
+// Pre-built routines — reference stretch IDs from the library
+const PREBUILT=[
+  // Existing 4
+  {name:'GROOVE X — Squat Day',ids:['s52','s54','s47','s72','s46','s86']},
+  {name:'BOUNCE X',ids:['s_deadhang','s40','s30','s13','s_neckbicep']},
+  {name:'GROOVE Y — Hip Thrust Day',ids:['s68','s48','s50','s47','s57','s86']},
+  {name:'BOUNCE Y',ids:['s37','s_deadhang','s34','s13','s_neckbicep']},
+  // Office ~5 min (2 variations) — desk-friendly + wrists
+  {name:'Office Reset · A (~5 min)',ids:['s5','s10','s19','s20','s39','s59','s67']},
+  {name:'Office Reset · B (~5 min)',ids:['s6','s11','s21','s23','s43','s58','s91']},
+  // Before bed ~10 min, long holds (4 variations)
+  {name:'Before Bed · A (~10 min)',ids:['s26','s51','s48','s28','s116','s150']},
+  {name:'Before Bed · B (~10 min)',ids:['s37','s124','s47','s113','s116','s150']},
+  {name:'Before Bed · C (~10 min)',ids:['s127','s139','s125','s149','s51','s150']},
+  {name:'Before Bed · D (~10 min)',ids:['s30','s53','s61','s28','s116','s150']},
+  // In bed / mattress ~6 min
+  {name:'In Bed (~6 min)',ids:['s32','s33','s113','s51','s148','s117']},
+  // Posture fix
+  {name:'Posture Fix',ids:['s4','s10','s11','s18','s36','s46','s122','s35']},
+  // APT assist
+  {name:'APT Assist (anterior pelvic tilt)',ids:['s46','s57','s66','s56','s26','s28','s48','s68']},
+];
+
+/* ── GUIDE CONTENT ── */
+const GUIDE=[
+  {q:'Static stretching',a:'Holding a stretch still for 15–60 seconds. The most common type — good for improving flexibility and cooling down. Ease to the point of tension (not pain) and breathe. Best done when muscles are already warm.'},
+  {q:'Dynamic stretching',a:'Controlled movement through a range of motion — leg swings, arm circles, walking lunges. You don\u2019t hold; you move. Ideal as a warm-up before activity because it raises temperature and primes the muscles. Marked with a ⟳ in the library.'},
+  {q:'PNF stretching',a:'Proprioceptive Neuromuscular Facilitation — the tense-and-relax method. Hold a stretch, contract the muscle hard for ~6 seconds, then relax and sink deeper. Repeat 2–3 times. One of the most effective ways to gain flexibility. Limber\u2019s PNF stretches cue you through the contract/relax cycle.'},
+  {q:'Active stretching',a:'Holding a position using only the strength of the opposing muscles — e.g. lifting and holding your leg up without hands. Builds strength and flexibility together. Holds are usually shorter (5–15s) because the muscles are working.'},
+  {q:'Ballistic stretching',a:'Bouncing rapidly into a stretch. Generally not recommended — it can trigger the muscle to tighten protectively and carries a higher injury risk. Dynamic stretching is the safer way to move through range.'},
+  {q:'How long to hold?',a:'Static holds: 15–30s for general flexibility, 45–90s for deeper release (yin-style). PNF: cycle for 45–60s total. Dynamic: 30s of controlled reps. Consistency matters more than duration — daily short sessions beat occasional long ones.'},
+  {q:'When to stretch',a:'Dynamic stretches before activity as a warm-up. Static and PNF after activity or as a standalone session when muscles are warm. Gentle stretching before bed can aid relaxation. Avoid deep static stretching of cold muscles.'},
+  {q:'Bilateral stretches',a:'Stretches marked ↔ work one side at a time. Limber alerts you at the halfway point to switch sides so each side gets equal time.'},
+];
+
+/* ── STATE ── */
+let lib=JSON.parse(localStorage.getItem('sx-lib')||'null')||DEFAULTS.map(s=>({...s}));
+let routines=JSON.parse(localStorage.getItem('sx-routines')||'[]');
+let session=JSON.parse(localStorage.getItem('sx-session')||'[]'); // current setup list
+let userImgs=JSON.parse(localStorage.getItem('sx-imgs')||'{}');
+let history=JSON.parse(localStorage.getItem('sx-history')||'[]');
+let settings=JSON.parse(localStorage.getItem('sx-settings')||'{"prepTime":5,"beepOn":true,"sideOn":true,"prepBeepOn":true,"breathOn":true,"voiceOn":false,"volume":0.8,"soundWave":"sine","soundPitch":1,"theme":"dark"}');
+
+let libArea='',imgTarget=null,dragSrc=null;
+let tInterval=null,tIdx=0,tLeft=0,tPhase='stretch',sideSwitched=false,sessionStretches=[];
+
+function save(){
+  localStorage.setItem('sx-lib',JSON.stringify(lib));
+  localStorage.setItem('sx-routines',JSON.stringify(routines));
+  localStorage.setItem('sx-session',JSON.stringify(session));
+  localStorage.setItem('sx-history',JSON.stringify(history));
+  try{localStorage.setItem('sx-imgs',JSON.stringify(userImgs));}catch(e){}
+}
+function saveSetting(k,v){settings[k]=v;localStorage.setItem('sx-settings',JSON.stringify(settings));}
+function uid(){return 'x'+Date.now()+Math.random().toString(36).slice(2,5);}
+function imgSrc(id){return userImgs[id]||'';}
+function getStretch(id){return lib.find(s=>s.id===id);}
+
+/* ── THEME ── */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('theme-color-meta').content=t==='dark'?'#0f0f0f':'#f5f3ef';
+  saveSetting('theme',t);
+  document.getElementById('btn-dark')?.classList.toggle('ac',t==='dark');
+  document.getElementById('btn-light')?.classList.toggle('ac',t==='light');
+}
+setTheme(settings.theme||'dark');
+
+/* ── AUDIO + VOICE ── */
+let audioCtx=null;
+function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
+function beep(freq,dur,vol,delay){
+  try{const ctx=getCtx(),o=ctx.createOscillator(),g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    o.frequency.value=freq*(settings.soundPitch||1);o.type=settings.soundWave||'sine';
+    const t=ctx.currentTime+(delay||0);const v=(vol||0.3)*(settings.volume!=null?settings.volume:0.8);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+0.01);g.gain.linearRampToValueAtTime(0,t+(dur||0.08));
+    o.start(t);o.stop(t+(dur||0.08)+0.05);}catch(e){}
+}
+function speak(text){
+  if(!settings.voiceOn)return;
+  try{const u=new SpeechSynthesisUtterance(text);u.rate=1;u.pitch=1;u.volume=settings.volume!=null?settings.volume:0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}
+}
+function playSound(type){
+  if(type==='countdown')beep(660,0.07,0.25);
+  else if(type==='countdownFinal')beep(880,0.12,0.35);
+  else if(type==='switchSide'){beep(440,0.08,0.28,0);beep(660,0.08,0.28,0.13);beep(880,0.13,0.38,0.26);}
+  else if(type==='prepEnd'){beep(880,0.12,0.38,0);beep(660,0.08,0.28,0.18);}
+  else if(type==='done'){beep(523,0.15,0.4,0);beep(659,0.15,0.4,0.2);beep(784,0.25,0.5,0.4);}
+  else if(type==='pnfTense'){beep(330,0.15,0.35,0);}
+  else if(type==='pnfRelax'){beep(550,0.15,0.35,0);}
+}
+function testSounds(){playSound('countdown');setTimeout(()=>playSound('switchSide'),700);setTimeout(()=>{playSound('done');speak('Test');},1600);}
+document.addEventListener('touchstart',()=>{try{getCtx().resume();}catch(e){}},{once:true});
+
+/* ── NAV ── */
+function show(p){
+  if(p!=='go')releaseWakeLock();
+  document.querySelectorAll('.pg').forEach(el=>el.classList.remove('on'));
+  // nav highlight: setup/go map to no specific tab highlight beyond go
+  const navMap={routines:'routines',library:'library',go:'go',setup:'routines',progress:'progress',settings:'settings',guide:'library'};
+  document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.p===navMap[p]));
+  document.getElementById('pg-'+p).classList.add('on');
+  window.scrollTo(0,0);
+  if(p==='routines')renderRoutines();
+  if(p==='library')renderLib();
+  if(p==='setup')renderSetup();
+  if(p==='progress')renderProgress();
+  if(p==='guide')renderGuide();
+  if(p==='settings')renderSettings();
+}
+
+/* ── SETTINGS UI ── */
+function renderSettings(){
+  const s=settings;
+  document.getElementById('set-prep').textContent=s.prepTime+'s';
+  document.getElementById('tog-voice').checked=!!s.voiceOn;
+  document.getElementById('tog-beep').checked=s.beepOn!==false;
+  document.getElementById('tog-side').checked=s.sideOn!==false;
+  document.getElementById('tog-prepbeep').checked=s.prepBeepOn!==false;
+  document.getElementById('tog-breath').checked=s.breathOn!==false;
+  const vol=s.volume!=null?s.volume:0.8;
+  document.getElementById('set-vol').value=vol;
+  document.getElementById('vol-label').textContent=Math.round(vol*100)+'%';
+  document.getElementById('set-pitch').value=s.soundPitch||1;
+  document.getElementById('pitch-label').textContent=pitchLabel(s.soundPitch||1);
+  document.getElementById('set-wave').value=s.soundWave||'sine';
+  document.getElementById('btn-dark').classList.toggle('ac',!s.theme||s.theme==='dark');
+  document.getElementById('btn-light').classList.toggle('ac',s.theme==='light');
+}
+function adjPrepTime(d){settings.prepTime=Math.max(0,Math.min(60,settings.prepTime+d));document.getElementById('set-prep').textContent=settings.prepTime+'s';saveSetting('prepTime',settings.prepTime);}
+function setVol(v){settings.volume=parseFloat(v);document.getElementById('vol-label').textContent=Math.round(v*100)+'%';saveSetting('volume',settings.volume);}
+function setPitch(v){settings.soundPitch=parseFloat(v);document.getElementById('pitch-label').textContent=pitchLabel(v);saveSetting('soundPitch',settings.soundPitch);}
+function pitchLabel(v){return v<0.8?'Low':v>1.3?'High':'Normal';}
+
+/* ── GUIDE ── */
+function renderGuide(){
+  document.getElementById('guide-content').innerHTML=GUIDE.map((g,i)=>`
+    <div class="guide-section">
+      <div class="guide-q" onclick="toggleGuide(${i})">${g.q}<span style="color:var(--muted)">+</span></div>
+      <div class="guide-a" id="guide-a-${i}">${g.a}</div>
+    </div>`).join('');
+}
+function toggleGuide(i){document.getElementById('guide-a-'+i).classList.toggle('open');}
+
+/* ── ROUTINES ── */
+function todayName(){return['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];}
+function renderRoutines(){
+  // today banner: match routine whose name hints at today (simple heuristic for GROOVE/BOUNCE schedule)
+  const tb=document.getElementById('today-banner');
+  tb.innerHTML='';
+  const el=document.getElementById('routine-list');
+  if(!routines.length){el.innerHTML='<div class="empty">No routines yet.<br>Tap "+ build" or 🎲 random to start.</div>';return;}
+  el.innerHTML=routines.map((r,i)=>{
+    const mins=Math.round(r.stretches.reduce((a,s)=>a+s.dur,0)/60);
+    return`<div class="rc" onclick="loadRoutine(${i})">
+      <div style="flex:1"><div style="font-size:16px">${r.name}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">${r.stretches.length} stretches · ~${Math.max(1,mins)} min</div></div>
+      <button class="btn sm" onclick="event.stopPropagation();loadRoutine(${i})">open</button>
+      <button class="btn sm" onclick="event.stopPropagation();routineMenu(${i})">⋯</button>
+    </div>`;
+  }).join('');
+}
+function routineMenu(i){
+  const r=routines[i];
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:4px">${r.name}</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px">${r.stretches.length} stretches · ~${Math.max(1,Math.round(r.stretches.reduce((a,s)=>a+s.dur,0)/60))} min</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn" onclick="renameRoutine(${i})">✏️ Rename</button>
+      <button class="btn" onclick="editRoutineContents(${i})">⠿ Edit stretches</button>
+      <button class="btn" onclick="duplicateRoutine(${i})">⧉ Duplicate</button>
+      <button class="btn red" onclick="delRoutine(${i})">🗑 Delete</button>
+    </div>
+    <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function renameRoutine(i){
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Rename routine</p>
+    <label class="fl">Name</label><input class="fi" id="m-rename" value="${routines[i].name.replace(/"/g,'&quot;')}" style="margin-bottom:14px">
+    <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmRename(${i})">Save</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+  setTimeout(()=>{const el=document.getElementById('m-rename');if(el){el.focus();el.select();}},80);
+}
+function confirmRename(i){const n=document.getElementById('m-rename')?.value.trim();if(!n)return;routines[i].name=n;save();closeModal();renderRoutines();}
+function editRoutineContents(i){
+  // load into setup, but remember we're editing this routine index
+  session=routines[i].stretches.map(s=>({...s,qid:uid()}));
+  window._setupTitle=routines[i].name;
+  window._editingRoutine=i;
+  save();closeModal();show('setup');
+}
+function duplicateRoutine(i){
+  const r=routines[i];
+  routines.push({id:uid(),name:r.name+' (copy)',stretches:r.stretches.map(s=>({...s,qid:uid()}))});
+  save();closeModal();renderRoutines();
+}
+function loadRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=null;save();show('setup');}
+function delRoutine(i){if(!confirm('Delete "'+routines[i].name+'"?'))return;routines.splice(i,1);save();closeModal();renderRoutines();}
+
+/* ── SESSION SETUP ── */
+function renderSetup(){
+  document.getElementById('setup-title').textContent=window._setupTitle||'session';
+  document.getElementById('setup-count').textContent=session.length+' stretch'+(session.length!==1?'es':'');
+  // save slot adapts: editing existing routine vs new
+  const slot=document.getElementById('setup-save-slot');
+  if(window._editingRoutine!=null&&routines[window._editingRoutine]){
+    slot.innerHTML=`<button class="btn ac" style="width:100%;margin-bottom:8px" onclick="saveRoutineChanges()">save changes to "${routines[window._editingRoutine].name}"</button>
+      <button class="btn" style="width:100%" onclick="saveSetupAsRoutine()">save as new routine</button>`;
+  } else {
+    slot.innerHTML=`<button class="btn" style="width:100%" onclick="saveSetupAsRoutine()">save as routine</button>`;
+  }
+  const el=document.getElementById('setup-list');
+  if(!session.length){el.innerHTML='<div class="empty">Empty. Add stretches from the library.</div>';return;}
+  el.innerHTML=session.map((s,i)=>`
+    <div class="qi" draggable="true" ondragstart="ds(event,${i})" ondragover="dov(event)" ondrop="dp(event,${i})">
+      <span class="dh">⠿</span>
+      ${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" class="thumb" onclick="uploadImg('${s.id}')" style="cursor:pointer">`:`<div class="thumb-ph" onclick="uploadImg('${s.id}')">+</div>`}
+      <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span>${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}</div></div>
+      <div class="stepper"><button onclick="adjDur(${i},-5)">−</button><span id="sd-${i}">${s.dur}s</span><button onclick="adjDur(${i},5)">+</button></div>
+      <button class="xbtn" onclick="removeSetup(${i})">✕</button>
+    </div>`).join('');
+}
+function adjDur(i,d){session[i].dur=Math.max(5,Math.min(300,session[i].dur+d));document.getElementById('sd-'+i).textContent=session[i].dur+'s';save();}
+function removeSetup(i){session.splice(i,1);save();renderSetup();}
+function ds(e,i){dragSrc=i;e.dataTransfer.effectAllowed='move';}
+function dov(e){e.preventDefault();}
+function dp(e,i){e.preventDefault();if(dragSrc===null||dragSrc===i)return;const m=session.splice(dragSrc,1)[0];session.splice(i,0,m);dragSrc=null;save();renderSetup();}
+function saveSetupAsRoutine(){
+  if(!session.length){alert('Nothing to save.');return;}
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Save as routine</p>
+    <label class="fl">Name</label><input class="fi" id="m-sqn" placeholder="e.g. My morning flow" style="margin-bottom:14px">
+    <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmSaveSetup()">Save</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+  setTimeout(()=>document.getElementById('m-sqn')?.focus(),80);
+}
+function confirmSaveSetup(){const n=document.getElementById('m-sqn')?.value.trim();if(!n)return;routines.push({id:uid(),name:n,stretches:session.map(s=>({...s}))});window._editingRoutine=null;save();closeModal();renderSetup();alert('Saved!');}
+function saveRoutineChanges(){
+  const i=window._editingRoutine;
+  if(i==null||!routines[i])return;
+  routines[i].stretches=session.map(s=>({...s}));
+  save();
+  const slot=document.getElementById('setup-save-slot');
+  const btn=slot.querySelector('.btn.ac');
+  if(btn){const o=btn.textContent;btn.textContent='✓ saved!';setTimeout(()=>{if(btn)btn.textContent=o;},1500);}
+}
+
+function quickStart(){
+  // go button in nav: if session exists, resume setup; else prompt
+  if(session.length){show('setup');}
+  else{show('routines');}
+}
+
+/* ── TIMER ── */
+function startGo(){
+  if(!session.length){alert('Add some stretches first.');return;}
+  sessionStretches=session.map(s=>({...s}));
+  clearInterval(tInterval);tInterval=null;tIdx=0;sideSwitched=false;pnfCycle=0;
+  tPhase=settings.prepTime>0?'prep':'stretch';
+  tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[0].dur;
+  _sessionStart=Date.now();
+  requestWakeLock();
+  show('go');renderTimer();
+}
+let _sessionStart=null,pnfCycle=0;
+
+function renderTimer(){
+  const el=document.getElementById('go-inner');
+  if(tIdx>=sessionStretches.length){
+    logSession();
+    el.innerHTML=`<div class="done-pg"><div class="big">✓</div><h2>all done</h2><p id="done-sub">Great session.</p>
+      <button class="btn ac" onclick="startGo()">go again</button>
+      <button class="btn" style="margin-top:8px" onclick="show('routines')">done</button></div>`;
+    playSound('done');speak('All done. Great work.');
+    const streak=computeStreak();
+    document.getElementById('done-sub').textContent=streak>1?`${streak} day streak! 🔥`:'Great session.';
+    return;
+  }
+  const s=sessionStretches[tIdx];
+  const total=tPhase==='prep'?settings.prepTime:s.dur;
+  const circ=2*Math.PI*54;
+  const pct=tLeft/total;
+  const ringCol=tPhase==='prep'?'#ffc832':'var(--accent)';
+  const isPlaying=!!tInterval;
+  const overallPct=Math.round(((tIdx)/sessionStretches.length)*100);
+
+  el.innerHTML=`
+    <div class="progbar"><div class="progbar-fill" style="width:${overallPct}%"></div></div>
+    <div class="img-box" id="img-box">
+      ${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" alt="${s.name}">`:`<div class="iph" onclick="uploadImg('${s.id}')"><span style="font-size:24px">+</span><span>tap to add photo</span></div>`}
+      <button class="img-change" onclick="imgOptions('${s.id}')">change photo</button>
+    </div>
+    <div class="timer-body">
+      <div class="tlabel">${tIdx+1} of ${sessionStretches.length} · ${tPhase==='prep'?'get ready':s.area}</div>
+      <div class="tname">${s.name}</div>
+      ${tPhase==='prep'?`<div class="phase-banner prep">⏱ Next: ${s.name}</div>`:''}
+      ${tPhase==='stretch'&&s.bilateral&&settings.sideOn&&sideSwitched?`<div class="phase-banner side">↔ Switch sides now</div>`:''}
+      ${tPhase==='stretch'&&s.pnf?`<div class="phase-banner pnf" id="pnf-banner">${pnfPhaseLabel()}</div>`:''}
+      ${tPhase==='stretch'&&(s.cues||s.desc)?`<div class="cue-box">${s.cues||s.desc}</div>`:''}
+      <div class="timer-row">
+        <div class="ring-wrap" id="ring-wrap" ontouchstart="ringTouchStart(event)" ontouchmove="ringTouchMove(event)" ontouchend="ringTouchEnd(event)" onmousedown="ringMouseDown(event)">
+          <div class="breath-ring" id="breath-ring"></div>
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="var(--border)" stroke-width="5"/>
+            <circle id="arc" cx="60" cy="60" r="54" fill="none" stroke="${ringCol}" stroke-width="5" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${(circ*(1-pct)).toFixed(1)}" stroke-linecap="round"/>
+          </svg>
+          <div class="tnum" id="tnum">${tLeft}</div>
+        </div>
+        <div class="tctrl">
+          <button class="pbtn ${isPlaying?'playing':''}" id="pbtn" onclick="toggleT()">
+            <svg id="pico" viewBox="0 0 24 24">${isPlaying?'<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>':'<polygon points="5,3 19,12 5,21"/>'}</svg>
+          </button>
+          <div class="skip-row">
+            <button class="sbtn" onclick="prevS()"><svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg></button>
+            <button class="sbtn" onclick="nextS()"><svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="plist">
+      ${sessionStretches.map((q,i)=>`<div class="pl-row ${i<tIdx?'done':i===tIdx?'cur':''}"><div class="pl-dot"></div><span>${q.name}${q.bilateral?' ↔':''}</span><span class="pl-dur">${q.dur}s</span></div>`).join('')}
+    </div>`;
+  if(settings.breathOn&&tPhase==='stretch'&&total>=40)startBreathPacer();
+  if(isPlaying)tickT();
+}
+
+/* PNF phases: split stretch into relax/tense cycles */
+function pnfPhaseLabel(){
+  const s=sessionStretches[tIdx];if(!s.pnf)return'';
+  // cycle: first 40% ease in, then alternate tense(6s)/relax
+  return pnfTensing?'💪 Tense — push and hold':'😮‍💨 Relax — sink deeper';
+}
+let pnfTensing=false;
+
+/* Breathing pacer */
+let breathInterval=null;
+function startBreathPacer(){
+  clearInterval(breathInterval);
+  const ring=document.getElementById('breath-ring');if(!ring)return;
+  let phase=0; // 0 inhale 4s, 1 exhale 6s
+  function cycle(){
+    if(!document.getElementById('breath-ring'))return clearInterval(breathInterval);
+    if(phase===0){ring.style.transition='transform 4s ease-in-out,opacity 4s';ring.style.transform='translate(-50%,-50%) scale(2.2)';ring.style.opacity='0.5';phase=1;}
+    else{ring.style.transition='transform 6s ease-in-out,opacity 6s';ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.15';phase=0;}
+  }
+  cycle();breathInterval=setInterval(cycle,phase===1?4000:6000);
+  // simpler: fixed 5s interval alternating
+  clearInterval(breathInterval);
+  breathInterval=setInterval(cycle,5000);
+}
+function stopBreathPacer(){clearInterval(breathInterval);breathInterval=null;}
+
+function ringAngle(e,rect){
+  const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+  const x=(e.clientX||e.touches?.[0]?.clientX||cx)-cx,y=(e.clientY||e.touches?.[0]?.clientY||cy)-cy;
+  let a=Math.atan2(y,x)*(180/Math.PI)+90;if(a<0)a+=360;return a;
+}
+let scrubbing=false;
+function scrubToAngle(a){
+  const s=sessionStretches[tIdx];const total=tPhase==='prep'?settings.prepTime:s.dur;
+  // ring is full at start (time remaining = total) and depletes clockwise.
+  // angle 0 = top = full remaining; increasing angle clockwise = less remaining.
+  const pct=(360-a)/360;
+  tLeft=Math.round(Math.max(1,Math.min(total,pct*total)));
+  const circ=2*Math.PI*54;
+  document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
+  const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
+}
+function ringTouchStart(e){scrubbing=true;scrubToAngle(ringAngle(e,e.currentTarget.getBoundingClientRect()));}
+function ringTouchMove(e){if(!scrubbing)return;e.preventDefault();scrubToAngle(ringAngle(e,document.getElementById('ring-wrap').getBoundingClientRect()));}
+function ringTouchEnd(){scrubbing=false;}
+function ringMouseDown(e){scrubbing=true;scrubToAngle(ringAngle(e,e.currentTarget.getBoundingClientRect()));const up=()=>{scrubbing=false;document.removeEventListener('mouseup',up);};document.addEventListener('mouseup',up);}
+
+function tickT(){
+  clearInterval(tInterval);
+  tInterval=setInterval(()=>{
+    if(scrubbing)return;
+    const s=sessionStretches[tIdx];
+    if(tPhase==='stretch'&&s.bilateral&&!s.pnf&&settings.sideOn&&!sideSwitched&&tLeft===Math.floor(s.dur/2)){
+      sideSwitched=true;playSound('switchSide');speak('Switch sides');renderTimer();tickT();return;
+    }
+    if(tPhase==='stretch'&&settings.beepOn&&tLeft<=3&&tLeft>0)playSound(tLeft===1?'countdownFinal':'countdown');
+    if(tPhase==='stretch'&&tLeft===10&&s.dur>15)speak('Ten seconds');
+    // PNF cycle: ease-in for first ~third, then alternate 6s tense / 8s relax
+    if(tPhase==='stretch'&&s.pnf){
+      const elapsed=s.dur-tLeft;
+      const easeIn=Math.round(s.dur*0.25);
+      if(elapsed>=easeIn){
+        const cyc=(elapsed-easeIn)%14; // 6 tense + 8 relax
+        const wantTense=cyc<6;
+        if(wantTense!==pnfTensing){
+          pnfTensing=wantTense;
+          playSound(wantTense?'pnfTense':'pnfRelax');
+          speak(wantTense?'Tense and hold':'Relax, sink deeper');
+          const b=document.getElementById('pnf-banner');if(b)b.innerHTML=pnfPhaseLabel();
+        }
+      }
+    }
+    tLeft--;
+    const total=tPhase==='prep'?settings.prepTime:s.dur;const circ=2*Math.PI*54;
+    document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
+    const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
+    if(tLeft<=0){
+      clearInterval(tInterval);tInterval=null;stopBreathPacer();
+      if(tPhase==='prep'){tPhase='stretch';tLeft=sessionStretches[tIdx].dur;sideSwitched=false;if(settings.prepBeepOn)playSound('prepEnd');speak(sessionStretches[tIdx].name);renderTimer();tickT();}
+      else nextS();
+    }
+  },1000);
+}
+function toggleT(){
+  if(tInterval){clearInterval(tInterval);tInterval=null;stopBreathPacer();const i=document.getElementById('pico');if(i)i.innerHTML='<polygon points="5,3 19,12 5,21"/>';document.getElementById('pbtn')?.classList.remove('playing');}
+  else{tickT();if(settings.breathOn){const s=sessionStretches[tIdx];if(tPhase==='stretch'&&s.dur>=40)startBreathPacer();}const i=document.getElementById('pico');if(i)i.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';document.getElementById('pbtn')?.classList.add('playing');}
+}
+function nextS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;}renderTimer();}
+function prevS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();sideSwitched=false;pnfTensing=false;if(tIdx>0)tIdx--;tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;renderTimer();}
+
+/* ── SESSION LOGGING / PROGRESS ── */
+function logSession(){
+  if(!sessionStretches.length)return;
+  const mins=Math.round(sessionStretches.reduce((a,s)=>a+s.dur,0)/60);
+  const today=new Date().toISOString().slice(0,10);
+  history.unshift({date:today,ts:Date.now(),count:sessionStretches.length,mins:Math.max(1,mins),name:window._setupTitle||'Custom session'});
+  if(history.length>200)history=history.slice(0,200);
+  save();
+}
+function computeStreak(){
+  if(!history.length)return 0;
+  const days=[...new Set(history.map(h=>h.date))].sort().reverse();
+  let streak=0;const today=new Date();
+  for(let i=0;i<days.length;i++){
+    const d=new Date(today);d.setDate(today.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    if(days.includes(ds))streak++;
+    else if(i===0){ // allow today not done yet, check yesterday
+      const y=new Date(today);y.setDate(today.getDate()-1);
+      if(days.includes(y.toISOString().slice(0,10))){streak=0;continue;}
+      else break;
+    } else break;
+  }
+  return streak;
+}
+function renderProgress(){
+  document.getElementById('stat-streak').textContent=computeStreak();
+  document.getElementById('stat-total').textContent=history.length;
+  document.getElementById('stat-mins').textContent=history.reduce((a,h)=>a+(h.mins||0),0);
+  // calendar — last 35 days
+  const doneDates=new Set(history.map(h=>h.date));
+  let cal='';const today=new Date();
+  for(let i=34;i>=0;i--){const d=new Date(today);d.setDate(today.getDate()-i);const ds=d.toISOString().slice(0,10);cal+=`<div class="cal-day ${doneDates.has(ds)?'done':''}"></div>`;}
+  document.getElementById('cal-grid').innerHTML=cal;
+  // history list
+  const hl=document.getElementById('history-list');
+  if(!history.length){hl.innerHTML='<div class="empty">No sessions yet.<br>Complete a routine to start tracking.</div>';return;}
+  hl.innerHTML=history.slice(0,15).map(h=>{
+    const d=new Date(h.ts);const when=d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+' · '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+    return`<div class="row"><div class="ri"><div class="rn">${h.name}</div><div class="rm">${when}</div></div><div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${h.count} · ${h.mins}m</div></div>`;
+  }).join('');
+}
+
+/* ── RANDOM GENERATOR ── */
+function randomModal(){
+  const areas=['neck','shoulders','back','hips','legs','core'];
+  window._randAreas=new Set();
+  window._toggleRandArea=function(a){window._randAreas.has(a)?window._randAreas.delete(a):window._randAreas.add(a);document.querySelectorAll('#rand-chips .chip').forEach(c=>c.classList.toggle('on',window._randAreas.has(c.dataset.a)));};
+  window._genRandom=function(){
+    const dur=parseInt(document.getElementById('rand-dur').value)||10;
+    const cnt=parseInt(document.getElementById('rand-cnt').value)||8;
+    const areas=window._randAreas.size?[...window._randAreas]:['neck','shoulders','back','hips','legs','core'];
+    let pool=lib.filter(s=>areas.includes(s.area)&&!s.dynamic);
+    // shuffle
+    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+    const picks=pool.slice(0,Math.min(cnt,pool.length));
+    if(!picks.length){alert('No stretches match. Pick different areas.');return;}
+    const per=Math.max(15,Math.round((dur*60)/picks.length/5)*5);
+    session=picks.map(s=>({...s,dur:per,qid:uid()}));
+    window._setupTitle='Random · '+dur+' min';
+    window._editingRoutine=null;
+    save();closeModal();show('setup');
+  };
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">🎲 Random session</p>
+    <label class="fl">Total duration (minutes)</label><input class="fi" type="number" id="rand-dur" value="10" min="2" max="60">
+    <label class="fl">Number of stretches</label><input class="fi" type="number" id="rand-cnt" value="8" min="2" max="25">
+    <label class="fl">Focus areas (none = all)</label>
+    <div class="chips" id="rand-chips" style="padding:0 0 10px">
+      ${areas.map(a=>`<button class="chip" data-a="${a}" onclick="_toggleRandArea('${a}')">${a}</button>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px"><button class="btn ac" style="flex:1" onclick="_genRandom()">Generate</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+}
+
+/* ── BUILD ROUTINE ── */
+function buildRoutineModal(){
+  let selected=new Set();
+  function renderList(){
+    const q=(document.getElementById('m-build-search')?.value||'').toLowerCase();
+    const filtered=lib.filter(s=>!q||s.name.toLowerCase().includes(q)||s.area.includes(q));
+    document.getElementById('m-build-list').innerHTML=filtered.map(s=>`
+      <div class="build-stretch" onclick="toggleBuildSel('${s.id}')">
+        <div class="check-circle ${selected.has(s.id)?'on':''}"></div>
+        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}</div></div>
+      </div>`).join('');
+    document.getElementById('m-build-count').textContent=selected.size?`${selected.size} selected`:'';
+  }
+  window.toggleBuildSel=id=>{selected.has(id)?selected.delete(id):selected.add(id);renderList();};
+  window._buildSearch=renderList;
+  window.toggleCustomForm=()=>{const f=document.getElementById('m-custom-form');f.style.display=f.style.display==='none'?'block':'none';};
+  window.addCustomAndSelect=()=>{
+    const n=document.getElementById('m-cs-name').value.trim();if(!n)return;
+    const s={id:uid(),name:n,area:document.getElementById('m-cs-area').value,desc:document.getElementById('m-cs-desc').value.trim(),cues:document.getElementById('m-cs-cues').value.trim(),dur:+document.getElementById('m-cs-dur').value||30,bilateral:document.getElementById('m-cs-bil').checked,pnf:document.getElementById('m-cs-pnf').checked};
+    lib.push(s);save();selected.add(s.id);
+    document.getElementById('m-cs-name').value='';document.getElementById('m-cs-desc').value='';document.getElementById('m-cs-cues').value='';
+    document.getElementById('m-custom-form').style.display='none';renderList();
+  };
+  window.confirmBuildRoutine=()=>{
+    const name=document.getElementById('m-build-name').value.trim();
+    if(!name){document.getElementById('m-build-name').focus();return;}
+    if(!selected.size){alert('Pick at least one stretch.');return;}
+    routines.push({id:uid(),name,stretches:lib.filter(s=>selected.has(s.id)).map(s=>({...s,qid:uid()}))});
+    save();closeModal();renderRoutines();
+  };
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Build routine</p>
+    <label class="fl">Routine name</label><input class="fi" id="m-build-name" placeholder="e.g. Morning wake-up" style="margin-bottom:10px">
+    <input class="fi" id="m-build-search" placeholder="Search stretches…" oninput="_buildSearch()" style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <span style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Pick stretches</span>
+      <span id="m-build-count" style="font-size:12px;color:var(--accent)"></span></div>
+    <div id="m-build-list" style="max-height:40vh;overflow-y:auto"></div>
+    <div style="border-top:1px solid var(--border);margin-top:12px;padding-top:12px">
+      <button class="btn" style="width:100%" onclick="toggleCustomForm()">+ add a custom stretch</button>
+      <div id="m-custom-form" style="display:none;margin-top:10px">
+        <label class="fl">Name</label><input class="fi" id="m-cs-name" placeholder="e.g. Hip flexor stretch">
+        <label class="fl">Area</label><select class="fi" id="m-cs-area"><option value="neck">neck</option><option value="shoulders">shoulders</option><option value="back">back</option><option value="hips">hips</option><option value="legs">legs</option><option value="core">core</option></select>
+        <label class="fl">Instructions</label><textarea class="fi" id="m-cs-desc" rows="2"></textarea>
+        <label class="fl">Coaching cues (shown on timer)</label><textarea class="fi" id="m-cs-cues" rows="2"></textarea>
+        <label class="fl">Duration (seconds)</label><input class="fi" type="number" id="m-cs-dur" value="30" min="5" max="300">
+        <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><label class="tog"><input type="checkbox" id="m-cs-bil"><span class="tog-sl"></span></label><div style="font-size:13px">Bilateral</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><label class="tog"><input type="checkbox" id="m-cs-pnf"><span class="tog-sl"></span></label><div style="font-size:13px">PNF (tense/relax)</div></div>
+        <button class="btn ac" style="width:100%" onclick="addCustomAndSelect()">Add &amp; select</button>
+      </div></div>
+    <div style="display:flex;gap:8px;margin-top:14px;position:sticky;bottom:0;background:var(--surface);padding-top:8px">
+      <button class="btn ac" style="flex:1" onclick="confirmBuildRoutine()">Save routine</button>
+      <button class="btn" onclick="closeModal()">Cancel</button></div>`);
+  renderList();setTimeout(()=>document.getElementById('m-build-name')?.focus(),80);
+}
+
+/* ── IMAGES ── */
+function uploadImg(id){imgTarget=id;document.getElementById('img-input').click();}
+function onImgFile(e){
+  const f=e.target.files[0];if(!f||!imgTarget)return;
+  const r=new FileReader();
+  r.onload=ev=>{userImgs[imgTarget]=ev.target.result;save();if(sessionStretches[tIdx]&&sessionStretches[tIdx].id===imgTarget)renderTimer();renderLib();if(document.getElementById('pg-setup').classList.contains('on'))renderSetup();imgTarget=null;};
+  r.readAsDataURL(f);e.target.value='';
+}
+function imgOptions(id){
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Change photo</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn" onclick="uploadImg('${id}');closeModal()">📷 Upload photo</button>
+      ${userImgs[id]?`<button class="btn red" onclick="delImg('${id}')">Remove photo</button>`:''}</div>
+    <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function delImg(id){delete userImgs[id];save();closeModal();if(sessionStretches[tIdx]&&sessionStretches[tIdx].id===id)renderTimer();}
+
+/* Batch image manager */
+let batchQueue=[];
+function batchImageModal(){
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:8px">Batch images</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:14px">Upload several photos at once, then assign each to a stretch. Faster than one at a time.</p>
+    <button class="btn ac" style="width:100%;margin-bottom:12px" onclick="document.getElementById('batch-input').click()">📷 Select photos</button>
+    <div id="batch-assign"></div>
+    <button class="btn" style="width:100%;margin-top:10px" onclick="closeModal()">Done</button>`);
+}
+function onBatchFiles(e){
+  const files=[...e.target.files];if(!files.length)return;
+  batchQueue=[];let loaded=0;
+  files.forEach((f,idx)=>{const r=new FileReader();r.onload=ev=>{batchQueue[idx]=ev.target.result;loaded++;if(loaded===files.length)renderBatchAssign();};r.readAsDataURL(f);});
+  e.target.value='';
+}
+function renderBatchAssign(){
+  const el=document.getElementById('batch-assign');if(!el)return;
+  const opts=lib.map(s=>`<option value="${s.id}">${s.name} (${s.area})</option>`).join('');
+  el.innerHTML='<div style="font-size:12px;color:var(--muted);margin-bottom:8px">Assign each photo:</div>'+batchQueue.map((img,i)=>`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <img src="${img}" style="width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0">
+      <select class="fi" style="margin:0" onchange="assignBatch(${i},this.value)"><option value="">— pick stretch —</option>${opts}</select>
+    </div>`).join('');
+}
+function assignBatch(i,id){if(!id)return;userImgs[id]=batchQueue[i];save();renderLib();}
+
+/* ── LIBRARY ── */
+function renderLib(){
+  const areas=['neck','shoulders','back','hips','legs','core'];
+  document.getElementById('lib-chips').innerHTML=['',...areas,'dynamic','pnf'].map(a=>`<button class="chip ${libArea===a?'on':''}" onclick="setArea('${a}')">${a||'all'}</button>`).join('');
+  const q=(document.getElementById('lib-search')?.value||'').toLowerCase();
+  const filtered=lib.filter(s=>{
+    if(libArea==='dynamic')return s.dynamic&&(!q||s.name.toLowerCase().includes(q));
+    if(libArea==='pnf')return s.pnf&&(!q||s.name.toLowerCase().includes(q));
+    return (!libArea||s.area===libArea)&&(!q||s.name.toLowerCase().includes(q)||s.area.includes(q)||(s.desc||'').toLowerCase().includes(q));
+  });
+  const el=document.getElementById('lib-list');
+  if(!filtered.length){el.innerHTML='<div class="empty">No stretches found.</div>';return;}
+  el.innerHTML=filtered.map(s=>{
+    const inS=session.some(q=>q.id===s.id);
+    return`<div class="row">
+      ${imgSrc(s.id)?`<img class="thumb" src="${imgSrc(s.id)}" onclick="uploadImg('${s.id}')" style="cursor:pointer">`:`<div class="thumb-ph" onclick="uploadImg('${s.id}')">+</div>`}
+      <div class="ri" onclick="editStretchModal('${s.id}')" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}${s.dynamic?' · ⟳':''}</div></div>
+      ${inS?'<div class="qdot"></div>':''}
+      <button class="btn sm ${inS?'red':''}" onclick="toggleSession('${s.id}')">${inS?'remove':'add'}</button>
+    </div>`;
+  }).join('');
+}
+function editStretchModal(id){
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  const areas=['neck','shoulders','back','hips','legs','core'];
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Edit stretch</p>
+    <label class="fl">Name</label><input class="fi" id="e-name" value="${(s.name||'').replace(/"/g,'&quot;')}">
+    <label class="fl">Area</label><select class="fi" id="e-area">${areas.map(a=>`<option value="${a}" ${s.area===a?'selected':''}>${a}</option>`).join('')}</select>
+    <label class="fl">Instructions</label><textarea class="fi" id="e-desc" rows="2">${s.desc||''}</textarea>
+    <label class="fl">Coaching cues</label><textarea class="fi" id="e-cues" rows="2">${s.cues||''}</textarea>
+    <label class="fl">Default duration (seconds)</label><input class="fi" type="number" id="e-dur" value="${s.dur}" min="5" max="300">
+    <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><label class="tog"><input type="checkbox" id="e-bil" ${s.bilateral?'checked':''}><span class="tog-sl"></span></label><div style="font-size:13px">Bilateral (switch-side alert)</div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label class="tog"><input type="checkbox" id="e-pnf" ${s.pnf?'checked':''}><span class="tog-sl"></span></label><div style="font-size:13px">PNF (tense/relax)</div></div>
+    <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmEditStretch('${id}')">Save</button><button class="btn red" onclick="deleteStretch('${id}')">Delete</button></div>
+    <button class="btn ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Cancel</button>`);
+  setTimeout(()=>document.getElementById('e-name')?.focus(),80);
+}
+function confirmEditStretch(id){
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  const n=document.getElementById('e-name').value.trim();if(!n)return;
+  s.name=n;s.area=document.getElementById('e-area').value;
+  s.desc=document.getElementById('e-desc').value.trim();
+  s.cues=document.getElementById('e-cues').value.trim();
+  s.dur=+document.getElementById('e-dur').value||30;
+  s.bilateral=document.getElementById('e-bil').checked;
+  s.pnf=document.getElementById('e-pnf').checked;
+  save();closeModal();renderLib();
+}
+function deleteStretch(id){
+  if(!confirm('Delete this stretch from the library? It stays in any saved routines.'))return;
+  const i=lib.findIndex(l=>l.id===id);if(i>=0)lib.splice(i,1);
+  const si=session.findIndex(q=>q.id===id);if(si>=0)session.splice(si,1);
+  save();closeModal();renderLib();
+}
+function setArea(a){libArea=a;renderLib();}
+function toggleSession(id){
+  const i=session.findIndex(q=>q.id===id);
+  if(i>=0)session.splice(i,1);
+  else{const s=lib.find(l=>l.id===id);if(s){session.push({...s,qid:uid()});if(!window._setupTitle)window._setupTitle='Custom session';}}
+  save();renderLib();
+}
+function addStretchModal(){
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Custom stretch</p>
+    <label class="fl">Name</label><input class="fi" id="m-cn" placeholder="e.g. Side bend">
+    <label class="fl">Area</label><select class="fi" id="m-ca"><option value="neck">neck</option><option value="shoulders">shoulders</option><option value="back">back</option><option value="hips">hips</option><option value="legs">legs</option><option value="core">core</option></select>
+    <label class="fl">Instructions</label><textarea class="fi" id="m-cd" rows="2"></textarea>
+    <label class="fl">Coaching cues (shown on timer)</label><textarea class="fi" id="m-cc" rows="2"></textarea>
+    <label class="fl">Duration (seconds)</label><input class="fi" type="number" id="m-cdur" value="30" min="5" max="300">
+    <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><label class="tog"><input type="checkbox" id="m-cbil"><span class="tog-sl"></span></label><div style="font-size:13px">Bilateral (switch-side alert)</div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label class="tog"><input type="checkbox" id="m-cpnf"><span class="tog-sl"></span></label><div style="font-size:13px">PNF (tense/relax)</div></div>
+    <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmAddStretch()">Add to library</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+  setTimeout(()=>document.getElementById('m-cn')?.focus(),80);
+}
+function confirmAddStretch(){
+  const n=document.getElementById('m-cn')?.value.trim();if(!n)return;
+  lib.push({id:uid(),name:n,area:document.getElementById('m-ca').value,desc:document.getElementById('m-cd').value.trim(),cues:document.getElementById('m-cc').value.trim(),dur:+document.getElementById('m-cdur').value||30,bilateral:document.getElementById('m-cbil').checked,pnf:document.getElementById('m-cpnf').checked});
+  save();closeModal();renderLib();
+}
+
+/* ── EXPORT / IMPORT ── */
+function exportData(){
+  const data={lib,routines,userImgs,history,settings,version:1,exported:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='limber-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+function onImportFile(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const d=JSON.parse(ev.target.result);
+      if(!confirm('This will replace your current routines, library, images and history. Continue?'))return;
+      if(d.lib)lib=d.lib;if(d.routines)routines=d.routines;if(d.userImgs)userImgs=d.userImgs;if(d.history)history=d.history;if(d.settings)settings=Object.assign(settings,d.settings);
+      save();localStorage.setItem('sx-settings',JSON.stringify(settings));
+      setTheme(settings.theme||'dark');
+      alert('Imported successfully!');show('routines');
+    }catch(err){alert('Could not read that file.');}
+  };
+  r.readAsText(f);e.target.value='';
+}
+
+/* ── MODAL ── */
+function openModal(html){document.getElementById('sheet').innerHTML=html;document.getElementById('overlay').classList.add('on');}
+function closeModal(){document.getElementById('overlay').classList.remove('on');}
+function maybeClose(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+/* ── INIT ── */
+(function(){
+  // merge new default stretches into existing lib (for users with saved data)
+  const ids=new Set(lib.map(s=>s.id));
+  DEFAULTS.forEach(s=>{if(!ids.has(s.id)){lib.push({...s});ids.add(s.id);}});
+  // build prebuilt routines if missing
+  const names=new Set(routines.map(r=>r.name));
+  PREBUILT.forEach(p=>{
+    if(!names.has(p.name)){
+      const stretches=p.ids.map(id=>getStretch(id)).filter(Boolean).map(s=>({...s,qid:uid()}));
+      if(stretches.length)routines.push({id:uid(),name:p.name,stretches});
+    }
+  });
+  save();
+  renderRoutines();renderLib();renderSettings();
+})();
+
+/* ── PWA: service worker + wake lock ── */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+// Keep screen awake during a session
+let wakeLock=null;
+async function requestWakeLock(){
+  try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');}}catch(e){}
+}
+function releaseWakeLock(){try{if(wakeLock){wakeLock.release();wakeLock=null;}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&document.getElementById('pg-go').classList.contains('on'))requestWakeLock();});
+</script>
+</body>
+</html>
