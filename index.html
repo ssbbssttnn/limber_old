@@ -494,7 +494,27 @@ function save(){
 }
 function saveSetting(k,v){settings[k]=v;localStorage.setItem('sx-settings',JSON.stringify(settings));}
 function uid(){return 'x'+Date.now()+Math.random().toString(36).slice(2,5);}
-function imgSrc(id){return userImgs[id]||'';}
+// Image priority: 1) photo you uploaded in-app  2) photos/<id>.jpg from the repo
+function imgSrc(id){
+  if(userImgs[id])return userImgs[id];
+  return 'photos/'+id+'.jpg';
+}
+// Renders an <img> that falls back to a + placeholder if the file is missing
+function imgTag(id,opts){
+  opts=opts||{};
+  const cls=opts.cls||'thumb';
+  const big=opts.big?'1':'0';
+  const src=imgSrc(id);
+  return `<img src="${src}" class="${cls}" onclick="uploadImg('${id}')" style="cursor:pointer" onerror="imgFallback(this,'${id}',${big})">`;
+}
+// Swaps a broken image for the + placeholder
+function imgFallback(el,id,big){
+  const ph=document.createElement(big?'div':'div');
+  if(big){ph.className='iph';ph.innerHTML='<span style="font-size:24px">+</span><span>tap to add photo</span>';}
+  else{ph.className='thumb-ph';ph.textContent='+';}
+  ph.onclick=()=>uploadImg(id);
+  el.replaceWith(ph);
+}
 function getStretch(id){return lib.find(s=>s.id===id);}
 
 /* ── THEME ── */
@@ -655,7 +675,7 @@ function renderSetup(){
   el.innerHTML=session.map((s,i)=>`
     <div class="qi" draggable="true" ondragstart="ds(event,${i})" ondragover="dov(event)" ondrop="dp(event,${i})">
       <span class="dh">⠿</span>
-      ${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" class="thumb" onclick="uploadImg('${s.id}')" style="cursor:pointer">`:`<div class="thumb-ph" onclick="uploadImg('${s.id}')">+</div>`}
+      ${imgTag(s.id)}
       <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span>${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}</div></div>
       <div class="stepper"><button onclick="adjDur(${i},-5)">−</button><span id="sd-${i}">${s.dur}s</span><button onclick="adjDur(${i},5)">+</button></div>
       <button class="xbtn" onclick="removeSetup(${i})">✕</button>
@@ -726,7 +746,7 @@ function renderTimer(){
   el.innerHTML=`
     <div class="progbar"><div class="progbar-fill" style="width:${overallPct}%"></div></div>
     <div class="img-box" id="img-box">
-      ${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" alt="${s.name}">`:`<div class="iph" onclick="uploadImg('${s.id}')"><span style="font-size:24px">+</span><span>tap to add photo</span></div>`}
+      ${imgTag(s.id,{cls:'timer-img',big:true})}
       <button class="img-change" onclick="imgOptions('${s.id}')">change photo</button>
     </div>
     <div class="timer-body">
@@ -1062,7 +1082,7 @@ function renderLib(){
   el.innerHTML=filtered.map(s=>{
     const inS=session.some(q=>q.id===s.id);
     return`<div class="row">
-      ${imgSrc(s.id)?`<img class="thumb" src="${imgSrc(s.id)}" onclick="uploadImg('${s.id}')" style="cursor:pointer">`:`<div class="thumb-ph" onclick="uploadImg('${s.id}')">+</div>`}
+      ${imgTag(s.id)}
       <div class="ri" onclick="editStretchModal('${s.id}')" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}${s.pnf?' · PNF':''}${s.dynamic?' · ⟳':''}</div></div>
       ${inS?'<div class="qdot"></div>':''}
       <button class="btn sm ${inS?'red':''}" onclick="toggleSession('${s.id}')">${inS?'remove':'add'}</button>
