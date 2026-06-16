@@ -431,6 +431,10 @@ const DEFAULTS=[
 {id:'s150',name:'Corpse / full relax',area:'core',desc:'Lie flat, arms open, fully release.',cues:'Let everything go. Slow breathing.',dur:90,bilateral:false},
 {id:'s_deadhang',name:'Dead hang',area:'shoulders',desc:'Hang from a bar with full bodyweight, shoulders relaxed.',cues:'Let the shoulders and spine decompress.',dur:60,bilateral:false},
 {id:'s_neckbicep',name:'Neck + bicep combo',area:'neck',desc:'Tilt ear to shoulder while reaching same-side arm down.',cues:'Reach the arm long as you tilt away.',dur:45,bilateral:true},
+{id:'s_hipopen',name:'Standing hip openers',area:'hips',desc:'Stand on one leg, lift the other knee and circle it open and out.',cues:'Open the hip in slow controlled circles. Switch legs.',dur:30,bilateral:true,dynamic:true},
+{id:'s_elephant',name:'Elephant walks',area:'legs',desc:'Hinge to a forward fold, hands down, alternately bend each knee.',cues:'Walk it out — bend one knee, straighten the other, swap.',dur:30,bilateral:false,dynamic:true},
+{id:'s_scappush',name:'Scapular pushups',area:'shoulders',desc:'In a plank or against a wall, push and pinch the shoulder blades.',cues:'Keep arms straight — move only the shoulder blades.',dur:30,bilateral:false,dynamic:true},
+{id:'s_windmill',name:'Windmills / low-back rotations',area:'back',desc:'Stand wide, hinge forward, rotate to touch hand to opposite foot.',cues:'Reach one hand down, the other up. Alternate sides.',dur:30,bilateral:false,dynamic:true},
 ];
 // Pre-built routines — reference stretch IDs from the library
 const PREBUILT=[
@@ -449,6 +453,8 @@ const PREBUILT=[
   {name:'Before Bed · D (~10 min)',ids:['s30','s53','s61','s28','s116','s150']},
   // In bed / mattress ~6 min
   {name:'In Bed (~6 min)',ids:['s32','s33','s113','s51','s148','s117']},
+  // Mobility flow — dynamic warm-up
+  {name:'Mobility',ids:['s_hipopen','s_elephant','s42','s25','s_scappush','s34','s_windmill'],dur:30},
   // Posture fix
   {name:'Posture Fix',ids:['s4','s10','s11','s18','s36','s46','s122','s35']},
   // APT assist
@@ -1158,7 +1164,7 @@ function maybeClose(e){if(e.target===document.getElementById('overlay'))closeMod
   const names=new Set(routines.map(r=>r.name));
   PREBUILT.forEach(p=>{
     if(!names.has(p.name)){
-      const stretches=p.ids.map(id=>getStretch(id)).filter(Boolean).map(s=>({...s,qid:uid()}));
+      const stretches=p.ids.map(id=>getStretch(id)).filter(Boolean).map(s=>({...s,qid:uid(),dur:p.dur||s.dur}));
       if(stretches.length)routines.push({id:uid(),name:p.name,stretches});
     }
   });
