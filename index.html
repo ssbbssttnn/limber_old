@@ -545,6 +545,15 @@ function save(){
 }
 function saveSetting(k,v){settings[k]=v;localStorage.setItem('sx-settings',JSON.stringify(settings));}
 function uid(){return 'x'+Date.now()+Math.random().toString(36).slice(2,5);}
+// Makes a clean, readable, unique id from a stretch name → e.g. "custom-hip-flexor"
+function slugId(name){
+  let base='custom-'+(name||'stretch').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+  if(!base||base==='custom-')base='custom-stretch';
+  let id=base,n=2;
+  const existing=new Set(lib.map(s=>s.id));
+  while(existing.has(id)){id=base+'-'+n;n++;}
+  return id;
+}
 // Formats the app will try, in order, for repo photos
 const IMG_EXTS=['jpg','jpeg','png','webp','JPG','JPEG','PNG'];
 // Image priority: 1) photo you uploaded in-app  2) photos/<id>.<ext> from the repo
@@ -1049,7 +1058,7 @@ function buildRoutineModal(){
   window.toggleCustomForm=()=>{const f=document.getElementById('m-custom-form');f.style.display=f.style.display==='none'?'block':'none';};
   window.addCustomAndSelect=()=>{
     const n=document.getElementById('m-cs-name').value.trim();if(!n)return;
-    const s={id:uid(),name:n,area:document.getElementById('m-cs-area').value,desc:document.getElementById('m-cs-desc').value.trim(),cues:document.getElementById('m-cs-cues').value.trim(),dur:+document.getElementById('m-cs-dur').value||30,bilateral:document.getElementById('m-cs-bil').checked,pnf:document.getElementById('m-cs-pnf').checked};
+    const s={id:slugId(n),name:n,area:document.getElementById('m-cs-area').value,desc:document.getElementById('m-cs-desc').value.trim(),cues:document.getElementById('m-cs-cues').value.trim(),dur:+document.getElementById('m-cs-dur').value||30,bilateral:document.getElementById('m-cs-bil').checked,pnf:document.getElementById('m-cs-pnf').checked};
     lib.push(s);save();selected.add(s.id);
     document.getElementById('m-cs-name').value='';document.getElementById('m-cs-desc').value='';document.getElementById('m-cs-cues').value='';
     document.getElementById('m-custom-form').style.display='none';renderList();
@@ -1154,7 +1163,8 @@ function renderLib(){
 }
 function editStretchModal(id){
   const s=lib.find(l=>l.id===id);if(!s)return;
-  const areas=['neck','shoulders','back','hips','legs','core'];
+  const areas=['neck','shoulders','back','hips','legs','core','nerve'];
+  const fname=id+'.jpg';
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Edit stretch</p>
     <label class="fl">Name</label><input class="fi" id="e-name" value="${(s.name||'').replace(/"/g,'&quot;')}">
     <label class="fl">Area</label><select class="fi" id="e-area">${areas.map(a=>`<option value="${a}" ${s.area===a?'selected':''}>${a}</option>`).join('')}</select>
@@ -1163,9 +1173,29 @@ function editStretchModal(id){
     <label class="fl">Default duration (seconds)</label><input class="fi" type="number" id="e-dur" value="${s.dur}" min="5" max="300">
     <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><label class="tog"><input type="checkbox" id="e-bil" ${s.bilateral?'checked':''}><span class="tog-sl"></span></label><div style="font-size:13px">Bilateral (switch-side alert)</div></div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><label class="tog"><input type="checkbox" id="e-pnf" ${s.pnf?'checked':''}><span class="tog-sl"></span></label><div style="font-size:13px">PNF (tense/relax)</div></div>
+    <label class="fl">Photo filename (for GitHub)</label>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px">
+      <code style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--accent);overflow:hidden;text-overflow:ellipsis" id="e-fname">photos/${fname}</code>
+      <button class="btn sm" onclick="copyFname('${fname}')">copy</button>
+    </div>
+    <p style="font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:14px">Name your image file <b>${fname}</b> (or .png/.webp) and put it in the <b>photos/</b> folder in your repo. This filename never changes, even if you rename the stretch.</p>
     <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmEditStretch('${id}')">Save</button><button class="btn red" onclick="deleteStretch('${id}')">Delete</button></div>
     <button class="btn ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Cancel</button>`);
   setTimeout(()=>document.getElementById('e-name')?.focus(),80);
+}
+function copyFname(fname){
+  const full='photos/'+fname;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(full).then(()=>flashCopied(),()=>fallbackCopy(full));
+  } else fallbackCopy(full);
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');flashCopied();}catch(e){}ta.remove();
+}
+function flashCopied(){
+  const el=document.getElementById('e-fname');if(!el)return;
+  const o=el.textContent;el.textContent='✓ copied!';setTimeout(()=>{if(el)el.textContent=o;},1200);
 }
 function confirmEditStretch(id){
   const s=lib.find(l=>l.id===id);if(!s)return;
@@ -1205,7 +1235,7 @@ function addStretchModal(){
 }
 function confirmAddStretch(){
   const n=document.getElementById('m-cn')?.value.trim();if(!n)return;
-  lib.push({id:uid(),name:n,area:document.getElementById('m-ca').value,desc:document.getElementById('m-cd').value.trim(),cues:document.getElementById('m-cc').value.trim(),dur:+document.getElementById('m-cdur').value||30,bilateral:document.getElementById('m-cbil').checked,pnf:document.getElementById('m-cpnf').checked});
+  lib.push({id:slugId(n),name:n,area:document.getElementById('m-ca').value,desc:document.getElementById('m-cd').value.trim(),cues:document.getElementById('m-cc').value.trim(),dur:+document.getElementById('m-cdur').value||30,bilateral:document.getElementById('m-cbil').checked,pnf:document.getElementById('m-cpnf').checked});
   save();closeModal();renderLib();
 }
 
