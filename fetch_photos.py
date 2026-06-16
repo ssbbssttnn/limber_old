@@ -61,8 +61,7 @@ IMG_EXTS = (".jpg", ".jpeg", ".png", ".webp")
 #     "<filename>": "<full liftmanual URL>"
 # Find the right URL by searching the stretch on liftmanual.com.
 OVERRIDES = {
-    # "deep-squat.jpg": "https://liftmanual.com/full-squat-mobility/",
-    # "frog-rock.jpg":  "https://liftmanual.com/rocking-ankle-stretch/",
+    "fire-log.jpg": "https://liftmanual.com/double-pigeon-pose/",
 }
 # ---------------------------------------------------------------------------
 
