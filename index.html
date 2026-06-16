@@ -35,7 +35,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;letter-spacing:0.03em}
 .nb.on{color:var(--accent)}.nb svg{width:21px;height:21px;stroke-width:1.6}
 .pg{display:none;padding-top:16px}.pg.on{display:block}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 14px}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 16px}
 .htitle{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;letter-spacing:-0.02em}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;overflow:hidden}
 .row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border)}
@@ -64,19 +64,19 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .stepper button{width:34px;height:34px;background:var(--surface2);border:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .stepper button:active{background:var(--border)}
 .stepper span{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);min-width:36px;text-align:center;background:var(--surface)}
-.img-box{width:100%;height:180px;background:var(--surface2);position:relative;overflow:hidden;flex-shrink:0}
+.img-box{width:100%;height:200px;background:var(--surface2);position:relative;overflow:hidden;flex-shrink:0}
 .img-box img{width:100%;height:100%;object-fit:cover;display:block}
 .img-box .iph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:13px;cursor:pointer}
 .img-change{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:11px;padding:4px 9px;cursor:pointer;font-family:'DM Sans',sans-serif}
-.timer-body{padding:10px 16px 0;display:flex;flex-direction:column;align-items:center}
-.tlabel{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:2px}
-.tname{font-family:'DM Mono',monospace;font-size:19px;font-weight:300;letter-spacing:-0.02em;line-height:1.2;text-align:center}
-.cue-box{width:100%;margin-top:6px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted);line-height:1.5;min-height:36px;text-align:center}
+.timer-body{padding:14px 20px 0;display:flex;flex-direction:column;align-items:center}
+.tlabel{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
+.tname{font-family:'DM Mono',monospace;font-size:21px;font-weight:300;letter-spacing:-0.02em;line-height:1.25;text-align:center;margin-top:1px}
+.cue-box{width:100%;margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 14px;font-size:13px;color:var(--muted);line-height:1.55;text-align:center}
 .phase-banner{width:100%;margin-top:6px;border-radius:10px;padding:7px 12px;text-align:center;font-size:13px;font-weight:500}
 .phase-banner.prep{background:rgba(255,200,50,0.12);color:#ffc832;border:1px solid rgba(255,200,50,0.25)}
 .phase-banner.side{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,240,96,0.3)}
 .phase-banner.pnf{background:rgba(120,180,255,0.12);color:#78b4ff;border:1px solid rgba(120,180,255,0.3)}
-.timer-row{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:8px;margin-bottom:6px}
+.timer-row{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:16px;margin-bottom:8px}
 .ring-wrap{position:relative;width:120px;height:120px;flex-shrink:0;cursor:pointer;touch-action:none}
 .ring-wrap svg{transform:rotate(-90deg);width:120px;height:120px}
 .tnum{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Mono',monospace;font-size:32px;font-weight:300;letter-spacing:-0.04em;pointer-events:none}
@@ -92,7 +92,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .sbtn svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
 .progbar{height:4px;background:var(--border);border-radius:2px;margin:6px 16px 0;overflow:hidden}
 .progbar-fill{height:100%;background:var(--accent);transition:width 0.5s}
-.plist{padding:8px 16px 20px;margin-top:4px}
+.plist{padding:16px 20px 24px;margin-top:12px}
 .pl-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:var(--muted)}
 .pl-row.cur{color:var(--text);font-weight:500}
 .pl-row.done{opacity:0.3;text-decoration:line-through}
@@ -131,7 +131,8 @@ select.fi{appearance:none}textarea.fi{resize:none}
 .check-circle.on{background:var(--accent);border-color:var(--accent)}
 .check-circle.on::after{content:'✓';font-size:12px;color:var(--accent-text);font-weight:700}
 .sec-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:8px 16px 6px;font-family:'DM Mono',monospace;display:block}
-.stat-grid{display:flex;gap:10px;margin:0 16px 10px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 10px}
+.stat-box .stat-num{font-size:24px}
 .stat-box{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
 .stat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:300;color:var(--accent)}
 .stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
@@ -172,12 +173,25 @@ select.fi{appearance:none}textarea.fi{resize:none}
 .snd-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-left:auto}
 .snd-check.on{background:var(--accent);border-color:var(--accent)}
 /* roomier two-line setup row */
-.qi2{padding:12px 16px;border-bottom:1px solid var(--border)}
+.qi2{padding:14px 16px;border-bottom:1px solid var(--border)}
 .qi2:last-child{border-bottom:none}
-.qi2-top{display:flex;align-items:center;gap:12px}
-.qi2-top .rn{font-size:15px;white-space:normal;line-height:1.25}
-.qi2-bot{display:flex;align-items:center;gap:10px;margin-top:8px;padding-left:34px}
+.qi2-top{display:flex;align-items:center;gap:13px}
+.qi2-top .rn{font-size:15px;white-space:normal;line-height:1.3;font-weight:500}
+.qi2-bot{display:flex;align-items:center;gap:10px;margin-top:10px;padding-left:47px}
 .qi2 .rn{white-space:normal}
+.qi2 .thumb,.qi2 .thumb-ph{width:44px;height:44px;border-radius:10px}
+.qi2 .dh{font-size:18px;opacity:0.5}
+.qi2 .rm{margin-top:3px}
+/* timer header */
+.timer-top{display:flex;align-items:center;gap:12px;padding:10px 16px 4px}
+.timer-end{display:flex;align-items:center;gap:4px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:4px 2px;flex-shrink:0}
+.timer-end svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
+.timer-top .progbar{flex:1;margin:0}
+.timer-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;min-width:30px;text-align:right}
+.snd-chip{font-size:12px;font-family:'DM Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.15s}
+.snd-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.pnf-chip{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:0.04em;padding:6px 11px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer}
+.pnf-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 </style>
 </head>
 <body>
@@ -190,6 +204,7 @@ select.fi{appearance:none}textarea.fi{resize:none}
     </div>
   </div>
   <div id="today-banner"></div>
+  <div class="search-wrap"><input class="search-input" id="routine-search" placeholder="Search routines…" oninput="renderRoutines()"></div>
   <div id="routine-list"></div>
 </div>
 
@@ -226,11 +241,14 @@ select.fi{appearance:none}textarea.fi{resize:none}
   <div class="hdr"><span class="htitle">progress</span></div>
   <div class="stat-grid">
     <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-lbl">day streak</div></div>
+    <div class="stat-box"><div class="stat-num" id="stat-week">0</div><div class="stat-lbl">this week</div></div>
     <div class="stat-box"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl">sessions</div></div>
     <div class="stat-box"><div class="stat-num" id="stat-mins">0</div><div class="stat-lbl">minutes</div></div>
   </div>
   <span class="sec-lbl">Last 35 days</span>
   <div class="card"><div class="cal-grid" id="cal-grid"></div></div>
+  <span class="sec-lbl">Focus by area</span>
+  <div class="card" style="padding:12px 16px"><div id="area-breakdown"></div></div>
   <span class="sec-lbl">Recent sessions</span>
   <div id="history-list" class="card"></div>
 </div>
@@ -263,28 +281,31 @@ select.fi{appearance:none}textarea.fi{resize:none}
   <div class="srow">
     <div><div class="slbl">Switch-side reposition time</div><div class="ssub">Pause to switch sides mid-stretch</div></div>
     <div class="stepper"><button onclick="adjSwitchTime(-1)">−</button><span id="set-switch">4s</span><button onclick="adjSwitchTime(1)">+</button></div>
+  </div>
+  <div class="srow">
+    <div><div class="slbl">Skip prep on first stretch</div><div class="ssub">Start the first stretch immediately</div></div>
+    <label class="tog"><input type="checkbox" id="tog-skipprep" onchange="saveSetting('skipFirstPrep',this.checked)"><span class="tog-sl"></span></label>
   </div></div>
-  <span class="sec-lbl">Sounds &amp; Voice</span>
+  <span class="sec-lbl">Sounds</span>
   <div class="card">
-    <div class="srow"><div><div class="slbl">Voice cues</div><div class="ssub">Speaks switch-side, countdown, prompts</div></div>
-      <label class="tog"><input type="checkbox" id="tog-voice" onchange="saveSetting('voiceOn',this.checked)"><span class="tog-sl"></span></label></div>
     <div class="srow"><div><div class="slbl">Countdown beeps</div><div class="ssub">Last 3 seconds of each stretch</div></div>
       <label class="tog"><input type="checkbox" id="tog-beep" onchange="saveSetting('beepOn',this.checked)"><span class="tog-sl"></span></label></div>
     <div class="srow"><div><div class="slbl">Switch-side alert</div><div class="ssub">Halfway cue for bilateral stretches</div></div>
       <label class="tog"><input type="checkbox" id="tog-side" onchange="saveSetting('sideOn',this.checked)"><span class="tog-sl"></span></label></div>
-    <div class="srow"><div><div class="slbl">Prep-end beep</div><div class="ssub">Beep when stretch starts</div></div>
+    <div class="srow"><div><div class="slbl">Next-stretch beep</div><div class="ssub">Sounds when each stretch starts</div></div>
       <label class="tog"><input type="checkbox" id="tog-prepbeep" onchange="saveSetting('prepBeepOn',this.checked)"><span class="tog-sl"></span></label></div>
     <div class="srow"><div><div class="slbl">Breathing pacer</div><div class="ssub">Pulsing circle on holds over 40s</div></div>
       <label class="tog"><input type="checkbox" id="tog-breath" onchange="saveSetting('breathOn',this.checked)"><span class="tog-sl"></span></label></div>
     <div class="srow"><div><div class="slbl">Volume</div><div class="ssub" id="vol-label">80%</div></div>
       <input type="range" min="0" max="1" step="0.05" id="set-vol" oninput="setVol(this.value)" style="width:90px;accent-color:var(--accent)"></div>
-    <div class="srow"><div><div class="slbl">Tone</div><div class="ssub">Beep character</div></div>
-      <select id="set-wave" onchange="saveSetting('soundWave',this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:5px 10px;font-size:13px;font-family:'DM Sans',sans-serif">
-        <option value="sine">Sine (soft)</option><option value="triangle">Triangle (warm)</option><option value="square">Square (sharp)</option><option value="sawtooth">Sawtooth (buzz)</option>
-      </select></div>
-    <div class="srow"><div><div class="slbl">Pitch</div><div class="ssub" id="pitch-label">Normal</div></div>
-      <input type="range" min="0.5" max="2" step="0.1" id="set-pitch" oninput="setPitch(this.value)" style="width:90px;accent-color:var(--accent)"></div>
-    <div class="srow"><button class="btn sm" onclick="testSounds()">▶ test sounds</button></div>
+  </div>
+  <span class="sec-lbl">Sound styles</span>
+  <div class="card" style="padding:14px 16px"><div id="sound-pickers"></div></div>
+  <span class="sec-lbl">Voice</span>
+  <div class="card">
+    <div class="srow"><div><div class="slbl">Voice cues</div><div class="ssub">Speaks switch-side, countdown, prompts</div></div>
+      <label class="tog"><input type="checkbox" id="tog-voice" onchange="saveSetting('voiceOn',this.checked);renderVoicePicker()"><span class="tog-sl"></span></label></div>
+    <div id="voice-options"></div>
   </div>
   <span class="sec-lbl">Data</span>
   <div class="card">
@@ -579,6 +600,11 @@ const DEFAULTS=[
 {id:"standing-wring-towel",name:"Standing Wring the Towel",area:"shoulders",type:"mobility",dur:30,bilateral:true,desc:"Extend the arms and rotate them in opposite directions, like wringing a towel.",cues:"Rotate from the shoulders. Switch directions."},
 {id:"overhead-clap",name:"Overhead Clap",area:"shoulders",type:"dynamic",dur:25,bilateral:false,desc:"Raise the arms out and up overhead to clap, then lower, opening the chest and shoulders.",cues:"Full range, controlled tempo."},
 {id:"bent-over-pendulum",name:"Bent Over Shoulder Pendulum",area:"shoulders",type:"mobility",dur:30,bilateral:true,desc:"Hinge forward and let one arm hang, swinging it gently in circles to loosen the shoulder.",cues:"Let gravity do the work. Relax the arm. Switch sides."},
+{id:"standing-hip-openers",name:"Standing Hip Openers",area:"hips",type:"dynamic",dur:30,bilateral:true,desc:"Stand on one leg, lift the other knee and circle it open and out, opening the hip.",cues:"Slow controlled circles. Open the hip out. Switch legs.",pnfOk:false},
+{id:"elephant-walks",name:"Elephant Walks",area:"legs",type:"dynamic",dur:30,bilateral:false,desc:"Hinge into a forward fold with hands on the floor, then alternately bend and straighten each knee, walking it out.",cues:"Bend one knee while straightening the other. Keep it flowing."},
+{id:"windshield-wipers",name:"Windshield Wipers",area:"hips",type:"mobility",dur:30,bilateral:false,desc:"Seated or lying with knees bent, drop both knees side to side like windshield wipers to rotate the hips and lower back.",cues:"Smooth side to side. Let the hips rotate."},
+{id:"scapular-pushups",name:"Scapular Pushups",area:"shoulders",type:"dynamic",dur:30,bilateral:false,desc:"In a plank or against a wall, keep the arms straight and push the shoulder blades apart, then squeeze them together.",cues:"Arms stay straight — move only the shoulder blades."},
+{id:"windmills",name:"Windmills / Lower Back Rotations",area:"back",type:"dynamic",dur:30,bilateral:false,desc:"Stand wide, hinge forward, and rotate to reach one hand toward the opposite foot while the other reaches up, alternating sides.",cues:"Reach one hand down, the other up. Alternate with control."},
 ];
 // Pre-built routines
 const PREBUILT=[
@@ -595,7 +621,7 @@ const PREBUILT=[
 {name:"In Bed (~6 min)",ids:["knee-to-chest","double-knee-to-chest","lying-crossover","butterfly","happy-baby","lying-lower-back"]},
 {name:"Posture Fix",ids:["chin-tuck","reverse-shoulder","behind-head-chest","cobra","side-lat","kneeling-hip-flexor","kneeling-lat","kneeling-tspine"]},
 {name:"APT Assist (anterior pelvic tilt)",ids:["kneeling-hip-flexor","couch-stretch","standing-quad","lizard","child-pose","supine-twist","lying-glute","seated-single-hamstring"]},
-{name:"Mobility",ids:["standing-balance-hip-rotation","toy-soldier","lying-lower-back","cat-cow","scapula-retraction","thread-the-needle","bent-over-twist"],dur:30},
+{name:"Mobility",ids:["standing-hip-openers","elephant-walks","windshield-wipers","cat-cow","scapular-pushups","thread-the-needle","windmills"],dur:30},
 {name:"Full Body (~8 min)",ids:["cat-cow","downward-dog","low-lunge","standing-hamstring","pigeon","thread-the-needle","child-pose"]},
 {name:"Nerve Flossing",ids:["floss-sciatic","floss-median","floss-ulnar","floss-radial","floss-femoral"]},
 ];
@@ -735,28 +761,73 @@ setTheme(settings.theme||'dark');
 /* ── AUDIO + VOICE ── */
 let audioCtx=null;
 function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
-function beep(freq,dur,vol,delay){
+function tone(freq,dur,vol,delay,wave){
   try{const ctx=getCtx(),o=ctx.createOscillator(),g=ctx.createGain();
     o.connect(g);g.connect(ctx.destination);
-    o.frequency.value=freq*(settings.soundPitch||1);o.type=settings.soundWave||'sine';
+    o.frequency.value=freq;o.type=wave||'sine';
     const t=ctx.currentTime+(delay||0);const v=(vol||0.3)*(settings.volume!=null?settings.volume:0.8);
     g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+0.01);g.gain.linearRampToValueAtTime(0,t+(dur||0.08));
     o.start(t);o.stop(t+(dur||0.08)+0.05);}catch(e){}
 }
+// keep beep() for backward-compat
+function beep(freq,dur,vol,delay){tone(freq,dur,vol,delay,settings.soundWave||'sine');}
+
+// Sound option library — each is a named pattern. Used per event.
+const SOUNDS={
+  chime:    ()=>{tone(660,0.07,0.25,0,'sine');},
+  ding:     ()=>{tone(880,0.12,0.3,0,'triangle');},
+  blip:     ()=>{tone(520,0.06,0.25,0,'square');},
+  marimba:  ()=>{tone(587,0.12,0.3,0,'sine');tone(880,0.1,0.2,0.06,'sine');},
+  pluck:    ()=>{tone(440,0.05,0.3,0,'sawtooth');},
+  rise:     ()=>{tone(440,0.07,0.28,0,'sine');tone(660,0.08,0.3,0.08,'sine');tone(880,0.12,0.35,0.17,'sine');},
+  fall:     ()=>{tone(880,0.07,0.3,0,'sine');tone(660,0.08,0.3,0.08,'sine');tone(440,0.12,0.32,0.17,'sine');},
+  twotone:  ()=>{tone(660,0.09,0.3,0,'triangle');tone(990,0.12,0.32,0.11,'triangle');},
+  wiggle:   ()=>{tone(523,0.07,0.28,0,'sine');tone(659,0.07,0.28,0.08,'sine');tone(523,0.1,0.3,0.16,'sine');},
+  bell:     ()=>{tone(784,0.18,0.32,0,'sine');tone(1175,0.12,0.18,0.02,'sine');},
+  fanfare:  ()=>{tone(523,0.13,0.38,0,'triangle');tone(659,0.13,0.38,0.16,'triangle');tone(784,0.26,0.45,0.32,'triangle');},
+  chord:    ()=>{tone(523,0.4,0.3,0,'sine');tone(659,0.4,0.3,0,'sine');tone(784,0.4,0.3,0,'sine');},
+  sparkle:  ()=>{tone(784,0.08,0.3,0,'sine');tone(988,0.08,0.3,0.07,'sine');tone(1319,0.18,0.32,0.14,'sine');},
+  gong:     ()=>{tone(196,0.5,0.4,0,'sine');tone(294,0.4,0.2,0.02,'sine');},
+  arcade:   ()=>{tone(660,0.06,0.3,0,'square');tone(880,0.06,0.3,0.07,'square');tone(1100,0.12,0.32,0.14,'square');},
+  tick:     ()=>{tone(1000,0.04,0.22,0,'square');},
+  beep2:    ()=>{tone(700,0.06,0.25,0,'sine');},
+  low:      ()=>{tone(330,0.1,0.3,0,'triangle');},
+  high:     ()=>{tone(1046,0.08,0.28,0,'sine');},
+  buzz:     ()=>{tone(400,0.12,0.25,0,'sawtooth');},
+};
+// Which sound options are offered per event
+const SOUND_CHOICES={
+  switchSide:['twotone','wiggle','rise','bell','arcade'],
+  nextUp:    ['rise','marimba','ding','sparkle','pluck'],
+  countdown: ['tick','blip','beep2','low','high'],
+  done:      ['fanfare','chord','bell','sparkle','gong'],
+};
+const SOUND_DEFAULTS={switchSide:'twotone',nextUp:'rise',countdown:'tick',done:'fanfare'};
+function soundFor(event){
+  const chosen=(settings.sounds&&settings.sounds[event])||SOUND_DEFAULTS[event];
+  return SOUNDS[chosen]?chosen:SOUND_DEFAULTS[event];
+}
 function speak(text){
   if(!settings.voiceOn)return;
-  try{const u=new SpeechSynthesisUtterance(text);u.rate=1;u.pitch=1;u.volume=settings.volume!=null?settings.volume:0.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}
+  try{
+    const u=new SpeechSynthesisUtterance(text);
+    u.rate=settings.voiceRate||1;u.pitch=settings.voicePitch||1;
+    u.volume=settings.volume!=null?settings.volume:0.8;
+    if(settings.voiceURI){const v=speechSynthesis.getVoices().find(v=>v.voiceURI===settings.voiceURI);if(v)u.voice=v;}
+    speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch(e){}
 }
 function playSound(type){
-  if(type==='countdown')beep(660,0.07,0.25);
-  else if(type==='countdownFinal')beep(880,0.12,0.35);
-  else if(type==='switchSide'){beep(440,0.08,0.28,0);beep(660,0.08,0.28,0.13);beep(880,0.13,0.38,0.26);}
-  else if(type==='prepEnd'){beep(880,0.12,0.38,0);beep(660,0.08,0.28,0.18);}
-  else if(type==='done'){beep(523,0.15,0.4,0);beep(659,0.15,0.4,0.2);beep(784,0.25,0.5,0.4);}
-  else if(type==='pnfTense'){beep(330,0.15,0.35,0);}
-  else if(type==='pnfRelax'){beep(550,0.15,0.35,0);}
+  if(type==='countdown')SOUNDS[soundFor('countdown')]();
+  else if(type==='countdownFinal'){const f=soundFor('countdown');SOUNDS[f]();}
+  else if(type==='switchSide')SOUNDS[soundFor('switchSide')]();
+  else if(type==='prepEnd')SOUNDS[soundFor('nextUp')]();
+  else if(type==='done')SOUNDS[soundFor('done')]();
+  else if(type==='pnfTense')tone(330,0.15,0.35,0,'triangle');
+  else if(type==='pnfRelax')tone(550,0.15,0.35,0,'sine');
 }
-function testSounds(){playSound('countdown');setTimeout(()=>playSound('switchSide'),700);setTimeout(()=>{playSound('done');speak('Test');},1600);}
+function previewSound(name){if(SOUNDS[name])SOUNDS[name]();}
+function testSounds(){playSound('switchSide');setTimeout(()=>playSound('prepEnd'),700);setTimeout(()=>playSound('countdown'),1300);setTimeout(()=>{playSound('done');speak('Test');},1900);}
 document.addEventListener('touchstart',()=>{try{getCtx().resume();}catch(e){}},{once:true});
 
 /* ── NAV ── */
@@ -789,17 +860,61 @@ function renderSettings(){
   const vol=s.volume!=null?s.volume:0.8;
   document.getElementById('set-vol').value=vol;
   document.getElementById('vol-label').textContent=Math.round(vol*100)+'%';
-  document.getElementById('set-pitch').value=s.soundPitch||1;
-  document.getElementById('pitch-label').textContent=pitchLabel(s.soundPitch||1);
-  document.getElementById('set-wave').value=s.soundWave||'sine';
   document.getElementById('tog-equip').checked=!!s.showEquip;
+  const sk=document.getElementById('tog-skipprep');if(sk)sk.checked=!!s.skipFirstPrep;
   renderThemeGrid();
+  renderSoundPickers();
+  renderVoicePicker();
 }
+const SOUND_EVENT_LABELS={switchSide:'Switch sides',nextUp:'Next stretch',countdown:'Countdown',done:'Routine complete'};
+function renderSoundPickers(){
+  const el=document.getElementById('sound-pickers');if(!el)return;
+  if(!settings.sounds)settings.sounds={};
+  let html='';
+  Object.keys(SOUND_CHOICES).forEach((ev,idx)=>{
+    const cur=settings.sounds[ev]||SOUND_DEFAULTS[ev];
+    html+=`<div style="${idx>0?'margin-top:14px;padding-top:14px;border-top:1px solid var(--border)':''}">
+      <div class="slbl" style="margin-bottom:8px">${SOUND_EVENT_LABELS[ev]}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">`;
+    SOUND_CHOICES[ev].forEach(name=>{
+      html+=`<button class="snd-chip ${cur===name?'on':''}" onclick="pickSound('${ev}','${name}')">${name}</button>`;
+    });
+    html+=`</div></div>`;
+  });
+  el.innerHTML=html;
+}
+function pickSound(ev,name){
+  if(!settings.sounds)settings.sounds={};
+  settings.sounds[ev]=name;saveSetting('sounds',settings.sounds);
+  previewSound(name);
+  renderSoundPickers();
+}
+function renderVoicePicker(){
+  const el=document.getElementById('voice-options');if(!el)return;
+  if(!settings.voiceOn){el.innerHTML='';return;}
+  let voices=[];
+  try{voices=speechSynthesis.getVoices();}catch(e){}
+  const localVoices=voices.filter(v=>v.lang&&v.lang.startsWith('en'));
+  const list=localVoices.length?localVoices:voices;
+  let opts='<option value="">Device default</option>'+list.map(v=>`<option value="${v.voiceURI}" ${settings.voiceURI===v.voiceURI?'selected':''}>${v.name} (${v.lang})</option>`).join('');
+  el.innerHTML=`
+    <div class="srow"><div><div class="slbl">Voice</div><div class="ssub">${list.length?list.length+' available on this device':'Loading voices…'}</div></div></div>
+    <div style="padding:0 16px 12px"><select class="fi" id="voice-select" onchange="saveSetting('voiceURI',this.value);previewVoice()" style="margin:0">${opts}</select></div>
+    <div class="srow"><div><div class="slbl">Speed</div><div class="ssub" id="vrate-label">${(settings.voiceRate||1).toFixed(1)}x</div></div>
+      <input type="range" min="0.5" max="1.5" step="0.1" value="${settings.voiceRate||1}" oninput="setVoiceRate(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+    <div class="srow"><div><div class="slbl">Pitch</div><div class="ssub" id="vpitch-label">${(settings.voicePitch||1).toFixed(1)}</div></div>
+      <input type="range" min="0.5" max="1.5" step="0.1" value="${settings.voicePitch||1}" oninput="setVoicePitch(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+    <div class="srow"><button class="btn sm" onclick="previewVoice()">▶ preview voice</button></div>`;
+}
+function setVoiceRate(v){settings.voiceRate=parseFloat(v);document.getElementById('vrate-label').textContent=parseFloat(v).toFixed(1)+'x';saveSetting('voiceRate',settings.voiceRate);}
+function setVoicePitch(v){settings.voicePitch=parseFloat(v);document.getElementById('vpitch-label').textContent=parseFloat(v).toFixed(1);saveSetting('voicePitch',settings.voicePitch);}
+function previewVoice(){const wasOn=settings.voiceOn;settings.voiceOn=true;speak('Switch sides. Ten seconds left.');settings.voiceOn=wasOn;}
+if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=()=>{if(document.getElementById('pg-settings')?.classList.contains('on'))renderVoicePicker();};}
 function adjPrepTime(d){settings.prepTime=Math.max(0,Math.min(60,settings.prepTime+d));document.getElementById('set-prep').textContent=settings.prepTime+'s';saveSetting('prepTime',settings.prepTime);}
 function adjSwitchTime(d){const cur=settings.switchTime!=null?settings.switchTime:4;settings.switchTime=Math.max(0,Math.min(30,cur+d));document.getElementById('set-switch').textContent=settings.switchTime+'s';saveSetting('switchTime',settings.switchTime);}
 function setVol(v){settings.volume=parseFloat(v);document.getElementById('vol-label').textContent=Math.round(v*100)+'%';saveSetting('volume',settings.volume);}
-function setPitch(v){settings.soundPitch=parseFloat(v);document.getElementById('pitch-label').textContent=pitchLabel(v);saveSetting('soundPitch',settings.soundPitch);}
 function pitchLabel(v){return v<0.8?'Low':v>1.3?'High':'Normal';}
+
 
 /* ── GUIDE ── */
 function renderGuide(){
@@ -814,21 +929,40 @@ function toggleGuide(i){document.getElementById('guide-a-'+i).classList.toggle('
 /* ── ROUTINES ── */
 function todayName(){return['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];}
 function renderRoutines(){
-  // today banner: match routine whose name hints at today (simple heuristic for GROOVE/BOUNCE schedule)
   const tb=document.getElementById('today-banner');
   tb.innerHTML='';
+  // Day-based scheduling: surface a routine tagged for today
+  const today=todayName();
+  const todayRoutine=routines.find(r=>r.day===today);
+  if(todayRoutine){
+    const idx=routines.indexOf(todayRoutine);
+    tb.innerHTML=`<div style="margin:0 16px 12px;padding:14px 16px;background:var(--accent-dim);border:1px solid var(--accent);border-radius:var(--r);cursor:pointer" onclick="loadRoutine(${idx})">
+      <div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;font-family:'DM Mono',monospace">Today · ${today}</div>
+      <div style="font-size:16px;margin-top:4px">${todayRoutine.name}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:2px">${todayRoutine.stretches.length} stretches · tap to start</div>
+    </div>`;
+  }
   const el=document.getElementById('routine-list');
   if(!routines.length){el.innerHTML='<div class="empty">No routines yet.<br>Tap "+ build" or 🎲 random to start.</div>';return;}
-  el.innerHTML=routines.map((r,i)=>{
+  const q=(document.getElementById('routine-search')?.value||'').toLowerCase();
+  const items=routines.map((r,i)=>({r,i})).filter(({r})=>!q||r.name.toLowerCase().includes(q));
+  if(!items.length){el.innerHTML='<div class="empty">No routines match.</div>';return;}
+  const canReorder=!q; // only allow drag when not filtering
+  el.innerHTML=items.map(({r,i})=>{
     const mins=Math.round(r.stretches.reduce((a,s)=>a+s.dur,0)/60);
-    return`<div class="rc" onclick="loadRoutine(${i})">
-      <div style="flex:1"><div style="font-size:16px">${r.name}</div>
+    return`<div class="rc" ${canReorder?`draggable="true" ondragstart="rds(event,${i})" ondragover="rdov(event)" ondrop="rdp(event,${i})"`:''} onclick="loadRoutine(${i})">
+      ${canReorder?'<span class="dh" style="font-size:18px;opacity:0.4" onclick="event.stopPropagation()">⠿</span>':''}
+      <div style="flex:1"><div style="font-size:16px">${r.name}${r.day?` <span style="font-size:10px;color:var(--accent);font-family:'DM Mono',monospace">${r.day.slice(0,3)}</span>`:''}</div>
       <div style="font-size:12px;color:var(--muted);margin-top:3px">${r.stretches.length} stretches · ~${Math.max(1,mins)} min</div></div>
       <button class="btn sm" onclick="event.stopPropagation();loadRoutine(${i})">open</button>
       <button class="btn sm" onclick="event.stopPropagation();routineMenu(${i})">⋯</button>
     </div>`;
   }).join('');
 }
+let rDragSrc=null;
+function rds(e,i){rDragSrc=i;e.dataTransfer.effectAllowed='move';}
+function rdov(e){e.preventDefault();}
+function rdp(e,i){e.preventDefault();if(rDragSrc===null||rDragSrc===i)return;const m=routines.splice(rDragSrc,1)[0];routines.splice(i,0,m);rDragSrc=null;save();renderRoutines();}
 function routineMenu(i){
   const r=routines[i];
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:4px">${r.name}</p>
@@ -836,10 +970,47 @@ function routineMenu(i){
     <div style="display:flex;flex-direction:column;gap:10px">
       <button class="btn" onclick="renameRoutine(${i})">✏️ Rename</button>
       <button class="btn" onclick="editRoutineContents(${i})">⠿ Edit stretches</button>
+      <button class="btn" onclick="scheduleRoutine(${i})">📅 Schedule day${r.day?' · '+r.day.slice(0,3):''}</button>
+      <button class="btn" onclick="routineTiming(${i})">⏱ Timing overrides${r.prepTime!=null||r.switchTime!=null?' · on':''}</button>
       <button class="btn" onclick="duplicateRoutine(${i})">⧉ Duplicate</button>
       <button class="btn red" onclick="delRoutine(${i})">🗑 Delete</button>
     </div>
     <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function scheduleRoutine(i){
+  const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const cur=routines[i].day||'';
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:6px">Schedule day</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Surface this routine on its day. One routine per day.</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${days.map(d=>`<button class="btn ${cur===d?'ac':''}" onclick="setRoutineDay(${i},'${d}')">${d}</button>`).join('')}
+      <button class="btn ${!cur?'':''}" onclick="setRoutineDay(${i},'')">No day</button>
+    </div>
+    <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function setRoutineDay(i,day){
+  if(day){routines.forEach((r,j)=>{if(j!==i&&r.day===day)delete r.day;});routines[i].day=day;}
+  else delete routines[i].day;
+  save();closeModal();renderRoutines();
+}
+function routineTiming(i){
+  const r=routines[i];
+  const p=r.prepTime!=null?r.prepTime:'';
+  const sw=r.switchTime!=null?r.switchTime:'';
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:6px">Timing overrides</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Leave blank to use the global defaults (prep ${settings.prepTime}s, switch ${settings.switchTime!=null?settings.switchTime:4}s).</p>
+    <label class="fl">Prep time for this routine (s)</label>
+    <input class="fi" type="number" id="rt-prep" value="${p}" placeholder="default" min="0" max="60">
+    <label class="fl">Switch-side time for this routine (s)</label>
+    <input class="fi" type="number" id="rt-switch" value="${sw}" placeholder="default" min="0" max="30">
+    <div style="display:flex;gap:8px;margin-top:14px"><button class="btn ac" style="flex:1" onclick="saveRoutineTiming(${i})">Save</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+}
+function saveRoutineTiming(i){
+  const p=document.getElementById('rt-prep').value;
+  const sw=document.getElementById('rt-switch').value;
+  if(p==='')delete routines[i].prepTime;else routines[i].prepTime=Math.max(0,Math.min(60,+p));
+  if(sw==='')delete routines[i].switchTime;else routines[i].switchTime=Math.max(0,Math.min(30,+sw));
+  save();closeModal();renderRoutines();
 }
 function renameRoutine(i){
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Rename routine</p>
@@ -860,7 +1031,7 @@ function duplicateRoutine(i){
   routines.push({id:uid(),name:r.name+' (copy)',stretches:r.stretches.map(s=>({...s,qid:uid()}))});
   save();closeModal();renderRoutines();
 }
-function loadRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=null;save();show('setup');}
+function loadRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=null;window._routinePrep=routines[i].prepTime;window._routineSwitch=routines[i].switchTime;save();show('setup');}
 function delRoutine(i){if(!confirm('Delete "'+routines[i].name+'"?'))return;routines.splice(i,1);save();closeModal();renderRoutines();}
 
 /* ── SESSION SETUP ── */
@@ -887,9 +1058,11 @@ function renderSetup(){
       </div>
       <div class="qi2-bot">
         <div class="stepper"><button onclick="adjDur(${i},-5)">−</button><span id="sd-${i}">${s.dur}s</span><button onclick="adjDur(${i},5)">+</button></div>
+        <button class="pnf-chip ${s.pnf?'on':''}" onclick="togglePnf(${i})" title="Tense/relax method">PNF ${s.pnf?'on':'off'}</button>
       </div>
     </div>`).join('');
 }
+function togglePnf(i){session[i].pnf=!session[i].pnf;save();renderSetup();}
 function adjDur(i,d){session[i].dur=Math.max(5,Math.min(300,session[i].dur+d));document.getElementById('sd-'+i).textContent=session[i].dur+'s';save();}
 function removeSetup(i){session.splice(i,1);save();renderSetup();}
 function ds(e,i){dragSrc=i;e.dataTransfer.effectAllowed='move';}
@@ -914,7 +1087,10 @@ function saveRoutineChanges(){
 }
 
 function quickStart(){
-  // go button in nav: if session exists, resume setup; else prompt
+  // nav "go" button: resume an in-progress session, else open setup, else routines
+  if(sessionActive&&sessionStretches.length&&tIdx<sessionStretches.length){
+    show('go');renderTimer();return;
+  }
   if(session.length){show('setup');}
   else{show('routines');}
 }
@@ -924,18 +1100,31 @@ function startGo(){
   if(!session.length){alert('Add some stretches first.');return;}
   sessionStretches=session.map(s=>({...s}));
   clearInterval(tInterval);tInterval=null;tIdx=0;sideSwitched=false;pnfCycle=0;
-  tPhase=settings.prepTime>0?'prep':'stretch';
-  tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[0].dur;
+  const skipFirst=settings.skipFirstPrep&&true;
+  tPhase=(ePrep()>0&&!skipFirst)?'prep':'stretch';
+  tLeft=tPhase==='prep'?ePrep():sessionStretches[0].dur;
   _sessionStart=Date.now();
+  sessionActive=true;
   requestWakeLock();
   show('go');renderTimer();
 }
+function endRoutine(){
+  if(!confirm('End this session? Your progress won\u2019t be logged.'))return;
+  clearInterval(tInterval);tInterval=null;stopBreathPacer();releaseWakeLock();
+  sessionActive=false;tIdx=0;
+  show('setup');
+}
+let sessionActive=false;
 let _sessionStart=null,pnfCycle=0,switchReturn=0;
+// Effective timing: routine override (stashed on load) → global setting
+function ePrep(){return window._routinePrep!=null?window._routinePrep:settings.prepTime;}
+function eSwitch(){const r=window._routineSwitch;return r!=null?r:(settings.switchTime!=null?settings.switchTime:4);}
 
 function renderTimer(){
   const el=document.getElementById('go-inner');
   if(tIdx>=sessionStretches.length){
     logSession();
+    sessionActive=false;releaseWakeLock();
     el.innerHTML=`<div class="done-pg"><div class="big">✓</div><h2>all done</h2><p id="done-sub">Great session.</p>
       <button class="btn ac" onclick="startGo()">go again</button>
       <button class="btn" style="margin-top:8px" onclick="show('routines')">done</button></div>`;
@@ -945,7 +1134,7 @@ function renderTimer(){
     return;
   }
   const s=sessionStretches[tIdx];
-  const total=tPhase==='prep'?settings.prepTime:tPhase==='switch'?(settings.switchTime!=null?settings.switchTime:4):s.dur;
+  const total=tPhase==='prep'?ePrep():tPhase==='switch'?eSwitch():s.dur;
   const circ=2*Math.PI*54;
   const pct=tLeft/total;
   const ringCol=tPhase==='prep'?'#ffc832':tPhase==='switch'?'#78b4ff':'var(--accent)';
@@ -953,15 +1142,19 @@ function renderTimer(){
   const overallPct=Math.round(((tIdx)/sessionStretches.length)*100);
 
   el.innerHTML=`
-    <div class="progbar"><div class="progbar-fill" style="width:${overallPct}%"></div></div>
+    <div class="timer-top">
+      <button class="timer-end" onclick="endRoutine()"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>end</button>
+      <div class="progbar"><div class="progbar-fill" style="width:${overallPct}%"></div></div>
+      <span class="timer-count">${tIdx+1}/${sessionStretches.length}</span>
+    </div>
     <div class="img-box" id="img-box">
       ${imgTag(s.id,{cls:'timer-img',big:true})}
       <button class="img-change" onclick="imgOptions('${s.id}')">change photo</button>
     </div>
     <div class="timer-body">
-      <div class="tlabel">${tIdx+1} of ${sessionStretches.length} · ${tPhase==='prep'?'get ready':tPhase==='switch'?'switch sides':s.area}</div>
+      <div class="tlabel">${tPhase==='prep'?'get ready':tPhase==='switch'?'switch sides':s.area}</div>
       <div class="tname">${s.name}</div>
-      ${tPhase==='prep'?`<div class="phase-banner prep">⏱ Next: ${s.name}</div>`:''}
+      ${tPhase==='prep'?`<div class="phase-banner prep" style="display:flex;align-items:center;gap:10px;justify-content:center">${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" style="width:32px;height:32px;border-radius:6px;object-fit:cover" onerror="this.style.display='none'">`:''}<span>⏱ Next: ${s.name}</span></div>`:''}
       ${tPhase==='switch'?`<div class="phase-banner side">↔ Switch sides — reposition</div>`:''}
       ${tPhase==='stretch'&&s.pnf?`<div class="phase-banner pnf" id="pnf-banner">${pnfPhaseLabel()}</div>`:''}
       ${(tPhase==='stretch'||tPhase==='switch')&&(s.cues||s.desc)?`<div class="cue-box expandable" onclick="this.querySelector('.cue-full')?.classList.toggle('open')">${s.cues||s.desc}${s.desc&&s.cues&&s.desc!==s.cues?`<div class="cue-full">${s.desc}</div><div class="cue-hint">tap for full instructions</div>`:''}</div>`:''}
@@ -995,8 +1188,9 @@ function renderTimer(){
 /* PNF phases: split stretch into relax/tense cycles */
 function pnfPhaseLabel(){
   const s=sessionStretches[tIdx];if(!s.pnf)return'';
-  // cycle: first 40% ease in, then alternate tense(6s)/relax
-  return pnfTensing?'💪 Tense — push and hold':'😮‍💨 Relax — sink deeper';
+  return pnfTensing
+    ?'💪 TENSE — gently contract the muscle, hold steady'
+    :'😮‍💨 RELAX — release and ease deeper into the stretch';
 }
 let pnfTensing=false;
 
@@ -1025,7 +1219,7 @@ function ringAngle(e,rect){
 }
 let scrubbing=false;
 function scrubToAngle(a){
-  const s=sessionStretches[tIdx];const total=tPhase==='prep'?settings.prepTime:tPhase==='switch'?(settings.switchTime!=null?settings.switchTime:4):s.dur;
+  const s=sessionStretches[tIdx];const total=tPhase==='prep'?ePrep():tPhase==='switch'?eSwitch():s.dur;
   // angle 0 = top. Empirically the arc fills this way, so map directly.
   const pct=a/360;
   tLeft=Math.round(Math.max(1,Math.min(total,pct*total)));
@@ -1046,7 +1240,7 @@ function tickT(){
     if(tPhase==='stretch'&&s.bilateral&&!s.pnf&&settings.sideOn&&!sideSwitched&&tLeft===Math.floor(s.dur/2)){
       // pause briefly to switch sides
       sideSwitched=true;playSound('switchSide');speak('Switch sides');
-      const swt=settings.switchTime!=null?settings.switchTime:4;
+      const swt=eSwitch();
       if(swt>0){
         clearInterval(tInterval);tInterval=null;stopBreathPacer();
         tPhase='switch';switchReturn=tLeft;tLeft=swt;
@@ -1056,7 +1250,7 @@ function tickT(){
     }
     if(tPhase==='switch'){
       tLeft--;
-      const total=settings.switchTime!=null?settings.switchTime:4;const circ=2*Math.PI*54;
+      const total=eSwitch();const circ=2*Math.PI*54;
       document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
       const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
       if(tLeft<=0){clearInterval(tInterval);tInterval=null;tPhase='stretch';tLeft=switchReturn;if(settings.prepBeepOn)playSound('prepEnd');renderTimer();keepRunning();}
@@ -1080,13 +1274,13 @@ function tickT(){
       }
     }
     tLeft--;
-    const total=tPhase==='prep'?settings.prepTime:s.dur;const circ=2*Math.PI*54;
+    const total=tPhase==='prep'?ePrep():s.dur;const circ=2*Math.PI*54;
     document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
     const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
     if(tLeft<=0){
       clearInterval(tInterval);tInterval=null;stopBreathPacer();
       if(tPhase==='prep'){tPhase='stretch';tLeft=sessionStretches[tIdx].dur;sideSwitched=false;if(settings.prepBeepOn)playSound('prepEnd');speak(sessionStretches[tIdx].name);renderTimer();keepRunning();}
-      else{tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;}renderTimer();keepRunning();}
+      else{tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=ePrep()>0?'prep':'stretch';tLeft=tPhase==='prep'?ePrep():sessionStretches[tIdx].dur;}renderTimer();keepRunning();}
     }
   },1000);
 }
@@ -1102,7 +1296,7 @@ function toggleT(){
   if(tInterval){clearInterval(tInterval);tInterval=null;stopBreathPacer();const i=document.getElementById('pico');if(i)i.innerHTML='<polygon points="5,3 19,12 5,21"/>';document.getElementById('pbtn')?.classList.remove('playing');}
   else{tickT();if(settings.breathOn){const s=sessionStretches[tIdx];if(tPhase==='stretch'&&s.dur>=40)startBreathPacer();}const i=document.getElementById('pico');if(i)i.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';document.getElementById('pbtn')?.classList.add('playing');}
 }
-function nextS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;}renderTimer();}
+function nextS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=ePrep()>0?'prep':'stretch';tLeft=tPhase==='prep'?ePrep():sessionStretches[tIdx].dur;}renderTimer();}
 function prevS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();sideSwitched=false;pnfTensing=false;if(tIdx>0)tIdx--;tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;renderTimer();}
 
 /* ── SESSION LOGGING / PROGRESS ── */
@@ -1110,7 +1304,8 @@ function logSession(){
   if(!sessionStretches.length)return;
   const mins=Math.round(sessionStretches.reduce((a,s)=>a+s.dur,0)/60);
   const today=new Date().toISOString().slice(0,10);
-  history.unshift({date:today,ts:Date.now(),count:sessionStretches.length,mins:Math.max(1,mins),name:window._setupTitle||'Custom session'});
+  const areas={};sessionStretches.forEach(s=>{areas[s.area]=(areas[s.area]||0)+1;});
+  history.unshift({date:today,ts:Date.now(),count:sessionStretches.length,mins:Math.max(1,mins),name:window._setupTitle||'Custom session',areas});
   if(history.length>200)history=history.slice(0,200);
   save();
 }
@@ -1142,6 +1337,28 @@ function renderProgress(){
   // history list
   const hl=document.getElementById('history-list');
   if(!history.length){hl.innerHTML='<div class="empty">No sessions yet.<br>Complete a routine to start tracking.</div>';return;}
+  // per-area breakdown (all time)
+  const areaTotals={};
+  history.forEach(h=>{if(h.areas)Object.entries(h.areas).forEach(([a,n])=>{areaTotals[a]=(areaTotals[a]||0)+n;});});
+  const areaEl=document.getElementById('area-breakdown');
+  if(areaEl){
+    const entries=Object.entries(areaTotals).sort((a,b)=>b[1]-a[1]);
+    if(entries.length){
+      const max=entries[0][1];
+      areaEl.innerHTML=entries.map(([a,n])=>`
+        <div style="display:flex;align-items:center;gap:10px;padding:5px 0">
+          <span style="font-size:12px;color:var(--muted);min-width:64px;text-transform:capitalize">${a}</span>
+          <div style="flex:1;height:7px;background:var(--surface2);border-radius:4px;overflow:hidden"><div style="height:100%;width:${Math.round(n/max*100)}%;background:var(--accent)"></div></div>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:var(--muted);min-width:24px;text-align:right">${n}</span>
+        </div>`).join('');
+    } else areaEl.innerHTML='<div style="font-size:12px;color:var(--muted);padding:4px 0">Complete sessions to see your focus areas.</div>';
+  }
+  // this week count
+  const weekEl=document.getElementById('stat-week');
+  if(weekEl){
+    const weekAgo=Date.now()-7*864e5;
+    weekEl.textContent=history.filter(h=>h.ts>=weekAgo).length;
+  }
   hl.innerHTML=history.slice(0,15).map(h=>{
     const d=new Date(h.ts);const when=d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+' · '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
     return`<div class="row"><div class="ri"><div class="rn">${h.name}</div><div class="rm">${when}</div></div><div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${h.count} · ${h.mins}m</div></div>`;
@@ -1166,6 +1383,7 @@ function randomModal(){
     session=picks.map(s=>({...s,dur:per,qid:uid()}));
     window._setupTitle='Random · '+dur+' min';
     window._editingRoutine=null;
+    window._routinePrep=null;window._routineSwitch=null;
     save();closeModal();show('setup');
   };
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">🎲 Random session</p>
@@ -1439,7 +1657,7 @@ function maybeClose(e){if(e.target===document.getElementById('overlay'))closeMod
 
 /* ── INIT ── */
 (function(){
-  const LIB_VERSION=2; // overhaul: full Lift Manual library
+  const LIB_VERSION=3; // overhaul + mobility moves + PNF
   const savedVersion=parseInt(localStorage.getItem('sx-libversion')||'1');
   if(savedVersion<LIB_VERSION){
     // Overhaul migration: replace built-in stretches with new library,
