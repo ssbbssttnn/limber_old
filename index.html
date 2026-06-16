@@ -210,6 +210,10 @@ select.fi{appearance:none}textarea.fi{resize:none}
   <div class="card"><div class="srow">
     <div><div class="slbl">Prep time between stretches</div><div class="ssub">Adjustable to the second</div></div>
     <div class="stepper"><button onclick="adjPrepTime(-1)">−</button><span id="set-prep">5s</span><button onclick="adjPrepTime(1)">+</button></div>
+  </div>
+  <div class="srow">
+    <div><div class="slbl">Switch-side reposition time</div><div class="ssub">Pause to switch sides mid-stretch</div></div>
+    <div class="stepper"><button onclick="adjSwitchTime(-1)">−</button><span id="set-switch">4s</span><button onclick="adjSwitchTime(1)">+</button></div>
   </div></div>
   <span class="sec-lbl">Sounds &amp; Voice</span>
   <div class="card">
@@ -469,7 +473,8 @@ let routines=JSON.parse(localStorage.getItem('sx-routines')||'[]');
 let session=JSON.parse(localStorage.getItem('sx-session')||'[]'); // current setup list
 let userImgs=JSON.parse(localStorage.getItem('sx-imgs')||'{}');
 let history=JSON.parse(localStorage.getItem('sx-history')||'[]');
-let settings=JSON.parse(localStorage.getItem('sx-settings')||'{"prepTime":5,"beepOn":true,"sideOn":true,"prepBeepOn":true,"breathOn":true,"voiceOn":false,"volume":0.8,"soundWave":"sine","soundPitch":1,"theme":"dark"}');
+let settings=JSON.parse(localStorage.getItem('sx-settings')||'{"prepTime":4,"switchTime":4,"beepOn":true,"sideOn":true,"prepBeepOn":true,"breathOn":true,"voiceOn":false,"volume":0.8,"soundWave":"sine","soundPitch":1,"theme":"dark"}');
+if(settings.switchTime==null)settings.switchTime=4;
 
 let libArea='',imgTarget=null,dragSrc=null;
 let tInterval=null,tIdx=0,tLeft=0,tPhase='stretch',sideSwitched=false,sessionStretches=[];
@@ -544,6 +549,7 @@ function show(p){
 function renderSettings(){
   const s=settings;
   document.getElementById('set-prep').textContent=s.prepTime+'s';
+  document.getElementById('set-switch').textContent=(s.switchTime!=null?s.switchTime:4)+'s';
   document.getElementById('tog-voice').checked=!!s.voiceOn;
   document.getElementById('tog-beep').checked=s.beepOn!==false;
   document.getElementById('tog-side').checked=s.sideOn!==false;
@@ -559,6 +565,7 @@ function renderSettings(){
   document.getElementById('btn-light').classList.toggle('ac',s.theme==='light');
 }
 function adjPrepTime(d){settings.prepTime=Math.max(0,Math.min(60,settings.prepTime+d));document.getElementById('set-prep').textContent=settings.prepTime+'s';saveSetting('prepTime',settings.prepTime);}
+function adjSwitchTime(d){const cur=settings.switchTime!=null?settings.switchTime:4;settings.switchTime=Math.max(0,Math.min(30,cur+d));document.getElementById('set-switch').textContent=settings.switchTime+'s';saveSetting('switchTime',settings.switchTime);}
 function setVol(v){settings.volume=parseFloat(v);document.getElementById('vol-label').textContent=Math.round(v*100)+'%';saveSetting('volume',settings.volume);}
 function setPitch(v){settings.soundPitch=parseFloat(v);document.getElementById('pitch-label').textContent=pitchLabel(v);saveSetting('soundPitch',settings.soundPitch);}
 function pitchLabel(v){return v<0.8?'Low':v>1.3?'High':'Normal';}
@@ -688,7 +695,7 @@ function startGo(){
   requestWakeLock();
   show('go');renderTimer();
 }
-let _sessionStart=null,pnfCycle=0;
+let _sessionStart=null,pnfCycle=0,switchReturn=0;
 
 function renderTimer(){
   const el=document.getElementById('go-inner');
@@ -703,10 +710,10 @@ function renderTimer(){
     return;
   }
   const s=sessionStretches[tIdx];
-  const total=tPhase==='prep'?settings.prepTime:s.dur;
+  const total=tPhase==='prep'?settings.prepTime:tPhase==='switch'?(settings.switchTime!=null?settings.switchTime:4):s.dur;
   const circ=2*Math.PI*54;
   const pct=tLeft/total;
-  const ringCol=tPhase==='prep'?'#ffc832':'var(--accent)';
+  const ringCol=tPhase==='prep'?'#ffc832':tPhase==='switch'?'#78b4ff':'var(--accent)';
   const isPlaying=!!tInterval;
   const overallPct=Math.round(((tIdx)/sessionStretches.length)*100);
 
@@ -717,12 +724,12 @@ function renderTimer(){
       <button class="img-change" onclick="imgOptions('${s.id}')">change photo</button>
     </div>
     <div class="timer-body">
-      <div class="tlabel">${tIdx+1} of ${sessionStretches.length} · ${tPhase==='prep'?'get ready':s.area}</div>
+      <div class="tlabel">${tIdx+1} of ${sessionStretches.length} · ${tPhase==='prep'?'get ready':tPhase==='switch'?'switch sides':s.area}</div>
       <div class="tname">${s.name}</div>
       ${tPhase==='prep'?`<div class="phase-banner prep">⏱ Next: ${s.name}</div>`:''}
-      ${tPhase==='stretch'&&s.bilateral&&settings.sideOn&&sideSwitched?`<div class="phase-banner side">↔ Switch sides now</div>`:''}
+      ${tPhase==='switch'?`<div class="phase-banner side">↔ Switch sides — reposition</div>`:''}
       ${tPhase==='stretch'&&s.pnf?`<div class="phase-banner pnf" id="pnf-banner">${pnfPhaseLabel()}</div>`:''}
-      ${tPhase==='stretch'&&(s.cues||s.desc)?`<div class="cue-box">${s.cues||s.desc}</div>`:''}
+      ${(tPhase==='stretch'||tPhase==='switch')&&(s.cues||s.desc)?`<div class="cue-box">${s.cues||s.desc}</div>`:''}
       <div class="timer-row">
         <div class="ring-wrap" id="ring-wrap" ontouchstart="ringTouchStart(event)" ontouchmove="ringTouchMove(event)" ontouchend="ringTouchEnd(event)" onmousedown="ringMouseDown(event)">
           <div class="breath-ring" id="breath-ring"></div>
@@ -783,7 +790,7 @@ function ringAngle(e,rect){
 }
 let scrubbing=false;
 function scrubToAngle(a){
-  const s=sessionStretches[tIdx];const total=tPhase==='prep'?settings.prepTime:s.dur;
+  const s=sessionStretches[tIdx];const total=tPhase==='prep'?settings.prepTime:tPhase==='switch'?(settings.switchTime!=null?settings.switchTime:4):s.dur;
   // ring is full at start (time remaining = total) and depletes clockwise.
   // angle 0 = top = full remaining; increasing angle clockwise = less remaining.
   const pct=(360-a)/360;
@@ -803,7 +810,23 @@ function tickT(){
     if(scrubbing)return;
     const s=sessionStretches[tIdx];
     if(tPhase==='stretch'&&s.bilateral&&!s.pnf&&settings.sideOn&&!sideSwitched&&tLeft===Math.floor(s.dur/2)){
-      sideSwitched=true;playSound('switchSide');speak('Switch sides');renderTimer();tickT();return;
+      // pause briefly to switch sides
+      sideSwitched=true;playSound('switchSide');speak('Switch sides');
+      const swt=settings.switchTime!=null?settings.switchTime:4;
+      if(swt>0){
+        clearInterval(tInterval);tInterval=null;stopBreathPacer();
+        tPhase='switch';switchReturn=tLeft;tLeft=swt;
+        renderTimer();keepRunning();return;
+      }
+      // switchTime 0 → just continue without a pause
+    }
+    if(tPhase==='switch'){
+      tLeft--;
+      const total=settings.switchTime!=null?settings.switchTime:4;const circ=2*Math.PI*54;
+      document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
+      const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
+      if(tLeft<=0){clearInterval(tInterval);tInterval=null;tPhase='stretch';tLeft=switchReturn;if(settings.prepBeepOn)playSound('prepEnd');renderTimer();keepRunning();}
+      return;
     }
     if(tPhase==='stretch'&&settings.beepOn&&tLeft<=3&&tLeft>0)playSound(tLeft===1?'countdownFinal':'countdown');
     if(tPhase==='stretch'&&tLeft===10&&s.dur>15)speak('Ten seconds');
@@ -828,10 +851,18 @@ function tickT(){
     const n=document.getElementById('tnum');if(n)n.textContent=tLeft;
     if(tLeft<=0){
       clearInterval(tInterval);tInterval=null;stopBreathPacer();
-      if(tPhase==='prep'){tPhase='stretch';tLeft=sessionStretches[tIdx].dur;sideSwitched=false;if(settings.prepBeepOn)playSound('prepEnd');speak(sessionStretches[tIdx].name);renderTimer();tickT();}
-      else nextS();
+      if(tPhase==='prep'){tPhase='stretch';tLeft=sessionStretches[tIdx].dur;sideSwitched=false;if(settings.prepBeepOn)playSound('prepEnd');speak(sessionStretches[tIdx].name);renderTimer();keepRunning();}
+      else{tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;}renderTimer();keepRunning();}
     }
   },1000);
+}
+// keep timer running across auto-transitions and sync the play/pause icon
+function keepRunning(){
+  if(tIdx>=sessionStretches.length)return; // session done
+  tickT();
+  if(settings.breathOn){const s=sessionStretches[tIdx];if(tPhase==='stretch'&&s&&s.dur>=40)startBreathPacer();}
+  const i=document.getElementById('pico');if(i)i.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';
+  document.getElementById('pbtn')?.classList.add('playing');
 }
 function toggleT(){
   if(tInterval){clearInterval(tInterval);tInterval=null;stopBreathPacer();const i=document.getElementById('pico');if(i)i.innerHTML='<polygon points="5,3 19,12 5,21"/>';document.getElementById('pbtn')?.classList.remove('playing');}
