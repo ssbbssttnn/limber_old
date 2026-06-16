@@ -494,22 +494,33 @@ function save(){
 }
 function saveSetting(k,v){settings[k]=v;localStorage.setItem('sx-settings',JSON.stringify(settings));}
 function uid(){return 'x'+Date.now()+Math.random().toString(36).slice(2,5);}
-// Image priority: 1) photo you uploaded in-app  2) photos/<id>.jpg from the repo
+// Formats the app will try, in order, for repo photos
+const IMG_EXTS=['jpg','jpeg','png','webp','JPG','JPEG','PNG'];
+// Image priority: 1) photo you uploaded in-app  2) photos/<id>.<ext> from the repo
 function imgSrc(id){
   if(userImgs[id])return userImgs[id];
-  return 'photos/'+id+'.jpg';
+  return 'photos/'+id+'.'+IMG_EXTS[0];
 }
-// Renders an <img> that falls back to a + placeholder if the file is missing
+// Renders an <img> that tries each format, then falls back to a + placeholder
 function imgTag(id,opts){
   opts=opts||{};
   const cls=opts.cls||'thumb';
   const big=opts.big?'1':'0';
-  const src=imgSrc(id);
-  return `<img src="${src}" class="${cls}" onclick="uploadImg('${id}')" style="cursor:pointer" onerror="imgFallback(this,'${id}',${big})">`;
+  if(userImgs[id]){
+    return `<img src="${userImgs[id]}" class="${cls}" onclick="uploadImg('${id}')" style="cursor:pointer">`;
+  }
+  // start at format index 0; onerror advances to the next format
+  return `<img src="photos/${id}.${IMG_EXTS[0]}" class="${cls}" data-ix="0" onclick="uploadImg('${id}')" style="cursor:pointer" onerror="imgFallback(this,'${id}',${big})">`;
 }
-// Swaps a broken image for the + placeholder
+// On error: try the next file extension; if none left, show the + placeholder
 function imgFallback(el,id,big){
-  const ph=document.createElement(big?'div':'div');
+  let ix=parseInt(el.getAttribute('data-ix')||'0')+1;
+  if(ix<IMG_EXTS.length){
+    el.setAttribute('data-ix',ix);
+    el.src='photos/'+id+'.'+IMG_EXTS[ix];
+    return;
+  }
+  const ph=document.createElement('div');
   if(big){ph.className='iph';ph.innerHTML='<span style="font-size:24px">+</span><span>tap to add photo</span>';}
   else{ph.className='thumb-ph';ph.textContent='+';}
   ph.onclick=()=>uploadImg(id);
