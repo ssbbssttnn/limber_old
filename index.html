@@ -791,9 +791,8 @@ function ringAngle(e,rect){
 let scrubbing=false;
 function scrubToAngle(a){
   const s=sessionStretches[tIdx];const total=tPhase==='prep'?settings.prepTime:tPhase==='switch'?(settings.switchTime!=null?settings.switchTime:4):s.dur;
-  // ring is full at start (time remaining = total) and depletes clockwise.
-  // angle 0 = top = full remaining; increasing angle clockwise = less remaining.
-  const pct=(360-a)/360;
+  // angle 0 = top. Empirically the arc fills this way, so map directly.
+  const pct=a/360;
   tLeft=Math.round(Math.max(1,Math.min(total,pct*total)));
   const circ=2*Math.PI*54;
   document.getElementById('arc')?.setAttribute('stroke-dashoffset',(circ*(1-tLeft/total)).toFixed(1));
