@@ -30,7 +30,7 @@
 :root{--r:14px;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;padding-bottom:90px;max-width:480px;margin:0 auto;transition:background 0.2s,color 0.2s}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));max-width:480px;margin:0 auto;transition:background 0.2s,color 0.2s}
 .nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:var(--bg);border-top:1px solid var(--border);z-index:99;padding-bottom:env(safe-area-inset-bottom,0)}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;letter-spacing:0.03em}
 .nb.on{color:var(--accent)}.nb svg{width:21px;height:21px;stroke-width:1.6}
