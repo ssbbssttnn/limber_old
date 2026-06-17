@@ -190,6 +190,15 @@ select.fi{appearance:none}textarea.fi{resize:none}
 .timer-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;min-width:30px;text-align:right}
 .snd-chip{font-size:12px;font-family:'DM Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.15s}
 .snd-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+/* settings menu */
+.set-menu-row{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
+.set-menu-row:last-child{border-bottom:none}
+.set-menu-row:active{background:var(--surface2)}
+.set-arrow{color:var(--muted);font-size:22px;font-weight:300}
+.settings-sub{display:none}
+.settings-sub.on{display:block}
+.sub-back{padding:6px 16px 14px;color:var(--accent);font-size:14px;cursor:pointer;display:inline-block}
+#settings-menu.hide{display:none}
 .pnf-chip{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:0.04em;padding:6px 11px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer}
 .pnf-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 </style>
@@ -263,58 +272,96 @@ select.fi{appearance:none}textarea.fi{resize:none}
 <!-- SETTINGS -->
 <div id="pg-settings" class="pg">
   <div class="hdr"><span class="htitle">settings</span></div>
-  <span class="sec-lbl">Appearance</span>
-  <div class="card" style="padding:14px 16px">
-    <div class="slbl" style="margin-bottom:4px">Theme</div>
-    <div class="ssub" style="margin-bottom:12px" id="theme-current">Dark</div>
-    <div id="theme-grid"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
-      <div><div class="slbl">Show equipment stretches</div><div class="ssub">Foam roller, bands, etc. (off = bodyweight only)</div></div>
-      <label class="tog"><input type="checkbox" id="tog-equip" onchange="saveSetting('showEquip',this.checked);renderLib()"><span class="tog-sl"></span></label>
+  <!-- MENU -->
+  <div id="settings-menu">
+    <div class="card">
+      <div class="set-menu-row" onclick="showSettingsSub('appearance')"><div><div class="slbl">Appearance</div><div class="ssub">Theme & library display</div></div><span class="set-arrow">›</span></div>
+      <div class="set-menu-row" onclick="showSettingsSub('timing')"><div><div class="slbl">Timing</div><div class="ssub">Prep, switch-side, skip prep</div></div><span class="set-arrow">›</span></div>
+      <div class="set-menu-row" onclick="showSettingsSub('sounds')"><div><div class="slbl">Sounds</div><div class="ssub">Alerts, styles & volume</div></div><span class="set-arrow">›</span></div>
+      <div class="set-menu-row" onclick="showSettingsSub('voice')"><div><div class="slbl">Voice</div><div class="ssub">Spoken cues & voice picker</div></div><span class="set-arrow">›</span></div>
+      <div class="set-menu-row" onclick="showSettingsSub('data')"><div><div class="slbl">Data</div><div class="ssub">Backup, restore</div></div><span class="set-arrow">›</span></div>
+      <div class="set-menu-row" onclick="show('guide')"><div><div class="slbl">Guide</div><div class="ssub">Stretch types & how-to</div></div><span class="set-arrow">›</span></div>
+    </div>
+    <div style="padding:8px 16px 0"><span style="font-size:11px;color:var(--muted)">Limber · all data saved on this device</span></div>
+  </div>
+
+  <!-- APPEARANCE -->
+  <div class="settings-sub" id="sub-appearance">
+    <div class="sub-back" onclick="closeSettingsSub()">‹ Settings</div>
+    <span class="sec-lbl">Appearance</span>
+    <div class="card" style="padding:14px 16px">
+      <div class="slbl" style="margin-bottom:4px">Theme</div>
+      <div class="ssub" style="margin-bottom:12px" id="theme-current">Dark</div>
+      <div id="theme-grid"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+        <div><div class="slbl">Show equipment stretches</div><div class="ssub">Foam roller, bands, etc. (off = bodyweight only)</div></div>
+        <label class="tog"><input type="checkbox" id="tog-equip" onchange="saveSetting('showEquip',this.checked);renderLib()"><span class="tog-sl"></span></label>
+      </div>
     </div>
   </div>
-  <span class="sec-lbl">Timing</span>
-  <div class="card"><div class="srow">
-    <div><div class="slbl">Prep time between stretches</div><div class="ssub">Adjustable to the second</div></div>
-    <div class="stepper"><button onclick="adjPrepTime(-1)">−</button><span id="set-prep">5s</span><button onclick="adjPrepTime(1)">+</button></div>
+
+  <!-- TIMING -->
+  <div class="settings-sub" id="sub-timing">
+    <div class="sub-back" onclick="closeSettingsSub()">‹ Settings</div>
+    <span class="sec-lbl">Timing</span>
+    <div class="card"><div class="srow">
+      <div><div class="slbl">Prep time between stretches</div><div class="ssub">Adjustable to the second</div></div>
+      <div class="stepper"><button onclick="adjPrepTime(-1)">−</button><span id="set-prep">5s</span><button onclick="adjPrepTime(1)">+</button></div>
+    </div>
+    <div class="srow">
+      <div><div class="slbl">Switch-side reposition time</div><div class="ssub">Pause to switch sides mid-stretch</div></div>
+      <div class="stepper"><button onclick="adjSwitchTime(-1)">−</button><span id="set-switch">4s</span><button onclick="adjSwitchTime(1)">+</button></div>
+    </div>
+    <div class="srow">
+      <div><div class="slbl">Skip prep on first stretch</div><div class="ssub">Start the first stretch immediately</div></div>
+      <label class="tog"><input type="checkbox" id="tog-skipprep" onchange="saveSetting('skipFirstPrep',this.checked)"><span class="tog-sl"></span></label>
+    </div></div>
   </div>
-  <div class="srow">
-    <div><div class="slbl">Switch-side reposition time</div><div class="ssub">Pause to switch sides mid-stretch</div></div>
-    <div class="stepper"><button onclick="adjSwitchTime(-1)">−</button><span id="set-switch">4s</span><button onclick="adjSwitchTime(1)">+</button></div>
+
+  <!-- SOUNDS -->
+  <div class="settings-sub" id="sub-sounds">
+    <div class="sub-back" onclick="closeSettingsSub()">‹ Settings</div>
+    <span class="sec-lbl">Sounds</span>
+    <div class="card">
+      <div class="srow"><div><div class="slbl">Countdown beeps</div><div class="ssub">Last 3 seconds of each stretch</div></div>
+        <label class="tog"><input type="checkbox" id="tog-beep" onchange="saveSetting('beepOn',this.checked)"><span class="tog-sl"></span></label></div>
+      <div class="srow"><div><div class="slbl">Switch-side alert</div><div class="ssub">Halfway cue for bilateral stretches</div></div>
+        <label class="tog"><input type="checkbox" id="tog-side" onchange="saveSetting('sideOn',this.checked)"><span class="tog-sl"></span></label></div>
+      <div class="srow"><div><div class="slbl">Next-stretch beep</div><div class="ssub">Sounds when each stretch starts</div></div>
+        <label class="tog"><input type="checkbox" id="tog-prepbeep" onchange="saveSetting('prepBeepOn',this.checked)"><span class="tog-sl"></span></label></div>
+      <div class="srow"><div><div class="slbl">Breathing pacer</div><div class="ssub">Pulsing circle on holds over 40s</div></div>
+        <label class="tog"><input type="checkbox" id="tog-breath" onchange="saveSetting('breathOn',this.checked)"><span class="tog-sl"></span></label></div>
+      <div class="srow"><div><div class="slbl">Volume</div><div class="ssub" id="vol-label">80%</div></div>
+        <input type="range" min="0" max="1" step="0.05" id="set-vol" oninput="setVol(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+    </div>
+    <span class="sec-lbl">Sound styles <span style="text-transform:none;letter-spacing:0">— tap to preview</span></span>
+    <div class="card" style="padding:14px 16px"><div id="sound-pickers"></div></div>
   </div>
-  <div class="srow">
-    <div><div class="slbl">Skip prep on first stretch</div><div class="ssub">Start the first stretch immediately</div></div>
-    <label class="tog"><input type="checkbox" id="tog-skipprep" onchange="saveSetting('skipFirstPrep',this.checked)"><span class="tog-sl"></span></label>
-  </div></div>
-  <span class="sec-lbl">Sounds</span>
-  <div class="card">
-    <div class="srow"><div><div class="slbl">Countdown beeps</div><div class="ssub">Last 3 seconds of each stretch</div></div>
-      <label class="tog"><input type="checkbox" id="tog-beep" onchange="saveSetting('beepOn',this.checked)"><span class="tog-sl"></span></label></div>
-    <div class="srow"><div><div class="slbl">Switch-side alert</div><div class="ssub">Halfway cue for bilateral stretches</div></div>
-      <label class="tog"><input type="checkbox" id="tog-side" onchange="saveSetting('sideOn',this.checked)"><span class="tog-sl"></span></label></div>
-    <div class="srow"><div><div class="slbl">Next-stretch beep</div><div class="ssub">Sounds when each stretch starts</div></div>
-      <label class="tog"><input type="checkbox" id="tog-prepbeep" onchange="saveSetting('prepBeepOn',this.checked)"><span class="tog-sl"></span></label></div>
-    <div class="srow"><div><div class="slbl">Breathing pacer</div><div class="ssub">Pulsing circle on holds over 40s</div></div>
-      <label class="tog"><input type="checkbox" id="tog-breath" onchange="saveSetting('breathOn',this.checked)"><span class="tog-sl"></span></label></div>
-    <div class="srow"><div><div class="slbl">Volume</div><div class="ssub" id="vol-label">80%</div></div>
-      <input type="range" min="0" max="1" step="0.05" id="set-vol" oninput="setVol(this.value)" style="width:90px;accent-color:var(--accent)"></div>
+
+  <!-- VOICE -->
+  <div class="settings-sub" id="sub-voice">
+    <div class="sub-back" onclick="closeSettingsSub()">‹ Settings</div>
+    <span class="sec-lbl">Voice</span>
+    <div class="card">
+      <div class="srow"><div><div class="slbl">Voice cues</div><div class="ssub">Speaks switch-side, countdown, prompts</div></div>
+        <label class="tog"><input type="checkbox" id="tog-voice" onchange="saveSetting('voiceOn',this.checked);renderVoicePicker()"><span class="tog-sl"></span></label></div>
+      <div id="voice-options"></div>
+    </div>
+    <div style="padding:0 16px"><p style="font-size:11px;color:var(--muted);line-height:1.6">Only voices installed on your phone appear here. To add more (incl. male voices): Phone Settings → General management → Text-to-speech → install voice data, then reopen Limber.</p></div>
   </div>
-  <span class="sec-lbl">Sound styles</span>
-  <div class="card" style="padding:14px 16px"><div id="sound-pickers"></div></div>
-  <span class="sec-lbl">Voice</span>
-  <div class="card">
-    <div class="srow"><div><div class="slbl">Voice cues</div><div class="ssub">Speaks switch-side, countdown, prompts</div></div>
-      <label class="tog"><input type="checkbox" id="tog-voice" onchange="saveSetting('voiceOn',this.checked);renderVoicePicker()"><span class="tog-sl"></span></label></div>
-    <div id="voice-options"></div>
+
+  <!-- DATA -->
+  <div class="settings-sub" id="sub-data">
+    <div class="sub-back" onclick="closeSettingsSub()">‹ Settings</div>
+    <span class="sec-lbl">Data</span>
+    <div class="card">
+      <div class="srow"><div><div class="slbl">Backup / export</div><div class="ssub">Download all your data as a file</div></div>
+        <button class="btn sm" onclick="exportData()">Export</button></div>
+      <div class="srow"><div><div class="slbl">Restore</div><div class="ssub">Import a backup file</div></div>
+        <button class="btn sm" onclick="document.getElementById('import-input').click()">Import</button></div>
+    </div>
+    <div style="padding:8px 16px 0"><span style="font-size:11px;color:var(--muted)">All data is stored on this device. Export regularly to keep a backup.</span></div>
   </div>
-  <span class="sec-lbl">Data</span>
-  <div class="card">
-    <div class="srow"><div><div class="slbl">Backup / export</div><div class="ssub">Download all your data as a file</div></div>
-      <button class="btn sm" onclick="exportData()">Export</button></div>
-    <div class="srow"><div><div class="slbl">Restore</div><div class="ssub">Import a backup file</div></div>
-      <button class="btn sm" onclick="document.getElementById('import-input').click()">Import</button></div>
-  </div>
-  <div style="padding:8px 16px 0"><span style="font-size:11px;color:var(--muted)">Limber · all data saved on this device</span></div>
 </div>
 
 <!-- NAV -->
@@ -772,37 +819,37 @@ function tone(freq,dur,vol,delay,wave){
 // keep beep() for backward-compat
 function beep(freq,dur,vol,delay){tone(freq,dur,vol,delay,settings.soundWave||'sine');}
 
-// Sound option library — each is a named pattern. Used per event.
+// Sound option library — richer, smoother patterns. Each is a named pattern.
 const SOUNDS={
-  chime:    ()=>{tone(660,0.07,0.25,0,'sine');},
-  ding:     ()=>{tone(880,0.12,0.3,0,'triangle');},
-  blip:     ()=>{tone(520,0.06,0.25,0,'square');},
-  marimba:  ()=>{tone(587,0.12,0.3,0,'sine');tone(880,0.1,0.2,0.06,'sine');},
-  pluck:    ()=>{tone(440,0.05,0.3,0,'sawtooth');},
-  rise:     ()=>{tone(440,0.07,0.28,0,'sine');tone(660,0.08,0.3,0.08,'sine');tone(880,0.12,0.35,0.17,'sine');},
-  fall:     ()=>{tone(880,0.07,0.3,0,'sine');tone(660,0.08,0.3,0.08,'sine');tone(440,0.12,0.32,0.17,'sine');},
-  twotone:  ()=>{tone(660,0.09,0.3,0,'triangle');tone(990,0.12,0.32,0.11,'triangle');},
-  wiggle:   ()=>{tone(523,0.07,0.28,0,'sine');tone(659,0.07,0.28,0.08,'sine');tone(523,0.1,0.3,0.16,'sine');},
-  bell:     ()=>{tone(784,0.18,0.32,0,'sine');tone(1175,0.12,0.18,0.02,'sine');},
-  fanfare:  ()=>{tone(523,0.13,0.38,0,'triangle');tone(659,0.13,0.38,0.16,'triangle');tone(784,0.26,0.45,0.32,'triangle');},
-  chord:    ()=>{tone(523,0.4,0.3,0,'sine');tone(659,0.4,0.3,0,'sine');tone(784,0.4,0.3,0,'sine');},
-  sparkle:  ()=>{tone(784,0.08,0.3,0,'sine');tone(988,0.08,0.3,0.07,'sine');tone(1319,0.18,0.32,0.14,'sine');},
-  gong:     ()=>{tone(196,0.5,0.4,0,'sine');tone(294,0.4,0.2,0.02,'sine');},
-  arcade:   ()=>{tone(660,0.06,0.3,0,'square');tone(880,0.06,0.3,0.07,'square');tone(1100,0.12,0.32,0.14,'square');},
-  tick:     ()=>{tone(1000,0.04,0.22,0,'square');},
-  beep2:    ()=>{tone(700,0.06,0.25,0,'sine');},
-  low:      ()=>{tone(330,0.1,0.3,0,'triangle');},
-  high:     ()=>{tone(1046,0.08,0.28,0,'sine');},
-  buzz:     ()=>{tone(400,0.12,0.25,0,'sawtooth');},
+  chime:    ()=>{tone(880,0.18,0.3,0,'sine');tone(1320,0.14,0.12,0.01,'sine');},
+  ding:     ()=>{tone(1047,0.22,0.32,0,'sine');tone(1568,0.12,0.1,0,'sine');},
+  blip:     ()=>{tone(560,0.07,0.28,0,'triangle');},
+  marimba:  ()=>{tone(587,0.16,0.32,0,'sine');tone(880,0.14,0.2,0.08,'sine');tone(1175,0.12,0.12,0.16,'sine');},
+  pluck:    ()=>{tone(660,0.09,0.3,0,'triangle');tone(660,0.14,0.12,0.02,'sine');},
+  rise:     ()=>{tone(523,0.1,0.28,0,'sine');tone(659,0.1,0.3,0.1,'sine');tone(880,0.16,0.34,0.2,'sine');},
+  fall:     ()=>{tone(880,0.1,0.3,0,'sine');tone(659,0.1,0.3,0.1,'sine');tone(523,0.16,0.32,0.2,'sine');},
+  twotone:  ()=>{tone(700,0.12,0.3,0,'sine');tone(1050,0.16,0.32,0.13,'sine');},
+  wiggle:   ()=>{tone(659,0.1,0.28,0,'sine');tone(880,0.1,0.3,0.1,'sine');tone(659,0.14,0.3,0.2,'sine');},
+  bell:     ()=>{tone(784,0.4,0.32,0,'sine');tone(1175,0.3,0.14,0.01,'sine');tone(1568,0.2,0.07,0.02,'sine');},
+  fanfare:  ()=>{tone(523,0.16,0.36,0,'sine');tone(659,0.16,0.36,0.16,'sine');tone(784,0.16,0.36,0.32,'sine');tone(1047,0.4,0.4,0.48,'sine');},
+  chord:    ()=>{tone(523,0.6,0.26,0,'sine');tone(659,0.6,0.24,0,'sine');tone(784,0.6,0.24,0,'sine');tone(1047,0.6,0.18,0,'sine');},
+  sparkle:  ()=>{tone(1047,0.1,0.26,0,'sine');tone(1319,0.1,0.26,0.08,'sine');tone(1568,0.1,0.26,0.16,'sine');tone(2093,0.18,0.24,0.24,'sine');},
+  gong:     ()=>{tone(196,0.7,0.4,0,'sine');tone(294,0.6,0.18,0.01,'sine');tone(98,0.7,0.2,0,'sine');},
+  arcade:   ()=>{tone(523,0.08,0.28,0,'square');tone(784,0.08,0.26,0.08,'square');tone(1047,0.16,0.28,0.16,'square');},
+  tick:     ()=>{tone(1200,0.05,0.22,0,'triangle');},
+  soft:     ()=>{tone(640,0.12,0.22,0,'sine');},
+  woodblock:()=>{tone(900,0.05,0.3,0,'triangle');tone(1800,0.03,0.1,0,'sine');},
+  drop:     ()=>{tone(784,0.1,0.28,0,'sine');tone(523,0.16,0.3,0.08,'sine');},
+  ping:     ()=>{tone(1318,0.16,0.28,0,'sine');},
 };
 // Which sound options are offered per event
 const SOUND_CHOICES={
-  switchSide:['twotone','wiggle','rise','bell','arcade'],
-  nextUp:    ['rise','marimba','ding','sparkle','pluck'],
-  countdown: ['tick','blip','beep2','low','high'],
+  switchSide:['twotone','wiggle','rise','bell','drop'],
+  nextUp:    ['ding','marimba','pluck','soft','ping'],
+  countdown: ['tick','blip','woodblock','soft','ping'],
   done:      ['fanfare','chord','bell','sparkle','gong'],
 };
-const SOUND_DEFAULTS={switchSide:'twotone',nextUp:'rise',countdown:'tick',done:'fanfare'};
+const SOUND_DEFAULTS={switchSide:'twotone',nextUp:'ding',countdown:'tick',done:'fanfare'};
 function soundFor(event){
   const chosen=(settings.sounds&&settings.sounds[event])||SOUND_DEFAULTS[event];
   return SOUNDS[chosen]?chosen:SOUND_DEFAULTS[event];
@@ -848,7 +895,25 @@ function show(p){
 }
 
 /* ── SETTINGS UI ── */
+function showSettingsSub(name){
+  document.getElementById('settings-menu').classList.add('hide');
+  document.querySelectorAll('.settings-sub').forEach(s=>s.classList.remove('on'));
+  const sub=document.getElementById('sub-'+name);if(sub)sub.classList.add('on');
+  window.scrollTo(0,0);
+  // render dynamic content for the opened sub-page
+  if(name==='appearance')renderThemeGrid();
+  if(name==='sounds')renderSoundPickers();
+  if(name==='voice')renderVoicePicker();
+}
+function closeSettingsSub(){
+  document.querySelectorAll('.settings-sub').forEach(s=>s.classList.remove('on'));
+  document.getElementById('settings-menu').classList.remove('hide');
+  window.scrollTo(0,0);
+}
 function renderSettings(){
+  // reset to menu view whenever settings tab opened
+  document.getElementById('settings-menu')?.classList.remove('hide');
+  document.querySelectorAll('.settings-sub').forEach(s=>s.classList.remove('on'));
   const s=settings;
   document.getElementById('set-prep').textContent=s.prepTime+'s';
   document.getElementById('set-switch').textContent=(s.switchTime!=null?s.switchTime:4)+'s';
@@ -1296,8 +1361,8 @@ function toggleT(){
   if(tInterval){clearInterval(tInterval);tInterval=null;stopBreathPacer();const i=document.getElementById('pico');if(i)i.innerHTML='<polygon points="5,3 19,12 5,21"/>';document.getElementById('pbtn')?.classList.remove('playing');}
   else{tickT();if(settings.breathOn){const s=sessionStretches[tIdx];if(tPhase==='stretch'&&s.dur>=40)startBreathPacer();}const i=document.getElementById('pico');if(i)i.innerHTML='<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>';document.getElementById('pbtn')?.classList.add('playing');}
 }
-function nextS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=ePrep()>0?'prep':'stretch';tLeft=tPhase==='prep'?ePrep():sessionStretches[tIdx].dur;}renderTimer();}
-function prevS(){clearInterval(tInterval);tInterval=null;stopBreathPacer();sideSwitched=false;pnfTensing=false;if(tIdx>0)tIdx--;tPhase=settings.prepTime>0?'prep':'stretch';tLeft=tPhase==='prep'?settings.prepTime:sessionStretches[tIdx].dur;renderTimer();}
+function nextS(){const wasPlaying=!!tInterval;clearInterval(tInterval);tInterval=null;stopBreathPacer();tIdx++;sideSwitched=false;pnfTensing=false;if(tIdx<sessionStretches.length){tPhase=ePrep()>0?'prep':'stretch';tLeft=tPhase==='prep'?ePrep():sessionStretches[tIdx].dur;}renderTimer();if(wasPlaying&&tIdx<sessionStretches.length)keepRunning();}
+function prevS(){const wasPlaying=!!tInterval;clearInterval(tInterval);tInterval=null;stopBreathPacer();sideSwitched=false;pnfTensing=false;if(tIdx>0)tIdx--;tPhase=ePrep()>0?'prep':'stretch';tLeft=tPhase==='prep'?ePrep():sessionStretches[tIdx].dur;renderTimer();if(wasPlaying)keepRunning();}
 
 /* ── SESSION LOGGING / PROGRESS ── */
 function logSession(){
