@@ -1,206 +1,319 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="blueprint">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" id="theme-color-meta" content="#0f0f0f">
+<meta name="theme-color" id="theme-color-meta" content="#0a0e22">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Limber</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-[data-theme="dark"]{--bg:#0f0f0f;--surface:#1a1a1a;--surface2:#242424;--border:#2e2e2e;--text:#f0ede8;--muted:#7a7570;--accent:#c8f060;--accent-text:#0f0f0f;--accent-dim:rgba(200,240,96,0.12);--danger:#ff6b6b;}
-[data-theme="light"]{--bg:#f5f3ef;--surface:#ffffff;--surface2:#f0ede8;--border:#e0dcd6;--text:#1a1814;--muted:#8a8480;--accent:#5a8a00;--accent-text:#ffffff;--accent-dim:rgba(90,138,0,0.1);--danger:#cc3333;}
-[data-theme="sage"]{--bg:#eef0e9;--surface:#f8faf4;--surface2:#e3e7da;--border:#d2d8c5;--text:#2f3b2c;--muted:#7e8a73;--accent:#6b8f5e;--accent-text:#ffffff;--accent-dim:rgba(107,143,94,0.14);--danger:#bb5544;}
-[data-theme="clay"]{--bg:#f3e9e1;--surface:#fbf4ee;--surface2:#ead9cb;--border:#dcc6b4;--text:#4a382c;--muted:#9c8270;--accent:#c2683f;--accent-text:#ffffff;--accent-dim:rgba(194,104,63,0.13);--danger:#b03a2e;}
-[data-theme="ocean"]{--bg:#0e1a24;--surface:#16242f;--surface2:#1e303d;--border:#2a3f4d;--text:#e0eaf0;--muted:#7693a3;--accent:#4fb3d9;--accent-text:#06141c;--accent-dim:rgba(79,179,217,0.14);--danger:#e8716b;}
-[data-theme="dusk"]{--bg:#1a1628;--surface:#241f36;--surface2:#2f2945;--border:#3d3656;--text:#e9e4f5;--muted:#9088ab;--accent:#b18cf0;--accent-text:#140f22;--accent-dim:rgba(177,140,240,0.15);--danger:#e8716b;}
-[data-theme="amoled"]{--bg:#000000;--surface:#0a0a0a;--surface2:#141414;--border:#222222;--text:#f0f0f0;--muted:#777777;--accent:#c8f060;--accent-text:#000000;--accent-dim:rgba(200,240,96,0.1);--danger:#ff6b6b;}
-[data-theme="contrast"]{--bg:#000000;--surface:#0d0d0d;--surface2:#1a1a1a;--border:#ffffff;--text:#ffffff;--muted:#cccccc;--accent:#ffe600;--accent-text:#000000;--accent-dim:rgba(255,230,0,0.18);--danger:#ff4444;}
-[data-theme="mono"]{--bg:#181818;--surface:#212121;--surface2:#2b2b2b;--border:#3a3a3a;--text:#e8e8e8;--muted:#888888;--accent:#bbbbbb;--accent-text:#181818;--accent-dim:rgba(187,187,187,0.12);--danger:#cc8888;}
-[data-theme="scifi"]{--bg:#060d17;--surface:#0c1825;--surface2:#122234;--border:#1d3850;--text:#d6ecff;--muted:#5f8aad;--accent:#22d3ee;--accent-text:#04111c;--accent-dim:rgba(34,211,238,0.13);--danger:#ff6b6b;}
-[data-theme="techno"]{--bg:#0d0716;--surface:#170d26;--surface2:#221236;--border:#3a1d5c;--text:#f0d6ff;--muted:#9b6fc4;--accent:#ff2bd6;--accent-text:#12041c;--accent-dim:rgba(255,43,214,0.14);--danger:#ff5b6b;}
-[data-theme="future"]{--bg:#fafbfc;--surface:#ffffff;--surface2:#f0f2f5;--border:#e2e6ea;--text:#1c2024;--muted:#9aa3ad;--accent:#2d6cff;--accent-text:#ffffff;--accent-dim:rgba(45,108,255,0.08);--danger:#e5484d;}
-[data-theme="galaxy"]{--bg:#0b0820;--surface:#15102e;--surface2:#1f1840;--border:#332a5c;--text:#e6e0ff;--muted:#8579b8;--accent:#9d7bff;--accent-text:#0b0820;--accent-dim:rgba(157,123,255,0.15);--danger:#ff6b8a;}
-[data-theme="starlight"]{--bg:#0a0f1e;--surface:#121829;--surface2:#1b2236;--border:#2a3450;--text:#eef2fb;--muted:#7a88a8;--accent:#d4dcf0;--accent-text:#0a0f1e;--accent-dim:rgba(212,220,240,0.12);--danger:#e8716b;}
-[data-theme="moonlight"]{--bg:#11161f;--surface:#1a212d;--surface2:#242d3b;--border:#34404f;--text:#dde6f0;--muted:#7e8c9e;--accent:#8fb3d9;--accent-text:#0d1119;--accent-dim:rgba(143,179,217,0.13);--danger:#e8716b;}
-[data-theme="cosmic"]{--bg:#050308;--surface:#0f0a16;--surface2:#181024;--border:#2c1d3f;--text:#ede4f5;--muted:#8a72a3;--accent:#7af0d4;--accent-text:#050308;--accent-dim:rgba(122,240,212,0.13);--danger:#ff6b8a;}
-:root{--r:14px;}
+/* ============ SPAN · ARCHITECTURAL / PRECISE / TECHNICAL ============ */
+/* Engineered palettes — red accent, drafting precision */
+[data-theme="blueprint"]{--bg:#0a0e22;--surface:#0f1530;--surface2:#161d40;--border:#243056;--grid:rgba(80,110,200,0.06);--text:#dce4f5;--muted:#6478a8;--accent:#ed3426;--accent2:#ff5a4d;--accent-text:#ffffff;--accent-dim:rgba(237,52,38,0.13);--danger:#ff5a4d;}
+[data-theme="paper"]{--bg:#ddd7c9;--surface:#e9e5d9;--surface2:#d6d0c1;--border:#bdb8a8;--grid:rgba(60,60,50,0.05);--text:#1c1c1a;--muted:#7e7a70;--accent:#d62f23;--accent2:#bd2519;--accent-text:#ffffff;--accent-dim:rgba(214,47,35,0.1);--danger:#bd2519;--card-shadow:0 2px 12px -5px rgba(60,55,45,0.2);--press:rgba(0,0,0,0.06);}
+[data-theme="carbon"]{--bg:#0d0d0f;--surface:#151517;--surface2:#1e1e21;--border:#2e2e33;--grid:rgba(255,255,255,0.03);--text:#e8e8ea;--muted:#76767e;--accent:#ed3426;--accent2:#ff5a4d;--accent-text:#ffffff;--accent-dim:rgba(237,52,38,0.13);--danger:#ff5a4d;}
+[data-theme="concrete"]{--bg:#26282b;--surface:#2f3236;--surface2:#3a3e43;--border:#4a4f55;--grid:rgba(255,255,255,0.03);--text:#e2e4e6;--muted:#8c9298;--accent:#ed3426;--accent2:#ff6155;--accent-text:#ffffff;--accent-dim:rgba(237,52,38,0.14);--danger:#ff6155;}
+[data-theme="cyan"]{--bg:#06141a;--surface:#0b1f28;--surface2:#102b37;--border:#1d4252;--grid:rgba(80,200,230,0.05);--text:#d6f0f5;--muted:#5c93a3;--accent:#ed3426;--accent2:#ff5a4d;--accent-text:#ffffff;--accent-dim:rgba(237,52,38,0.13);--danger:#ff5a4d;}
+[data-theme="amber"]{--bg:#1a1408;--surface:#241c0d;--surface2:#312614;--border:#4a3a1d;--grid:rgba(230,180,80,0.05);--text:#f5ecd6;--muted:#a3905c;--accent:#ed3426;--accent2:#ff5a4d;--accent-text:#ffffff;--accent-dim:rgba(237,52,38,0.13);--danger:#ff5a4d;}
+/* — inorganic — */
+[data-theme="moonlight"]{--bg:#0c1018;--surface:#141a26;--surface2:#1c2433;--border:#2b3649;--grid:rgba(140,170,220,0.05);--text:#d8e0ee;--muted:#6b7a92;--accent:#8fb3ff;--accent2:#aac6ff;--accent-text:#0c1018;--accent-dim:rgba(143,179,255,0.14);--danger:#ff6b6b;}
+[data-theme="sunset"]{--bg:#1a0f1e;--surface:#251530;--surface2:#33203f;--border:#473150;--grid:rgba(255,140,110,0.05);--text:#f0dde6;--muted:#a07d92;--accent:#ff6a4d;--accent2:#ff8a6d;--accent-text:#1a0f1e;--accent-dim:rgba(255,106,77,0.14);--danger:#ff5a52;}
+[data-theme="neon"]{--bg:#08090d;--surface:#101218;--surface2:#181b24;--border:#262a36;--grid:rgba(80,235,130,0.045);--text:#e4e8ef;--muted:#6a7180;--accent:#34e878;--accent2:#66f2a0;--accent-text:#04200f;--accent-dim:rgba(52,232,120,0.13);--danger:#ff5a4d;}
+/* — organic — */
+[data-theme="clay"]{--bg:#211712;--surface:#2c1f18;--surface2:#392a20;--border:#4d3a2d;--grid:rgba(200,140,90,0.05);--text:#f0e2d6;--muted:#a08872;--accent:#d9542f;--accent2:#e87a52;--accent-text:#ffffff;--accent-dim:rgba(217,84,47,0.14);--danger:#e85a40;}
+[data-theme="ocean"]{--bg:#06151a;--surface:#0b2128;--surface2:#102e36;--border:#1c4450;--grid:rgba(70,180,190,0.05);--text:#d6eef2;--muted:#5c95a0;--accent:#2bb6c7;--accent2:#4fd0de;--accent-text:#06151a;--accent-dim:rgba(43,182,199,0.14);--danger:#ff6b6b;}
+[data-theme="moss"]{--bg:#10160f;--surface:#181f15;--surface2:#222b1e;--border:#344029;--grid:rgba(150,190,120,0.05);--text:#e2ead8;--muted:#889578;--accent:#8fc44a;--accent2:#a8d96b;--accent-text:#101a0c;--accent-dim:rgba(143,196,74,0.14);--danger:#ff6b6b;}
+/* — mineral — */
+[data-theme="amethyst"]{--bg:#1a1230;--surface:#241836;--surface2:#2f2147;--border:#41305c;--grid:rgba(180,140,255,0.05);--text:#e6ddf2;--muted:#8a7aa6;--accent:#b884ff;--accent2:#c9a3ff;--accent-text:#15101f;--accent-dim:rgba(184,132,255,0.14);--danger:#ff6b6b;}
+[data-theme="garnet"]{--bg:#1c0d10;--surface:#281318;--surface2:#371c22;--border:#4d2a30;--grid:rgba(230,120,120,0.05);--text:#f2dde0;--muted:#a87d83;--accent:#e8443a;--accent2:#ff6258;--accent-text:#ffffff;--accent-dim:rgba(232,68,58,0.15);--danger:#ff6258;}
+[data-theme="topaz"]{--bg:#1a160e;--surface:#241f14;--surface2:#322a1a;--border:#4a3f28;--grid:rgba(230,190,90,0.05);--text:#f2e9d6;--muted:#a39072;--accent:#e6b143;--accent2:#f2c869;--accent-text:#1a160e;--accent-dim:rgba(230,177,67,0.14);--danger:#ff6b6b;}
+/* — light members (one per category) — */
+[data-theme="daybreak"]{--bg:#e7eaf2;--surface:#f1f3f9;--surface2:#dde2ee;--border:#c4cadb;--grid:rgba(70,90,180,0.05);--text:#191d2a;--muted:#767e94;--accent:#3f5bd4;--accent2:#2f47b8;--accent-text:#ffffff;--accent-dim:rgba(63,91,212,0.1);--danger:#d83a3a;--card-shadow:0 2px 12px -5px rgba(40,50,90,0.18);--press:rgba(0,0,0,0.06);}
+[data-theme="sand"]{--bg:#e8dec9;--surface:#f1ebda;--surface2:#ddd2bb;--border:#c8bca1;--grid:rgba(150,110,60,0.05);--text:#231c11;--muted:#847a64;--accent:#bb4d28;--accent2:#a23f1f;--accent-text:#ffffff;--accent-dim:rgba(187,77,40,0.1);--danger:#c4261b;--card-shadow:0 2px 12px -5px rgba(80,60,30,0.2);--press:rgba(0,0,0,0.06);}
+[data-theme="quartz"]{--bg:#f0e8ed;--surface:#f7f1f5;--surface2:#e8dde6;--border:#d4c4ce;--grid:rgba(200,100,150,0.05);--text:#241920;--muted:#90778a;--accent:#c44d8a;--accent2:#ab3a76;--accent-text:#ffffff;--accent-dim:rgba(196,77,138,0.1);--danger:#d83a3a;--card-shadow:0 2px 12px -5px rgba(80,45,65,0.18);--press:rgba(0,0,0,0.06);}
+[data-theme="sage"]{--bg:#e2e7da;--surface:#ebefe4;--surface2:#d7ddca;--border:#c2c8b4;--grid:rgba(110,150,70,0.05);--text:#1a1d15;--muted:#797f6e;--accent:#5f8a3a;--accent2:#4e7430;--accent-text:#ffffff;--accent-dim:rgba(95,138,58,0.1);--danger:#c4261b;--card-shadow:0 2px 12px -5px rgba(60,70,40,0.18);--press:rgba(0,0,0,0.06);}
+/* — mono — */
+[data-theme="noir"]{--bg:#0a0a0b;--surface:#161618;--surface2:#1f1f22;--border:#2c2c31;--grid:rgba(255,255,255,0.03);--text:#e8e8ea;--muted:#71717a;--accent:#d4d4d8;--accent2:#e8e8ec;--accent-text:#0a0a0b;--accent-dim:rgba(212,212,216,0.1);--danger:#ef4444;}
+[data-theme="slate"]{--bg:#14171c;--surface:#1b1f26;--surface2:#252b34;--border:#333a45;--grid:rgba(140,160,200,0.035);--text:#d8dde5;--muted:#717a88;--accent:#8b9bb4;--accent2:#a6b4c9;--accent-text:#14171c;--accent-dim:rgba(139,155,180,0.12);--danger:#ef5350;}
+[data-theme="bone"]{--bg:#e9e9e7;--surface:#f3f3f1;--surface2:#dedec9;--border:#c8c8c0;--grid:rgba(60,60,55,0.045);--text:#1b1b1a;--muted:#7a7a74;--accent:#3f3f46;--accent2:#27272a;--accent-text:#ffffff;--accent-dim:rgba(63,63,70,0.08);--danger:#d8392c;--card-shadow:0 2px 12px -5px rgba(50,50,45,0.18);--press:rgba(0,0,0,0.06);}
+
+:root{--r:4px;--r-sm:2px;--card-shadow:0 2px 14px -6px rgba(0,0,0,0.6);--glow:0 0 0 transparent;--press:rgba(0,0,0,0.18);}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{height:100%}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;min-height:100%;padding-bottom:calc(110px + env(safe-area-inset-bottom,0px));max-width:480px;margin:0 auto;transition:background 0.2s,color 0.2s}
-.nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;display:flex;background:var(--bg);border-top:1px solid var(--border);z-index:99;padding-bottom:env(safe-area-inset-bottom,0)}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;letter-spacing:0.03em}
-.nb.on{color:var(--accent)}.nb svg{width:21px;height:21px;stroke-width:1.6}
-.pg{display:none;padding-top:16px}.pg.on{display:block}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 16px 16px}
-.htitle{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;letter-spacing:-0.02em}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;overflow:hidden}
-.row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border)}
+body{
+  background:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--text);font-family:'Archivo',sans-serif;font-size:16px;min-height:100%;
+  padding-bottom:calc(112px + env(safe-area-inset-bottom,0px));max-width:480px;margin:0 auto;
+  transition:background-color 0.25s,color 0.25s;
+}
+
+/* bottom dock — session bar stacked above the tab bar */
+.dock{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;z-index:99}
+.resume-bar{position:relative;display:none;align-items:center;gap:12px;padding:10px 16px;background:var(--surface);border-top:1.5px solid var(--accent);cursor:pointer;overflow:hidden}
+.resume-bar.on{display:flex}
+.rb-prog{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent);box-shadow:0 0 8px var(--accent);transition:width 0.4s}
+.rb-pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);flex-shrink:0;animation:rbpulse 1.6s ease-in-out infinite}
+@keyframes rbpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.78)}}
+.rb-info{flex:1;min-width:0}
+.rb-name{font-size:13px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-sub{font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+.rb-time{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;color:var(--accent);flex-shrink:0;letter-spacing:0.02em}
+.rb-chev{width:16px;height:16px;stroke-width:2.5;color:var(--muted);flex-shrink:0}
+body.has-resume{padding-bottom:calc(166px + env(safe-area-inset-bottom,0px))}
+@media(prefers-reduced-motion:reduce){.rb-pulse{animation:none}}
+
+/* technical bottom nav — flat bar, hairline top rule, mono labels */
+.nav{
+  display:flex;
+  background:var(--surface);border-top:1.5px solid var(--accent);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 0;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:400;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer}
+.nb:last-child{border-right:none}
+.nb.on{color:var(--accent)}
+.nb.on::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.nb:active{color:var(--accent)}
+.nb{position:relative}
+.nb svg{width:20px;height:20px;stroke-width:1.5}
+
+.pg{display:none;padding-top:18px}.pg.on{display:block}
+
+/* header — drafting title block */
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;padding:8px 16px 14px;border-bottom:1px solid var(--border);margin-bottom:18px;position:relative}
+.hdr::before{content:'';position:absolute;bottom:-1px;left:16px;width:44px;height:2px;background:var(--accent)}
+.htitle{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;letter-spacing:-0.02em;text-transform:lowercase}
+.htitle::before{content:'// ';color:var(--accent);font-weight:400}
+
+/* cards — sharp, hairline, cornered with a tick */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 12px;overflow:hidden;position:relative;box-shadow:var(--card-shadow)}
+.row{display:flex;align-items:center;gap:13px;padding:14px 16px;border-bottom:1px solid var(--border);transition:background 0.12s}
 .row:last-child{border-bottom:none}
-.ri{flex:1;min-width:0}.rn{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rm{font-size:12px;color:var(--muted);margin-top:2px}
-.pill{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);display:inline-block}
-.btn{padding:7px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;white-space:nowrap}
-.btn.ac{background:var(--accent);color:var(--accent-text);border-color:var(--accent);font-weight:500}
-.btn.sm{padding:5px 11px;font-size:12px;border-radius:8px}
-.btn.ghost{background:none;border-color:transparent;color:var(--muted)}
-.btn.red{color:var(--danger);background:none;border-color:transparent}
-.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;padding:15px 16px;display:flex;align-items:center;gap:10px;cursor:pointer}
-.rc:active{background:var(--surface2)}
-.search-wrap{padding:0 16px 10px}
-.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none}
-.search-input:focus{border-color:var(--accent)}
-.chips{display:flex;gap:6px;padding:0 16px 10px;overflow-x:auto;scrollbar-width:none}
+.ri{flex:1;min-width:0}
+.rn{font-size:15px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:11px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;letter-spacing:0.03em}
+.pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:2px;background:var(--accent-dim);color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+
+/* buttons — flat, bracketed, technical */
+.btn{
+  font-family:'JetBrains Mono',monospace;font-weight:500;font-size:13px;padding:11px 18px;border-radius:var(--r);cursor:pointer;
+  background:var(--surface2);border:1px solid var(--border);color:var(--text);position:relative;transition:all 0.12s;letter-spacing:0.02em;
+}
+@media(hover:hover){.btn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}}
+.btn:active{transform:translateY(1px)}
+.btn.ac{background:linear-gradient(180deg,var(--accent2),var(--accent));color:var(--accent-text);border-color:var(--accent);box-shadow:0 2px 10px -4px var(--accent)}
+.btn.ac:active{background:var(--accent2)}
+.btn.sm{padding:7px 13px;font-size:12px}
+.btn.ghost{background:none;border-color:var(--border);color:var(--muted)}
+.btn.red{background:none;border-color:var(--danger);color:var(--danger)}
+.btn.addbtn{width:34px;height:34px;padding:0;font-size:19px;line-height:1;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+
+/* routine cards — drafting blocks with coordinate corner */
+.rc{
+  display:flex;align-items:center;gap:12px;padding:15px;margin:0 16px 10px;border-radius:var(--r);cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);position:relative;transition:border-color 0.12s;
+}
+.rc{box-shadow:var(--card-shadow)}
+.rc::before{content:'';position:absolute;top:8px;right:8px;width:6px;height:6px;border-top:1.5px solid var(--accent);border-right:1.5px solid var(--accent)}
+@media(hover:hover){.rc:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}}
+.rc:active{border-color:var(--accent)}
+
+.search-wrap{padding:0 16px 12px}
+.search-input{width:100%;padding:12px 15px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px}
+.search-input:focus{outline:none;border-color:var(--accent)}
+.search-input::placeholder{color:var(--muted)}
+
+.chips{display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0}
-.chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
-.qi{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border)}
-.qi:last-child{border-bottom:none}
-.dh{color:var(--border);font-size:22px;flex-shrink:0;cursor:grab;user-select:none}
-.xbtn{background:none;border:none;color:var(--muted);font-size:18px;padding:4px;cursor:pointer;flex-shrink:0}
-.stepper{display:flex;align-items:center;flex-shrink:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.stepper button{width:34px;height:34px;background:var(--surface2);border:none;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.stepper button:active{background:var(--border)}
-.stepper span{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);min-width:36px;text-align:center;background:var(--surface)}
-.img-box{width:100%;height:200px;background:var(--surface2);position:relative;overflow:hidden;flex-shrink:0}
-.img-box img{width:100%;height:100%;object-fit:cover;display:block}
-.img-box .iph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:13px;cursor:pointer}
-.img-change{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:11px;padding:4px 9px;cursor:pointer;font-family:'DM Sans',sans-serif}
-.timer-body{padding:14px 20px 0;display:flex;flex-direction:column;align-items:center}
-.tlabel{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
-.tname{font-family:'DM Mono',monospace;font-size:21px;font-weight:300;letter-spacing:-0.02em;line-height:1.25;text-align:center;margin-top:1px}
-.cue-box{width:100%;margin-top:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px 14px;font-size:13px;color:var(--muted);line-height:1.55;text-align:center}
-.phase-banner{width:100%;margin-top:6px;border-radius:10px;padding:7px 12px;text-align:center;font-size:13px;font-weight:500}
-.phase-banner.prep{background:rgba(255,200,50,0.12);color:#ffc832;border:1px solid rgba(255,200,50,0.25)}
-.phase-banner.side{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,240,96,0.3)}
-.phase-banner.pnf{background:rgba(120,180,255,0.12);color:#78b4ff;border:1px solid rgba(120,180,255,0.3)}
-.timer-row{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:16px;margin-bottom:8px}
-.ring-wrap{position:relative;width:120px;height:120px;flex-shrink:0;cursor:pointer;touch-action:none}
-.ring-wrap svg{transform:rotate(-90deg);width:120px;height:120px}
-.tnum{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'DM Mono',monospace;font-size:32px;font-weight:300;letter-spacing:-0.04em;pointer-events:none}
-.breath-ring{position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;background:var(--accent-dim);transform:translate(-50%,-50%);pointer-events:none;opacity:0}
-.tctrl{display:flex;flex-direction:column;gap:8px;align-items:center}
-.pbtn{width:54px;height:54px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pbtn:active{transform:scale(0.93)}
-.pbtn svg{width:20px;height:20px;fill:var(--accent-text);stroke:none;margin-left:3px}
-.pbtn.playing svg{margin-left:0}
-.skip-row{display:flex;gap:8px}
-.sbtn{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sbtn:active{background:var(--surface2)}
-.sbtn svg{width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
-.progbar{height:4px;background:var(--border);border-radius:2px;margin:6px 16px 0;overflow:hidden}
-.progbar-fill{height:100%;background:var(--accent);transition:width 0.5s}
-.plist{padding:16px 20px 24px;margin-top:12px}
-.pl-row{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:var(--muted)}
-.pl-row.cur{color:var(--text);font-weight:500}
-.pl-row.done{opacity:0.3;text-decoration:line-through}
-.pl-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0}
-.pl-row.done .pl-dot{background:#4a7c22}.pl-row.cur .pl-dot{background:var(--accent)}
-.pl-dur{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px}
-.done-pg{text-align:center;padding:60px 24px}
-.done-pg .big{font-size:60px;margin-bottom:12px}
-.done-pg h2{font-family:'DM Mono',monospace;font-size:26px;font-weight:300;margin-bottom:8px}
-.done-pg p{color:var(--muted);font-size:14px;margin-bottom:20px}
-.thumb{width:40px;height:40px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--surface2)}
-.thumb-ph{width:40px;height:40px;border-radius:8px;background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--border);font-size:18px;cursor:pointer}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;align-items:flex-end;justify-content:center}
-.overlay.on{display:flex}
-.sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0));width:100%;max-width:480px;max-height:85vh;overflow-y:auto}
-.fl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;display:block;margin-top:12px}
-.fl:first-child{margin-top:0}
-.fi{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;margin-bottom:4px}
-.fi:focus{border-color:var(--accent)}
-select.fi{appearance:none}textarea.fi{resize:none}
-.srow{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border)}
-.srow:last-child{border-bottom:none}
-.slbl{font-size:14px}.ssub{font-size:12px;color:var(--muted);margin-top:2px}
-.empty{text-align:center;padding:48px 24px;color:var(--muted);font-size:14px;line-height:1.7}
-.slabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:0 20px 8px;font-family:'DM Mono',monospace;display:block}
-.qdot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.tog{position:relative;width:44px;height:26px;flex-shrink:0}
-.tog input{opacity:0;width:0;height:0;position:absolute}
-.tog-sl{position:absolute;inset:0;background:var(--border);border-radius:13px;cursor:pointer;transition:0.2s}
-.tog input:checked+.tog-sl{background:var(--accent)}
-.tog-sl:before{content:'';position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:0.2s}
-.tog input:checked+.tog-sl:before{transform:translateX(18px)}
-.build-stretch{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.build-stretch:last-child{border-bottom:none}
-.check-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.check-circle.on{background:var(--accent);border-color:var(--accent)}
-.check-circle.on::after{content:'✓';font-size:12px;color:var(--accent-text);font-weight:700}
-.sec-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;padding:8px 16px 6px;font-family:'DM Mono',monospace;display:block}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 10px}
-.stat-box .stat-num{font-size:24px}
-.stat-box{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
-.stat-num{font-family:'DM Mono',monospace;font-size:28px;font-weight:300;color:var(--accent)}
-.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px}
-.guide-section{margin-bottom:8px}
-.guide-q{padding:14px 16px;font-size:15px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.guide-a{padding:0 16px 14px;font-size:14px;color:var(--muted);line-height:1.6;display:none}
-.guide-a.open{display:block}
-.cal-grid{display:flex;flex-wrap:wrap;gap:4px;padding:12px 16px}
-.cal-day{width:13px;height:13px;border-radius:3px;background:var(--surface2)}
-.cal-day.done{background:var(--accent)}
-/* theme picker */
-.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.theme-cat{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;font-family:'DM Mono',monospace;margin:14px 0 8px;grid-column:1/-1}
-.theme-cat:first-child{margin-top:0}
-.theme-sw{aspect-ratio:1;border-radius:10px;border:2px solid transparent;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:5px}
-.theme-sw.on{border-color:var(--accent)}
-.theme-sw .dot{width:14px;height:14px;border-radius:50%}
-.theme-sw .nm{position:absolute;top:4px;left:5px;font-size:8px;font-family:'DM Mono',monospace;opacity:0.85}
-/* expandable cue */
-.cue-box.expandable{cursor:pointer}
-.cue-full{margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-size:12px;text-align:left;display:none}
-.cue-full.open{display:block}
-.cue-hint{font-size:9px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace}
-/* type label */
-.type-pill{font-size:9px;font-family:'DM Mono',monospace;letter-spacing:0.05em;text-transform:uppercase;padding:1px 6px;border-radius:20px;background:var(--accent-dim);color:var(--accent);display:inline-block}
-/* image enlarge */
-.img-zoom-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:300;align-items:center;justify-content:center;padding:20px}
-.img-zoom-overlay.on{display:flex}
-.img-zoom-overlay img{max-width:100%;max-height:100%;border-radius:12px}
-/* info popup */
-.info-pop .ip-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
-.info-pop .ip-row:last-child{border-bottom:none}
-.info-pop .ip-k{color:var(--muted);min-width:80px}
-/* sound option row */
-.snd-opt{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}
-.snd-opt:last-child{border-bottom:none}
-.snd-play{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--accent)}
-.snd-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-left:auto}
-.snd-check.on{background:var(--accent);border-color:var(--accent)}
-/* roomier two-line setup row */
+.chip{
+  flex-shrink:0;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;padding:6px 13px;border-radius:var(--r);cursor:pointer;white-space:nowrap;
+  background:var(--surface);border:1px solid var(--border);color:var(--muted);text-transform:lowercase;letter-spacing:0.03em;transition:all 0.12s;
+}
+.chip.on{background:linear-gradient(180deg,var(--accent2),var(--accent));color:var(--accent-text);border-color:var(--accent);box-shadow:0 2px 8px -3px var(--accent)}
+
+/* setup rows */
 .qi2{padding:14px 16px;border-bottom:1px solid var(--border)}
 .qi2:last-child{border-bottom:none}
-.qi2-top{display:flex;align-items:center;gap:13px}
+.qi2-top{display:flex;align-items:center;gap:12px}
 .qi2-top .rn{font-size:15px;white-space:normal;line-height:1.3;font-weight:500}
-.qi2-bot{display:flex;align-items:center;gap:10px;margin-top:10px;padding-left:47px}
+.qi2-bot{display:flex;align-items:center;gap:10px;margin-top:10px;padding-left:46px;justify-content:space-between}
+.qi2-bot .stepper{flex-shrink:0}
 .qi2 .rn{white-space:normal}
-.qi2 .thumb,.qi2 .thumb-ph{width:44px;height:44px;border-radius:10px}
-.qi2 .dh{font-size:18px;opacity:0.5}
-.qi2 .rm{margin-top:3px}
-/* timer header */
-.timer-top{display:flex;align-items:center;gap:12px;padding:10px 16px 4px}
-.timer-end{display:flex;align-items:center;gap:4px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;padding:4px 2px;flex-shrink:0}
-.timer-end svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
+.dh{font-family:'JetBrains Mono',monospace;font-size:15px;opacity:0.4;cursor:grab}
+.xbtn{background:none;border:none;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:15px;cursor:pointer;padding:4px 8px}
+.xbtn:active{color:var(--danger)}
+
+/* steppers — bracketed mono */
+.stepper{display:flex;align-items:center;flex-shrink:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:var(--surface2)}
+.stepper button{width:38px;height:36px;border:none;background:none;color:var(--accent);font-size:18px;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:background 0.1s}
+.stepper button:active{background:var(--accent-dim)}
+.stepper span{min-width:46px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;font-variant-numeric:tabular-nums;border-left:1px solid var(--border);border-right:1px solid var(--border);height:36px;display:flex;align-items:center;justify-content:center}
+
+/* thumbnails — sharp with corner tick */
+.thumb,.thumb-ph{width:46px;height:46px;border-radius:var(--r);object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+.thumb-ph{display:flex;align-items:center;justify-content:center;background:var(--surface2);color:transparent;position:relative;background-image:linear-gradient(var(--border),var(--border)),linear-gradient(var(--border),var(--border));background-size:11px 1px,1px 11px;background-position:center,center;background-repeat:no-repeat}
+.qi2 .thumb,.qi2 .thumb-ph{width:44px;height:44px}
+
+/* ===== TIMER SCREEN — instrument readout ===== */
+.timer-top{display:flex;align-items:center;gap:12px;padding:10px 16px 6px}
+.timer-end{display:flex;align-items:center;gap:5px;background:none;border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;padding:6px 11px;border-radius:var(--r);flex-shrink:0}
+.timer-end svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round}
 .timer-top .progbar{flex:1;margin:0}
-.timer-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;min-width:30px;text-align:right}
-.snd-chip{font-size:12px;font-family:'DM Sans',sans-serif;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;transition:all 0.15s}
-.snd-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
-/* settings menu */
-.set-menu-row{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s}
+.timer-count{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;color:var(--accent);flex-shrink:0;min-width:38px;text-align:right;letter-spacing:0.05em}
+
+.img-box{width:calc(100% - 32px);margin:6px 16px 0;height:200px;border-radius:var(--r);background:var(--surface2);position:relative;overflow:hidden;border:1px solid var(--border)}
+.img-box::before{content:'';position:absolute;top:6px;left:6px;width:7px;height:7px;border-top:1.5px solid var(--accent);border-left:1.5px solid var(--accent);z-index:2}
+.img-box::after{content:'';position:absolute;bottom:6px;right:6px;width:7px;height:7px;border-bottom:1.5px solid var(--accent);border-right:1.5px solid var(--accent);z-index:2}
+.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.img-box .iph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'JetBrains Mono',monospace}
+.img-change{position:absolute;bottom:9px;right:9px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.05em;padding:6px 11px;border-radius:var(--r);cursor:pointer;z-index:3}
+
+.timer-body{padding:16px 16px 0;display:flex;flex-direction:column;align-items:center}
+.tlabel{font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:400;letter-spacing:0.16em;color:var(--accent);text-transform:uppercase;margin-bottom:5px}
+.tname{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;letter-spacing:-0.02em;line-height:1.25;text-align:center}
+.cue-box{width:100%;margin-top:14px;background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:var(--r);padding:12px 15px;font-size:13px;color:var(--text);line-height:1.55;text-align:left}
+.cue-box.expandable{cursor:pointer}
+.cue-full{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;text-align:left;display:none;color:var(--muted)}
+.cue-full.open{display:block}
+.cue-hint{font-size:10px;color:var(--accent);margin-top:5px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.05em}
+
+.phase-banner{width:100%;margin-top:12px;padding:11px;border-radius:var(--r);text-align:center;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:0.04em;border:1px solid}
+.phase-banner.prep{background:var(--accent-dim);color:var(--accent);border-color:var(--accent)}
+.phase-banner.side{background:rgba(255,160,60,0.12);color:#ffa83c;border-color:#ffa83c}
+.phase-banner.pnf{background:rgba(150,120,255,0.12);color:#9d8cff;border-color:#9d8cff}
+
+.timer-row{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:18px;margin-bottom:8px}
+.ring-wrap{position:relative;width:130px;height:130px;flex-shrink:0;touch-action:none}
+.ring-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+.tnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:700;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:var(--text)}
+.breath-ring{position:absolute;inset:14px;border-radius:50%;border:1px solid var(--accent-dim);opacity:0;pointer-events:none}
+.breath-ring.breathing{animation:breathe 8s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(0.82);opacity:0.2}50%{transform:scale(1.12);opacity:0.55}}
+
+.tctrl{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pbtn{width:66px;height:66px;border-radius:var(--r);border:1.5px solid var(--accent);cursor:pointer;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--accent2),var(--accent));position:relative;box-shadow:0 6px 18px -6px var(--accent)}
+.pbtn:active{background:var(--accent2);transform:translateY(1px);box-shadow:0 3px 10px -5px var(--accent)}
+.pbtn svg{width:26px;height:26px;fill:var(--accent-text)}
+.skip-row{display:flex;gap:8px}
+.sbtn{width:40px;height:40px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sbtn:active{background:var(--accent-dim);border-color:var(--accent)}
+.sbtn svg{width:16px;height:16px;fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.progbar{height:6px;background:var(--surface2);border-radius:0;margin:6px 16px 0;overflow:hidden;border:1px solid var(--border)}
+.progbar-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.5s;box-shadow:0 0 8px -1px var(--accent)}
+
+.plist{padding:18px 16px 24px;margin-top:18px;border-top:1px solid var(--border)}
+.pl-row{display:flex;align-items:center;gap:11px;padding:8px 0;font-size:13px;color:var(--muted);font-family:'Archivo',sans-serif}
+.pl-row.cur{color:var(--text);font-weight:600}
+.pl-row.done{opacity:0.45}
+.pl-dot{width:8px;height:8px;border-radius:0;background:var(--border);flex-shrink:0;transform:rotate(45deg)}
+.pl-row.cur .pl-dot{background:var(--accent)}
+.pl-row.done .pl-dot{background:var(--accent);opacity:0.5}
+.pl-dur{margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px}
+
+.done-pg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center}
+.done-pg .big{width:84px;height:84px;border-radius:var(--r);background:linear-gradient(180deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--accent-text);margin-bottom:22px;box-shadow:0 8px 28px -8px var(--accent)}
+.done-pg h2{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;margin-bottom:8px;text-transform:lowercase}
+.done-pg p{color:var(--muted);margin-bottom:24px;font-family:'JetBrains Mono',monospace;font-size:13px}
+.done-pg .btn{min-width:180px}
+
+/* modals — technical sheet */
+.overlay{display:none;position:fixed;inset:0;background:rgba(5,8,20,0.7);z-index:200;align-items:flex-end;justify-content:center}
+.overlay.on{display:flex}
+.sheet{background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px));width:100%;max-width:480px;max-height:85vh;overflow-y:auto;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.5)}
+.sheet::before{content:'';display:block;width:34px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 18px}
+
+/* forms */
+.fl{display:block;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 6px}
+.fl:first-child{margin-top:0}
+.fi{width:100%;padding:12px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Archivo',sans-serif;font-size:15px}
+.fi:focus{outline:none;border-color:var(--accent)}
+
+.srow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid var(--border)}
+.srow:last-child{border-bottom:none}
+.slbl{font-size:14px;font-weight:500}
+.ssub{font-size:11px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace;letter-spacing:0.02em}
+.empty{text-align:center;color:var(--muted);padding:40px 20px;line-height:1.7;font-family:'JetBrains Mono',monospace;font-size:13px}
+.slabel{display:block;padding:0 16px 10px;font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;color:var(--muted)}
+
+/* toggles — square technical switch */
+.tog{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tog-sl{position:absolute;cursor:pointer;inset:0;background:var(--surface2);border:1px solid var(--border);border-radius:2px;transition:0.2s}
+.tog-sl:before{content:'';position:absolute;height:18px;width:18px;left:3px;bottom:2.5px;background:var(--muted);border-radius:1px;transition:0.2s}
+.tog input:checked+.tog-sl{background:var(--accent-dim);border-color:var(--accent)}
+.tog input:checked+.tog-sl:before{transform:translateX(22px);background:var(--accent)}
+
+.build-stretch{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.build-stretch:last-child{border-bottom:none}
+.check-circle{width:24px;height:24px;border-radius:2px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:0.12s}
+.check-circle.on{background:var(--accent);border-color:var(--accent)}
+.check-circle.on::after{content:'✓';font-size:13px;color:var(--accent-text);font-weight:700}
+
+.sec-lbl{display:block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;padding:0 16px;margin:18px 0 10px;position:relative}
+.sec-lbl::before{content:'— ';color:var(--accent)}
+
+/* progress — data readout */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px 10px}
+.stat-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:left;position:relative;box-shadow:var(--card-shadow)}
+.stat-box::before{content:'';position:absolute;top:6px;right:6px;width:5px;height:5px;border-top:1.5px solid var(--accent);border-right:1.5px solid var(--accent)}
+.stat-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:31px;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.08em}
+
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:14px}
+.cal-day{aspect-ratio:1;border-radius:1px;background:var(--surface2);border:1px solid var(--border)}
+.cal-day.done{background:var(--accent);border-color:var(--accent)}
+
+/* theme picker */
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.theme-cat{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin:14px 0 8px;grid-column:1/-1}
+.theme-cat::before{content:'— ';color:var(--accent)}
+.theme-cat:first-child{margin-top:0}
+.theme-sw{aspect-ratio:1.4;border-radius:var(--r);border:1px solid var(--border);cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:7px}
+.theme-sw.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.theme-sw .dot{width:14px;height:14px;border-radius:1px}
+.theme-sw .nm{position:absolute;top:6px;left:7px;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:9px;text-transform:uppercase;letter-spacing:0.04em}
+
+/* misc */
+.type-pill{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;padding:1px 6px;border-radius:2px;background:var(--accent-dim);color:var(--accent);display:inline-block;border:1px solid var(--accent-dim)}
+.bilat{display:inline-flex;align-items:center;justify-content:center;height:16px;padding:0 4px;border-radius:2px;border:1px solid var(--border);background:var(--surface2);color:var(--accent);vertical-align:middle}
+.bilat svg{display:block;width:13px;height:13px}
+.img-zoom-overlay{display:none;position:fixed;inset:0;background:rgba(5,8,20,0.85);z-index:300;align-items:center;justify-content:center;padding:20px}
+.img-zoom-overlay.on{display:flex}
+.img-zoom-overlay img{max-width:100%;max-height:100%;border-radius:var(--r);border:1px solid var(--accent)}
+.info-pop .ip-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.info-pop .ip-row:last-child{border-bottom:none}
+.info-pop .ip-k{color:var(--muted);min-width:80px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.05em}
+.snd-chip{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:12px;padding:6px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;text-transform:lowercase}
+.snd-chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
+.set-menu-row{display:flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:1px solid var(--border);cursor:pointer}
 .set-menu-row:last-child{border-bottom:none}
 .set-menu-row:active{background:var(--surface2)}
-.set-arrow{color:var(--muted);font-size:22px;font-weight:300}
+.set-arrow{color:var(--accent);font-size:18px;font-family:'JetBrains Mono',monospace}
 .settings-sub{display:none}
 .settings-sub.on{display:block}
-.sub-back{padding:6px 16px 14px;color:var(--accent);font-size:14px;cursor:pointer;display:inline-block}
+.sub-back{padding:6px 16px 14px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:400;font-size:13px;cursor:pointer;display:inline-block;text-transform:lowercase}
 #settings-menu.hide{display:none}
-.pnf-chip{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:0.04em;padding:6px 11px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer}
-.pnf-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.pnf-chip{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:11px;letter-spacing:0.02em;padding:6px 11px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;text-transform:uppercase}
+.pnf-chip.on{background:rgba(150,120,255,0.15);border-color:#9d8cff;color:#9d8cff}
+
+/* ── refinement layer ── */
+.search-input:focus,.fi:focus{box-shadow:0 0 0 3px var(--accent-dim)}
+.cue-box,.phase-banner{box-shadow:var(--card-shadow)}
+.sbtn,.set-menu-row,.chip,.check-circle{transition:all 0.12s}
+.btn,.chip,.snd-chip,.pnf-chip,.sbtn,.addbtn{-webkit-user-select:none;user-select:none}
+.empty{letter-spacing:0.02em}
+.sec-lbl::before{content:'';display:inline-block;width:14px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px;margin-bottom:2px}
+.theme-cat::before{content:'';display:inline-block;width:12px;height:2px;background:var(--accent);vertical-align:middle;margin-right:7px}
+.set-arrow{transition:transform 0.12s}
+@media(hover:hover){.set-menu-row:hover .set-arrow{transform:translateX(3px)}}
+.timer-end{transition:all 0.12s}
+@media(hover:hover){.timer-end:hover{border-color:var(--accent);color:var(--accent)}}
 </style>
 </head>
 <body>
@@ -217,14 +330,16 @@ select.fi{appearance:none}textarea.fi{resize:none}
   <div id="routine-list"></div>
 </div>
 
-<!-- SESSION SETUP (replaces queue) -->
+<!-- SESSION SETUP / OPEN ROUTINE -->
 <div id="pg-setup" class="pg">
-  <div class="hdr"><span class="htitle" id="setup-title">session</span>
-    <button class="btn sm ac" onclick="startGo()">go →</button>
+  <div class="hdr" style="align-items:center">
+    <span class="htitle" id="setup-title" style="flex:1;min-width:0;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">session</span>
+    <button class="btn sm" id="setup-opts" style="flex-shrink:0;margin-left:12px;display:none" onclick="openRoutineOptions()" title="routine options">⋯</button>
+    <button class="btn sm ac" style="flex-shrink:0;margin-left:8px" onclick="startGo()">go →</button>
   </div>
   <span class="slabel" id="setup-count">0 stretches</span>
   <div id="setup-list" class="card"></div>
-  <div style="padding:8px 16px"><button class="btn" style="width:100%" onclick="show('library')">+ add stretches</button></div>
+  <div style="padding:8px 16px"><button class="btn" style="width:100%" onclick="addToSessionModal()">+ add stretches</button></div>
   <div id="setup-save-slot" style="padding:0 16px"><button class="btn" style="width:100%" onclick="saveSetupAsRoutine()">save as routine</button></div>
 </div>
 
@@ -293,10 +408,6 @@ select.fi{appearance:none}textarea.fi{resize:none}
       <div class="slbl" style="margin-bottom:4px">Theme</div>
       <div class="ssub" style="margin-bottom:12px" id="theme-current">Dark</div>
       <div id="theme-grid"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
-        <div><div class="slbl">Show equipment stretches</div><div class="ssub">Foam roller, bands, etc. (off = bodyweight only)</div></div>
-        <label class="tog"><input type="checkbox" id="tog-equip" onchange="saveSetting('showEquip',this.checked);renderLib()"><span class="tog-sl"></span></label>
-      </div>
     </div>
   </div>
 
@@ -365,18 +476,25 @@ select.fi{appearance:none}textarea.fi{resize:none}
 </div>
 
 <!-- NAV -->
-<nav class="nav">
-  <button class="nb on" data-p="routines" onclick="show('routines')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>routines</button>
-  <button class="nb" data-p="library" onclick="show('library')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>library</button>
-  <button class="nb" data-p="go" onclick="quickStart()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>go</button>
-  <button class="nb" data-p="progress" onclick="show('progress')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>progress</button>
-  <button class="nb" data-p="settings" onclick="show('settings')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>settings</button>
-</nav>
+<div class="dock">
+  <div id="resume-bar" class="resume-bar" onclick="show('go');renderTimer()">
+    <div class="rb-prog" id="rb-prog"></div>
+    <div class="rb-pulse"></div>
+    <div class="rb-info"><div class="rb-name" id="rb-name">—</div><div class="rb-sub" id="rb-sub">tap to resume</div></div>
+    <div class="rb-time" id="rb-time"></div>
+    <svg class="rb-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 6 15 12 9 18"/></svg>
+  </div>
+  <nav class="nav">
+    <button class="nb on" data-p="routines" onclick="show('routines')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>routines</button>
+    <button class="nb" data-p="library" onclick="show('library')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>library</button>
+    <button class="nb" data-p="progress" onclick="show('progress')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>progress</button>
+    <button class="nb" data-p="settings" onclick="show('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>settings</button>
+  </nav>
+</div>
 
 <div id="overlay" class="overlay" onclick="maybeClose(event)"><div class="sheet" id="sheet"></div></div>
 <input type="file" id="img-input" accept="image/*" style="display:none" onchange="onImgFile(event)">
@@ -384,26 +502,29 @@ select.fi{appearance:none}textarea.fi{resize:none}
 <input type="file" id="import-input" accept="application/json,.json" style="display:none" onchange="onImportFile(event)">
 
 <script>
-// ~150 stretch library
+// stretch library (270 built-ins) — categories assigned via CAT map below
+const CATS=['Neck','Chest','Back','Core','Biceps','Triceps','Forearms','Wrists','Glutes','Hips','Hamstrings','Quads','Calves','Ankles','Twists','Mobility','Dynamic','Balance','Floss','Restorative'];
+const CAT={"neck-side":"Neck","neck-flexor":"Neck","neck-extensor":"Neck","chin-to-chest":"Neck","chin-tuck":"Neck","rotating-neck":"Neck","neck-circle":"Neck","seated-neck-side":"Neck","seated-sky-look":"Neck","ceiling-look":"Neck","forward-flexion-neck":"Neck","front-back-neck":"Neck","side-push-neck":"Neck","seated-neck-tap":"Neck","kneeling-neck":"Neck","bent-arm-chest":"Chest","above-head-chest":"Chest","humble-warrior":"Chest","fish":"Chest","crab":"Chest","kneeling-chest":"Chest","seated-chest-clam":"Chest","chest-front-shoulder":"Chest","behind-head-chest":"Chest","back-pec":"Chest","standing-one-arm-chest":"Chest","reverse-chest":"Chest","superman-chest":"Chest","reaching-upper-back":"Back","cat-pose":"Back","cow-stretch":"Back","cobra":"Back","sphinx":"Back","upward-dog":"Back","puppy-pose":"Back","knee-to-chest":"Back","lying-knee-to-chest":"Back","double-knee-to-chest":"Back","lying-lower-back":"Back","seated-lower-back":"Back","middle-back":"Back","upper-back":"Back","back-stretch":"Back","bow-pose":"Back","camel":"Back","bridge":"Back","wheel":"Back","plow":"Back","spine-stretch-forward":"Back","kneeling-lat":"Back","one-arm-lat":"Back","side-lat":"Back","dead-hang":"Back","wrist-flexor":"Wrists","wrist-extensor":"Wrists","wrist-circles":"Wrists","kneeling-wrist-flexor":"Wrists","reverse-prayer":"Wrists","finger-extension":"Forearms","finger-flexor":"Forearms","thumb-stretch":"Forearms","forearm-pronator":"Forearms","elbow-flexor":"Biceps","elbows-back":"Biceps","overhead-triceps":"Triceps","triceps-stretch":"Triceps","cow-face":"Triceps","pigeon":"Glutes","half-pigeon":"Glutes","double-pigeon":"Glutes","fire-log":"Glutes","seated-glute":"Glutes","lying-glute":"Glutes","seated-piriformis":"Glutes","figure-four":"Glutes","pretzel":"Glutes","standing-knee-to-chest":"Glutes","butterfly":"Hips","frog":"Hips","happy-baby":"Hips","low-lunge":"Hips","high-lunge":"Hips","kneeling-hip-flexor":"Hips","standing-hip-flexor":"Hips","lizard":"Hips","garland":"Hips","90-90":"Hips","seated-groin":"Hips","adductor":"Hips","side-lunge-adductor":"Hips","sitting-wide-adductor":"Hips","runners-stretch":"Hips","warrior-1":"Hips","warrior-2":"Hips","lotus":"Hips","standing-iliotibial":"Hips","standing-leg-cross-abductor":"Hips","standing-outer-hip":"Hips","lying-hip-flexor":"Hips","kneeling-iliopsoas":"Hips","crossover-kneeling-hip-flexor":"Hips","hip-extension":"Hips","hip-external-rotator":"Hips","seated-hip-external-rotation":"Hips","lying-abductor":"Hips","recumbent-hip":"Hips","side-split":"Hips","split-sprinter-lunge":"Hips","lunge-stretch":"Hips","kneeling-sartorius":"Hips","thread-the-needle":"Twists","seated-back-twist":"Twists","supine-twist":"Twists","lying-knee-roll":"Twists","standing-back-rotation":"Twists","kneeling-back-rotation":"Twists","rotating-stomach":"Twists","seated-rotation":"Twists","standing-abs-rotation":"Twists","revolved-triangle":"Twists","revolved-side-angle":"Twists","open-book":"Twists","kneeling-tspine":"Twists","seated-spinal-twist":"Twists","lying-crossover":"Twists","squat-mobility-twist":"Twists","twisted-leg-lunge":"Twists","spine-twist":"Twists","side-twist":"Twists","big-turn-back":"Twists","lying-upper-body-rotation":"Twists","standing-low-body-rotation":"Twists","standing-upper-body-rotation":"Twists","twist-step":"Twists","bent-over-twist":"Twists","standing-wring-towel":"Twists","windshield-wipers":"Twists","windmills":"Twists","scorpion":"Twists","standing-hamstring":"Hamstrings","standing-high-hamstring":"Hamstrings","seated-single-hamstring":"Hamstrings","leg-up-hamstring":"Hamstrings","basic-toe-touch":"Hamstrings","spread-leg-fold":"Hamstrings","wide-leg-fold":"Hamstrings","stand-spread-fold":"Hamstrings","downward-dog":"Hamstrings","standing-forward-bend":"Hamstrings","hands-to-feet":"Hamstrings","pyramid":"Hamstrings","front-hamstring":"Hamstrings","standing-hamstrings-back":"Hamstrings","standing-quad":"Quads","standing-balance-quad":"Quads","lying-quad":"Quads","seated-quad":"Quads","all-fours-quad":"Quads","couch-stretch":"Quads","chair-pose":"Quads","hero":"Quads","calf-wall":"Calves","calves-stretch":"Calves","standing-gastroc":"Calves","lunging-calf":"Calves","standing-achilles":"Calves","seated-calf":"Calves","seated-straight-calf":"Calves","heel-press":"Calves","standing-toe-up-calf":"Calves","lying-calf":"Calves","frog-rock":"Ankles","standing-shin":"Ankles","standing-tibialis":"Ankles","ankle-circles":"Ankles","feet-ankles-rotation":"Ankles","seated-ankle":"Ankles","plantar-flexion":"Ankles","peroneals":"Ankles","posterior-tibialis":"Ankles","standing-side-bend":"Core","standing-lateral":"Core","standing-side-stretch":"Core","abdominal-stretch":"Core","triangle":"Core","extended-side-angle":"Core","reverse-warrior":"Core","gate-pose":"Core","boat-pose":"Core","crescent-moon":"Core","standing-half-bend":"Core","standing-lateral-side":"Core","standing-two-side-bend":"Core","floss-sciatic":"Floss","floss-median":"Floss","floss-ulnar":"Floss","floss-radial":"Floss","floss-femoral":"Floss","child-pose":"Restorative","legs-up-wall":"Restorative","corpse":"Restorative","crocodile":"Restorative","animal-resting":"Restorative","arm-circles":"Dynamic","standing-arms-circling":"Dynamic","leg-swings-front":"Dynamic","leg-swings-side":"Dynamic","worlds-greatest":"Dynamic","toy-soldier":"Dynamic","front-leg-kick":"Dynamic","inchworm":"Dynamic","rocker-open-legs":"Dynamic","side-kick":"Dynamic","leg-to-side":"Dynamic","single-straight-leg":"Dynamic","double-leg-stretch":"Dynamic","overhead-clap":"Dynamic","rollover":"Dynamic","half-sun-salutation":"Dynamic","standing-hip-openers":"Dynamic","elephant-walks":"Dynamic","butterfly-flaps":"Dynamic","rocking-frog":"Dynamic","cross-over-shoulder":"Mobility","reaching-up-shoulder":"Mobility","rear-deltoid":"Mobility","arm-up-rotator":"Mobility","reverse-shoulder":"Mobility","shoulder-circle":"Mobility","arm-crossover":"Mobility","cat-cow":"Mobility","child-to-cobra":"Mobility","deep-squat":"Mobility","dynamic-90-90":"Mobility","shin-box-switch":"Mobility","hip-circles":"Mobility","scapula-retraction":"Mobility","scapula-elevation":"Mobility","pelvic-tilt":"Mobility","standing-pelvic-tilt":"Mobility","cossack-squat":"Mobility","thoracic-bridge":"Mobility","flexion-extension-hip":"Mobility","half-seated-leg-circle":"Mobility","side-lying-leg-circle":"Mobility","lying-single-leg-circle":"Mobility","potty-squat":"Mobility","full-squat-mobility":"Mobility","external-shoulder-rotation":"Mobility","internal-shoulder-rotation":"Mobility","rotator-cuff":"Mobility","elbow-out-rotator":"Mobility","forearm-wall-slide":"Mobility","serratus-wall-slide":"Mobility","prayer-squat":"Mobility","dolphin":"Mobility","mountain-pose":"Mobility","lying-shoulder-sweep":"Mobility","standing-back-extension-flexion":"Mobility","seated-shoulder-flexor-depressor-retractor":"Mobility","scapular-pushups":"Mobility","bent-over-pendulum":"Mobility","warrior-3":"Balance","tree-pose":"Balance","eagle-pose":"Balance","dancer":"Balance","half-moon":"Balance","hawaiian-squat":"Balance","standing-figure-four":"Balance","standing-balance-outer-hip":"Balance","standing-balance-hip-rotation":"Balance"};
+function catOf(s){if(s.cat)return s.cat;if(CAT[s.id])return CAT[s.id];const t=(s.type||'').toLowerCase();if(t==='dynamic')return'Dynamic';if(t==='mobility')return'Mobility';if(t==='restorative')return'Restorative';if(t==='balance')return'Balance';return({neck:'Neck',chest:'Chest',back:'Back',hips:'Hips',legs:'Hamstrings',core:'Core',shoulders:'Mobility',glide:'Floss'})[s.area]||'Mobility';}
 const DEFAULTS=[
 {id:"neck-side",name:"Neck Side Stretch",area:"neck",type:"static",dur:30,bilateral:true,desc:"Sitting or standing tall, gently tilt your head so your ear moves toward your shoulder until you feel a stretch along the opposite side of the neck.",cues:"Keep both shoulders down. Let the head be heavy — no forcing."},
 {id:"neck-flexor",name:"Neck Flexor Stretch",area:"neck",type:"static",dur:25,bilateral:false,desc:"Gently tip the head back to look up toward the ceiling, feeling a stretch along the front of the neck.",cues:"Small range. Stop if you feel any pinching at the back of the neck."},
 {id:"neck-extensor",name:"Neck Extensor Stretch",area:"neck",type:"static",dur:30,bilateral:false,desc:"Drop the chin toward the chest until you feel a stretch along the back of the neck.",cues:"Let the weight of the head do the work. Relax the shoulders."},
-{id:"chin-to-chest",name:"Chin to Chest Stretch",area:"neck",type:"static",dur:30,bilateral:false,desc:"Slowly lower your chin to your chest and hold, lengthening the back of the neck.",cues:"Breathe and soften. No need to pull with the hands."},
+{id:"chin-to-chest",name:"Chin to Chest Stretch",area:"neck",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Slowly lower your chin to your chest and hold, lengthening the back of the neck.",cues:"Breathe and soften. No need to pull with the hands."},
 {id:"chin-tuck",name:"Chin Tuck",area:"neck",type:"static",dur:20,bilateral:false,desc:"Draw the chin straight back, making a \"double chin,\" lengthening the back of the neck.",cues:"Keep eyes level. A retraction, not a nod."},
 {id:"rotating-neck",name:"Rotating Neck Stretch",area:"neck",type:"static",dur:30,bilateral:true,desc:"Slowly turn the head to look over one shoulder, feeling a stretch along the side of the neck. Switch sides.",cues:"Move slowly and smoothly. Keep the shoulders square."},
 {id:"neck-circle",name:"Neck Circle Stretch",area:"neck",type:"mobility",dur:30,bilateral:false,desc:"Slowly circle the head, dropping the chin toward the chest and around. Avoid rolling the head far back.",cues:"Move through the front range only. Slow and controlled."},
 {id:"seated-neck-side",name:"Seated Neck Side Stretch",area:"neck",type:"static",dur:30,bilateral:true,desc:"Seated tall, tilt the ear toward the shoulder. Optionally rest the hand over the head for gentle added weight.",cues:"Anchor the opposite shoulder down. Gentle, no pulling."},
 {id:"cross-over-shoulder",name:"Cross Over Shoulder Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Bring one arm straight across the chest and use the other arm to gently draw it closer.",cues:"Keep the shoulder down, away from the ear. Switch sides."},
-{id:"overhead-triceps",name:"Overhead Triceps Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Reach one arm overhead and bend the elbow so the hand drops behind the neck. Gently press the elbow with the other hand.",cues:"Reach the hand down the spine. Keep the head tall."},
-{id:"triceps-stretch",name:"Triceps Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Bend one elbow overhead, hand reaching down the back, and gently ease the elbow back with the other hand.",cues:"Light pressure on the elbow. Breathe."},
-{id:"bent-arm-chest",name:"Bent Arm Chest Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Place a bent arm against a wall or doorframe at shoulder height and turn the body away to stretch the chest and front shoulder.",cues:"Forearm flat, rotate the chest open. Switch sides."},
+{id:"overhead-triceps",name:"Overhead Triceps Stretch",area:"shoulders",sub:"tricep",type:"static",dur:30,bilateral:true,desc:"Reach one arm overhead and bend the elbow so the hand drops behind the neck. Gently press the elbow with the other hand.",cues:"Reach the hand down the spine. Keep the head tall."},
+{id:"triceps-stretch",name:"Triceps Stretch",area:"shoulders",sub:"tricep",type:"static",dur:30,bilateral:true,desc:"Bend one elbow overhead, hand reaching down the back, and gently ease the elbow back with the other hand.",cues:"Light pressure on the elbow. Breathe."},
+{id:"bent-arm-chest",name:"Bent Arm Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:true,desc:"Place a bent arm against a wall or doorframe at shoulder height and turn the body away to stretch the chest and front shoulder.",cues:"Forearm flat, rotate the chest open. Switch sides."},
 {id:"reaching-up-shoulder",name:"Reaching Up Shoulder Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Interlace the fingers and press the palms up overhead, reaching tall through the arms.",cues:"Lengthen up, drop the shoulders away from the ears."},
 {id:"rear-deltoid",name:"Rear Deltoid Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Draw one straight arm across the body and hold it in with the opposite forearm to stretch the back of the shoulder.",cues:"Keep the arm straight and low across the chest."},
 {id:"arm-up-rotator",name:"Arm Up Rotator Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Raise the arm out to the side, elbow bent 90° with the hand pointing up, and gently rotate the forearm back.",cues:"Keep the elbow at shoulder height. Move slowly."},
 {id:"elbows-back",name:"Elbows Back Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Bend both elbows and draw them back behind you, squeezing the shoulder blades together to open the chest.",cues:"Lift the chest, pull the elbows toward each other."},
 {id:"reverse-shoulder",name:"Reverse Shoulder Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Clasp the hands behind the back and lift the arms gently to stretch the front of the shoulders and chest.",cues:"Roll the shoulders back, squeeze the blades together."},
-{id:"above-head-chest",name:"Above Head Chest Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Clasp the hands overhead with palms up and gently press back and up to open the chest and shoulders.",cues:"Lengthen up, keep the ribs from flaring."},
+{id:"above-head-chest",name:"Above Head Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Clasp the hands overhead with palms up and gently press back and up to open the chest and shoulders.",cues:"Lengthen up, keep the ribs from flaring."},
 {id:"shoulder-circle",name:"Shoulder Circle",area:"shoulders",type:"mobility",dur:25,bilateral:false,desc:"Roll the shoulders in slow, full circles, forward then backward.",cues:"Big slow circles. Loosen with each rotation."},
 {id:"arm-crossover",name:"Arm Crossover",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Bring one arm across the body and gently press it toward the chest with the other arm.",cues:"Relax the shoulder down as you draw the arm in."},
 {id:"reaching-upper-back",name:"Reaching Upper Back Stretch",area:"back",type:"static",dur:30,bilateral:false,desc:"Interlace the fingers and reach the arms forward, rounding the upper back to stretch between the shoulder blades.",cues:"Push the hands away, spread the shoulder blades wide."},
@@ -424,8 +545,8 @@ const DEFAULTS=[
 {id:"puppy-pose",name:"Puppy Pose",area:"back",type:"static",dur:60,bilateral:false,desc:"From hands and knees, walk the hands forward and melt the chest toward the floor, hips staying over the knees.",cues:"Keep the hips high, let the heart sink down."},
 {id:"seated-back-twist",name:"Seated Back Twist",area:"back",type:"static",dur:35,bilateral:true,desc:"Seated, rotate the torso to one side, using the hand for gentle leverage. Switch sides.",cues:"Inhale tall, exhale to deepen the twist. Rotate from the spine."},
 {id:"supine-twist",name:"Supine Spinal Twist Yoga Pose",area:"back",type:"static",dur:45,bilateral:true,desc:"Lying on the back, draw one knee across the body toward the floor while keeping both shoulders down.",cues:"Gaze away from the knee. Let gravity do the work."},
-{id:"knee-to-chest",name:"Knee to Chest Stretch",area:"back",type:"static",dur:30,bilateral:true,desc:"Lying on the back, draw one knee into the chest while the other leg stays extended or bent.",cues:"Relax the shoulders down. Switch sides."},
-{id:"lying-knee-to-chest",name:"Lying Knee to Chest Stretch",area:"back",type:"static",dur:30,bilateral:true,desc:"On the back, hug one knee into the chest, keeping the lower back relaxed on the floor.",cues:"Draw the knee gently — no need to crank it."},
+{id:"knee-to-chest",name:"Knee to Chest Stretch",area:"back",sub:"chest",type:"static",dur:30,bilateral:true,desc:"Lying on the back, draw one knee into the chest while the other leg stays extended or bent.",cues:"Relax the shoulders down. Switch sides."},
+{id:"lying-knee-to-chest",name:"Lying Knee to Chest Stretch",area:"back",sub:"chest",type:"static",dur:30,bilateral:true,desc:"On the back, hug one knee into the chest, keeping the lower back relaxed on the floor.",cues:"Draw the knee gently — no need to crank it."},
 {id:"double-knee-to-chest",name:"Pavanamuktasana Yoga Pose",area:"back",type:"static",dur:30,bilateral:false,desc:"Lying on the back, hug both knees into the chest and gently rock.",cues:"Massage the lower back into the floor. Breathe."},
 {id:"lying-lower-back",name:"Lying Lower Back Stretch",area:"back",type:"static",dur:40,bilateral:false,desc:"On the back, knees bent, gently let both knees drop to one side, then the other.",cues:"Keep the shoulders grounded. Slow side to side."},
 {id:"lying-knee-roll",name:"Lying Knee Roll Over Stretch",area:"back",type:"static",dur:40,bilateral:true,desc:"On the back with knees bent, roll both knees to one side and hold, feeling the stretch through the lower back and hip.",cues:"Let the knees be heavy. Switch sides."},
@@ -444,51 +565,51 @@ const DEFAULTS=[
 {id:"frog",name:"Frog Pose Mandukasana",area:"hips",type:"static",dur:60,bilateral:false,desc:"On hands and knees, widen the knees apart with feet in line, then ease the hips back and down.",cues:"Go slow — frog is intense. Back off if the knees complain."},
 {id:"rocking-frog",name:"Rocking Frog Stretch",area:"hips",type:"dynamic",dur:40,bilateral:false,desc:"In the wide-knee frog position, gently rock the hips forward and back.",cues:"Small controlled rocking. Never force the end range."},
 {id:"happy-baby",name:"Happy Baby Pose",area:"hips",type:"static",dur:45,bilateral:false,desc:"On the back, draw the knees toward the armpits and hold the outsides of the feet, shins vertical.",cues:"Gently rock side to side. Relax the lower back."},
-{id:"seated-glute",name:"Seated Glute Stretch",area:"hips",type:"static",dur:35,bilateral:true,desc:"Seated, cross one ankle over the opposite knee and gently lean forward.",cues:"Keep the back flat as you hinge. Switch sides."},
-{id:"lying-glute",name:"Lying Glute Stretch",area:"hips",type:"static",dur:45,bilateral:true,desc:"On the back, cross one ankle over the opposite knee and draw both legs toward the chest.",cues:"Flex the top foot. Switch sides."},
-{id:"seated-piriformis",name:"Seated Piriformis Stretch",area:"hips",type:"static",dur:35,bilateral:true,desc:"Seated, cross one ankle over the opposite knee and hinge forward to target the deep glute.",cues:"Sit tall first, then fold. Switch sides."},
+{id:"seated-glute",name:"Seated Glute Stretch",area:"hips",sub:"glute",type:"static",dur:35,bilateral:true,desc:"Seated, cross one ankle over the opposite knee and gently lean forward.",cues:"Keep the back flat as you hinge. Switch sides."},
+{id:"lying-glute",name:"Lying Glute Stretch",area:"hips",sub:"glute",type:"static",dur:45,bilateral:true,desc:"On the back, cross one ankle over the opposite knee and draw both legs toward the chest.",cues:"Flex the top foot. Switch sides."},
+{id:"seated-piriformis",name:"Seated Piriformis Stretch",area:"hips",sub:"glute",type:"static",dur:35,bilateral:true,desc:"Seated, cross one ankle over the opposite knee and hinge forward to target the deep glute.",cues:"Sit tall first, then fold. Switch sides."},
 {id:"figure-four",name:"Standing Figure Four Pose",area:"hips",type:"balance",dur:35,bilateral:true,desc:"Standing, cross one ankle over the opposite thigh and sit back into a one-legged squat.",cues:"Use a wall for balance. Sit the hips back. Switch sides."},
 {id:"low-lunge",name:"Low Lunge",area:"hips",type:"static",dur:45,bilateral:true,desc:"Step one foot forward and lower the back knee to the floor, sinking the hips down and forward.",cues:"Press the hips forward. Lift the chest. Switch sides."},
 {id:"high-lunge",name:"High Lunge",area:"hips",type:"static",dur:40,bilateral:true,desc:"From a lunge, keep the back leg straight and lifted off the floor, sinking into the front hip.",cues:"Drive the back heel away. Square the hips. Switch sides."},
-{id:"kneeling-hip-flexor",name:"Kneeling Hip Flexor",area:"hips",type:"static",dur:40,bilateral:true,desc:"Kneel on one knee with the other foot forward, then shift the hips forward to stretch the front of the back hip.",cues:"Tuck the tailbone, then press forward. Switch sides."},
-{id:"standing-hip-flexor",name:"Standing Hip Flexor Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"In a staggered stance, tuck the pelvis and shift forward to stretch the front of the rear hip.",cues:"Squeeze the back glute to deepen it. Switch sides."},
+{id:"kneeling-hip-flexor",name:"Kneeling Hip Flexor",area:"hips",sub:"hip flexor",type:"static",dur:40,bilateral:true,desc:"Kneel on one knee with the other foot forward, then shift the hips forward to stretch the front of the back hip.",cues:"Tuck the tailbone, then press forward. Switch sides."},
+{id:"standing-hip-flexor",name:"Standing Hip Flexor Stretch",area:"hips",sub:"hip flexor",type:"static",dur:40,bilateral:true,desc:"In a staggered stance, tuck the pelvis and shift forward to stretch the front of the rear hip.",cues:"Squeeze the back glute to deepen it. Switch sides."},
 {id:"couch-stretch",name:"Couch Stretch",area:"hips",type:"static",dur:45,bilateral:true,desc:"With the back foot elevated against a wall and the front foot forward, sink the hips down to stretch the hip flexor and quad.",cues:"Tuck the pelvis. Intense — ease in. Switch sides."},
 {id:"lizard",name:"Lizard Pose",area:"hips",type:"static",dur:45,bilateral:true,desc:"From a low lunge, bring the front foot to the outside of the hand and lower onto the forearms if possible.",cues:"Keep the back leg active. Breathe. Switch sides."},
 {id:"garland",name:"Garland Pose Malasana",area:"hips",type:"static",dur:45,bilateral:false,desc:"Squat down with the feet flat and knees wide, pressing the elbows against the inner knees with palms together.",cues:"Lengthen the spine up. Open the knees with the elbows."},
-{id:"deep-squat",name:"Squat Mobility",area:"hips",type:"mobility",dur:45,bilateral:false,desc:"Lower into a deep squat with feet flat, holding at the bottom to open the hips and ankles.",cues:"Chest tall. Elbows can press the knees open."},
+{id:"deep-squat",name:"Prayer Squat Yoga Pose",area:"hips",type:"mobility",dur:45,bilateral:false,desc:"Lower into a deep squat with feet flat, holding at the bottom to open the hips and ankles.",cues:"Chest tall. Elbows can press the knees open."},
 {id:"90-90",name:"90 to 90 Stretch",area:"hips",type:"static",dur:45,bilateral:true,desc:"Seated with both knees bent at 90° — one in front, one to the side — sit tall and hinge over the front shin.",cues:"Sit tall first, then fold. Switch sides."},
 {id:"dynamic-90-90",name:"Dynamic 90 90 Hip Twist",area:"hips",type:"mobility",dur:45,bilateral:false,desc:"Seated, rotate both knees from one 90/90 side to the other, controlling the movement through the middle.",cues:"Drive from the hips. Keep the chest tall."},
-{id:"shin-box-switch",name:"Shin Box Switch",area:"hips",type:"mobility",dur:40,bilateral:false,desc:"Seated, switch the knees side to side between 90/90 positions, lifting and rotating from the hips.",cues:"Control the movement. Use the glutes to drive."},
+{id:"shin-box-switch",name:"Shin Box Switch",area:"hips",sub:"shin",type:"mobility",dur:40,bilateral:false,desc:"Seated, switch the knees side to side between 90/90 positions, lifting and rotating from the hips.",cues:"Control the movement. Use the glutes to drive."},
 {id:"seated-groin",name:"Seated Groin Stretch",area:"hips",type:"static",dur:40,bilateral:false,desc:"Seated with soles together, gently press the knees toward the floor to stretch the inner thighs.",cues:"Sit tall, hinge from the hips. Gentle pressure on the knees."},
 {id:"frog-rock",name:"Rocking Ankle Stretch",area:"legs",type:"mobility",dur:30,bilateral:true,desc:"Kneeling with one foot forward, rock the front knee forward over the toes to mobilize the ankle.",cues:"Keep the heel down. Rock gently. Switch sides."},
 {id:"fire-log",name:"Double Pigeon Pose (Fire Log)",area:"hips",type:"static",dur:45,bilateral:true,desc:"Seated, stack the shins parallel one over the other and fold forward over them.",cues:"Flex both feet. Ease forward slowly. Switch sides."},
 {id:"pretzel",name:"Pretzel Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"Seated with legs crossed and twisted, rotate the torso to deepen a combined hip and spine stretch.",cues:"Sit tall, rotate gently. Switch sides."},
-{id:"standing-hamstring",name:"Standing Hamstring Stretch",area:"legs",type:"static",dur:40,bilateral:false,desc:"Standing, hinge forward from the hips with soft knees and let the upper body hang toward the floor.",cues:"Hinge from the hips, keep the back long. Soft knees."},
-{id:"standing-high-hamstring",name:"Standing High Leg Bent Knee Hamstring Stretch",area:"legs",type:"static",dur:40,bilateral:true,desc:"Place one heel on a raised surface with a slight bend in the knee and hinge forward over it.",cues:"Lead with the chest. Switch sides."},
-{id:"seated-single-hamstring",name:"Seated Single Leg Hamstring Stretch",area:"legs",type:"static",dur:40,bilateral:true,desc:"Seated with one leg extended and the other bent in, fold forward over the straight leg.",cues:"Reach the chest toward the toes. Switch sides."},
-{id:"leg-up-hamstring",name:"Leg Up Hamstring Stretch",area:"legs",type:"static",dur:45,bilateral:true,desc:"On the back, raise one straight leg and draw it gently toward you, holding behind the thigh or calf.",cues:"Keep the leg as straight as comfortable. Switch sides."},
+{id:"standing-hamstring",name:"Standing Hamstring Stretch",area:"legs",sub:"hamstring",type:"static",dur:40,bilateral:false,desc:"Standing, hinge forward from the hips with soft knees and let the upper body hang toward the floor.",cues:"Hinge from the hips, keep the back long. Soft knees."},
+{id:"standing-high-hamstring",name:"Standing High Leg Bent Knee Hamstring Stretch",area:"legs",sub:"hamstring",type:"static",dur:40,bilateral:true,desc:"Place one heel on a raised surface with a slight bend in the knee and hinge forward over it.",cues:"Lead with the chest. Switch sides."},
+{id:"seated-single-hamstring",name:"Seated Single Leg Hamstring Stretch",area:"legs",sub:"hamstring",type:"static",dur:40,bilateral:true,desc:"Seated with one leg extended and the other bent in, fold forward over the straight leg.",cues:"Reach the chest toward the toes. Switch sides."},
+{id:"leg-up-hamstring",name:"Leg Up Hamstring Stretch",area:"legs",sub:"hamstring",type:"static",dur:45,bilateral:true,desc:"On the back, raise one straight leg and draw it gently toward you, holding behind the thigh or calf.",cues:"Keep the leg as straight as comfortable. Switch sides."},
 {id:"basic-toe-touch",name:"Basic Toe Touch",area:"legs",type:"static",dur:40,bilateral:false,desc:"Standing with feet together, fold forward and reach toward the toes.",cues:"Soft knees if needed. Let the head hang."},
-{id:"standing-quad",name:"Standing Quadriceps Stretch",area:"legs",type:"balance",dur:30,bilateral:true,desc:"Standing on one leg, bend the other knee and hold the foot behind you, drawing the heel toward the glute.",cues:"Keep the knees together. Tuck the pelvis. Switch sides."},
-{id:"standing-balance-quad",name:"Standing Balance Quadriceps Stretch",area:"legs",type:"balance",dur:30,bilateral:true,desc:"Balancing on one leg, hold the opposite foot behind you and gently press the hips forward.",cues:"Use a wall if needed. Knees stay close. Switch sides."},
-{id:"lying-quad",name:"Quadriceps Lying Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"Lying on one side, hold the top foot behind you and ease the heel toward the glute.",cues:"Keep the knees stacked, hips forward. Switch sides."},
-{id:"seated-quad",name:"Seated Quadriceps Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"Seated with one leg folded back beside the hip, gently lean back to stretch the front of the thigh.",cues:"Go only as far as the knee allows. Switch sides."},
-{id:"all-fours-quad",name:"All Fours Quad Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"On hands and knees, lift one foot toward the glute and reach back to hold it.",cues:"Keep the hips level. Switch sides."},
-{id:"calf-wall",name:"Calf Stretch with Hands Against Wall",area:"legs",type:"static",dur:30,bilateral:true,desc:"Hands on a wall, step one foot back and press the heel down with the leg straight.",cues:"Straight back leg targets the upper calf. Switch sides."},
-{id:"calves-stretch",name:"Calves Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Step one foot back and press the heel into the floor, keeping the leg straight.",cues:"Lean forward gently. Heel stays down. Switch sides."},
-{id:"standing-gastroc",name:"Standing Gastrocnemius Calf Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"In a staggered stance against a wall, keep the back leg straight and heel down to stretch the calf.",cues:"Straight knee, heel grounded. Switch sides."},
-{id:"lunging-calf",name:"Lunging Straight Leg Calf Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"In a lunge, keep the back leg straight with the heel pressing down to stretch the calf.",cues:"Drive the back heel into the floor. Switch sides."},
-{id:"standing-achilles",name:"Standing Achilles Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Like a calf stretch but with the back knee slightly bent to target the lower calf and Achilles.",cues:"Bend the back knee, keep the heel down. Switch sides."},
-{id:"seated-calf",name:"Seated Calf Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Seated with one leg extended, loop a towel or reach for the foot and draw the toes toward you.",cues:"Keep the leg straight. Switch sides."},
-{id:"seated-straight-calf",name:"Seated Straight Leg Calf Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Seated with the leg straight, pull the toes back toward the shin to stretch the calf.",cues:"Gentle steady pull. Switch sides."},
-{id:"adductor",name:"Adductor Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"In a wide stance, shift the weight to one bent knee while the other leg stays straight, stretching the inner thigh.",cues:"Sink toward the bent side. Switch sides."},
-{id:"side-lunge-adductor",name:"Side Lunge Adductor Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"Step wide and bend one knee, keeping the other leg straight, to stretch the inner thigh.",cues:"Keep the straight leg’s foot flat. Switch sides."},
-{id:"sitting-wide-adductor",name:"Sitting Wide Leg Adductor Stretch",area:"legs",type:"static",dur:45,bilateral:false,desc:"Seated with the legs wide, hinge forward from the hips to stretch the inner thighs.",cues:"Lead with the chest, spine long."},
+{id:"standing-quad",name:"Standing Quadriceps Stretch",area:"legs",sub:"quad",type:"balance",dur:30,bilateral:true,desc:"Standing on one leg, bend the other knee and hold the foot behind you, drawing the heel toward the glute.",cues:"Keep the knees together. Tuck the pelvis. Switch sides."},
+{id:"standing-balance-quad",name:"Standing Balance Quadriceps Stretch",area:"legs",sub:"quad",type:"balance",dur:30,bilateral:true,desc:"Balancing on one leg, hold the opposite foot behind you and gently press the hips forward.",cues:"Use a wall if needed. Knees stay close. Switch sides."},
+{id:"lying-quad",name:"Quadriceps Lying Stretch",area:"legs",sub:"quad",type:"static",dur:35,bilateral:true,desc:"Lying on one side, hold the top foot behind you and ease the heel toward the glute.",cues:"Keep the knees stacked, hips forward. Switch sides."},
+{id:"seated-quad",name:"Seated Quadriceps Stretch",area:"legs",sub:"quad",type:"static",dur:35,bilateral:true,desc:"Seated with one leg folded back beside the hip, gently lean back to stretch the front of the thigh.",cues:"Go only as far as the knee allows. Switch sides."},
+{id:"all-fours-quad",name:"All Fours Quad Stretch",area:"legs",sub:"quad",type:"static",dur:35,bilateral:true,desc:"On hands and knees, lift one foot toward the glute and reach back to hold it.",cues:"Keep the hips level. Switch sides."},
+{id:"calf-wall",name:"Calf Stretch with Hands Against Wall",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Hands on a wall, step one foot back and press the heel down with the leg straight.",cues:"Straight back leg targets the upper calf. Switch sides."},
+{id:"calves-stretch",name:"Calves Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Step one foot back and press the heel into the floor, keeping the leg straight.",cues:"Lean forward gently. Heel stays down. Switch sides."},
+{id:"standing-gastroc",name:"Standing Gastrocnemius Calf Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"In a staggered stance against a wall, keep the back leg straight and heel down to stretch the calf.",cues:"Straight knee, heel grounded. Switch sides."},
+{id:"lunging-calf",name:"Lunging Straight Leg Calf Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"In a lunge, keep the back leg straight with the heel pressing down to stretch the calf.",cues:"Drive the back heel into the floor. Switch sides."},
+{id:"standing-achilles",name:"Standing Achilles Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Like a calf stretch but with the back knee slightly bent to target the lower calf and Achilles.",cues:"Bend the back knee, keep the heel down. Switch sides."},
+{id:"seated-calf",name:"Seated Calf Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Seated with one leg extended, loop a towel or reach for the foot and draw the toes toward you.",cues:"Keep the leg straight. Switch sides."},
+{id:"seated-straight-calf",name:"Seated Straight Leg Calf Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Seated with the leg straight, pull the toes back toward the shin to stretch the calf.",cues:"Gentle steady pull. Switch sides."},
+{id:"adductor",name:"Adductor Stretch",area:"legs",sub:"adductor",type:"static",dur:35,bilateral:true,desc:"In a wide stance, shift the weight to one bent knee while the other leg stays straight, stretching the inner thigh.",cues:"Sink toward the bent side. Switch sides."},
+{id:"side-lunge-adductor",name:"Side Lunge Adductor Stretch",area:"legs",sub:"adductor",type:"static",dur:35,bilateral:true,desc:"Step wide and bend one knee, keeping the other leg straight, to stretch the inner thigh.",cues:"Keep the straight leg’s foot flat. Switch sides."},
+{id:"sitting-wide-adductor",name:"Sitting Wide Leg Adductor Stretch",area:"legs",sub:"adductor",type:"static",dur:45,bilateral:false,desc:"Seated with the legs wide, hinge forward from the hips to stretch the inner thighs.",cues:"Lead with the chest, spine long."},
 {id:"spread-leg-fold",name:"Spread Leg Forward Fold Upavista Konasana",area:"legs",type:"static",dur:50,bilateral:false,desc:"Seated with legs wide, walk the hands forward and fold the torso toward the floor.",cues:"Hinge from the hips. Patience — let it open."},
 {id:"wide-leg-fold",name:"Wide Legged Forward Bend Prasarita Padottanasana",area:"legs",type:"static",dur:45,bilateral:false,desc:"Standing with feet wide, fold forward from the hips and let the crown of the head drop toward the floor.",cues:"Hinge from the hips, soften the knees if needed."},
 {id:"stand-spread-fold",name:"Stand Spread Leg Forward Fold",area:"legs",type:"static",dur:45,bilateral:false,desc:"Wide stance, hinge forward and let the upper body hang between the legs.",cues:"Keep the weight in the balls of the feet slightly."},
 {id:"runners-stretch",name:"Runners Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"From a lunge, drop the hands inside the front foot and sink the hips low.",cues:"Lengthen the back leg. Drop the hips. Switch sides."},
-{id:"standing-shin",name:"Standing Shin Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Point one foot behind you with the top of the toes on the floor and gently press to stretch the shin.",cues:"Ease the weight back slowly. Switch sides."},
-{id:"standing-tibialis",name:"Standing Tibialis Anterior Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Tuck one foot behind with the toes pointed down and press lightly into the top of the foot.",cues:"Feel it along the front of the shin. Switch sides."},
+{id:"standing-shin",name:"Standing Shin Stretch",area:"legs",sub:"shin",type:"static",dur:30,bilateral:true,desc:"Point one foot behind you with the top of the toes on the floor and gently press to stretch the shin.",cues:"Ease the weight back slowly. Switch sides."},
+{id:"standing-tibialis",name:"Standing Tibialis Anterior Stretch",area:"legs",sub:"shin",type:"static",dur:30,bilateral:true,desc:"Tuck one foot behind with the toes pointed down and press lightly into the top of the foot.",cues:"Feel it along the front of the shin. Switch sides."},
 {id:"ankle-circles",name:"Ankle Circles",area:"legs",type:"mobility",dur:25,bilateral:true,desc:"Lift one foot and slowly circle the ankle in both directions.",cues:"Full slow circles each way. Switch sides."},
 {id:"feet-ankles-rotation",name:"Feet and Ankles Rotation Stretch",area:"legs",type:"mobility",dur:25,bilateral:true,desc:"Rotate the foot at the ankle through its full range in both directions.",cues:"Slow and controlled. Switch sides."},
 {id:"seated-ankle",name:"Seated Ankle Stretch",area:"legs",type:"mobility",dur:25,bilateral:true,desc:"Seated, point and flex the foot and circle the ankle to mobilize the joint.",cues:"Move through the full range gently. Switch sides."},
@@ -550,19 +671,19 @@ const DEFAULTS=[
 {id:"inchworm",name:"Bodyweight Front Plank to Downward Dog",area:"back",type:"dynamic",dur:40,bilateral:false,desc:"From a plank, press the hips up and back into downward dog, then return.",cues:"Move slowly, feel the whole back line."},
 {id:"thoracic-bridge",name:"Thoracic Bridge",area:"back",type:"mobility",dur:35,bilateral:true,desc:"From a tabletop or seated position, reach one arm under and across, then open up and rotate the chest toward the ceiling.",cues:"Rotate through the upper back. Switch sides."},
 {id:"kneeling-tspine",name:"Kneeling T Spine Mobility",area:"back",type:"mobility",dur:35,bilateral:true,desc:"On hands and knees, hand behind the head, rotate the elbow down and across then up and open.",cues:"Follow the elbow with the eyes. Switch sides."},
-{id:"floss-sciatic",name:"Sciatic Nerve Floss",area:"nerve",type:"floss",dur:40,bilateral:true,desc:"Seated, extend one knee straight while looking up, then bend the knee back in while tucking the chin. Move smoothly between the two.",cues:"GLIDE, don’t hold. Stop before any tingling. 8–10 slow reps. Switch sides."},
-{id:"floss-median",name:"Median Nerve Floss",area:"nerve",type:"floss",dur:35,bilateral:true,desc:"Arm out to the side at shoulder height, palm up. Extend the wrist back while tilting the head away, then release while tilting toward.",cues:"Gentle glide — never into pins and needles. 8–10 reps. Switch sides."},
-{id:"floss-ulnar",name:"Ulnar Nerve Floss",area:"nerve",type:"floss",dur:35,bilateral:true,desc:"Make an \"OK\" sign and bring it up to the eye like a monocle, then extend the arm out to the side and away.",cues:"Light and smooth. Back off if you feel tingling. 8–10 reps. Switch sides."},
-{id:"floss-radial",name:"Radial Nerve Floss",area:"nerve",type:"floss",dur:35,bilateral:true,desc:"Reach the arm down and slightly behind, palm rotated outward, flex the wrist down, then tilt the head away and back.",cues:"Glide gently in and out. No holding, no pain. 8–10 reps. Switch sides."},
-{id:"floss-femoral",name:"Femoral Nerve Floss",area:"nerve",type:"floss",dur:40,bilateral:true,desc:"Standing or side-lying, bend one knee to hold the foot behind you (hip extension), then tuck and lift the chin to glide the nerve.",cues:"Combine hip and neck movement smoothly. 8–10 reps. Switch sides."},
+{id:"floss-sciatic",name:"Sciatic Nerve Floss",area:"floss",type:"",dur:40,bilateral:true,desc:"Seated, extend one knee straight while looking up, then bend the knee back in while tucking the chin. Move smoothly between the two.",cues:"GLIDE, don’t hold. Stop before any tingling. 8–10 slow reps. Switch sides."},
+{id:"floss-median",name:"Median Nerve Floss",area:"floss",type:"",dur:35,bilateral:true,desc:"Arm out to the side at shoulder height, palm up. Extend the wrist back while tilting the head away, then release while tilting toward.",cues:"Gentle glide — never into pins and needles. 8–10 reps. Switch sides."},
+{id:"floss-ulnar",name:"Ulnar Nerve Floss",area:"floss",type:"",dur:35,bilateral:true,desc:"Make an \"OK\" sign and bring it up to the eye like a monocle, then extend the arm out to the side and away.",cues:"Light and smooth. Back off if you feel tingling. 8–10 reps. Switch sides."},
+{id:"floss-radial",name:"Radial Nerve Floss",area:"floss",type:"",dur:35,bilateral:true,desc:"Reach the arm down and slightly behind, palm rotated outward, flex the wrist down, then tilt the head away and back.",cues:"Glide gently in and out. No holding, no pain. 8–10 reps. Switch sides."},
+{id:"floss-femoral",name:"Femoral Nerve Floss",area:"floss",type:"",dur:40,bilateral:true,desc:"Standing or side-lying, bend one knee to hold the foot behind you (hip extension), then tuck and lift the chin to glide the nerve.",cues:"Combine hip and neck movement smoothly. 8–10 reps. Switch sides."},
 {id:"seated-spinal-twist",name:"Ardha Matsyendrasana Yoga Pose",area:"back",type:"static",dur:35,bilateral:true,desc:"Seated with one leg crossed over the other, twist the torso toward the top knee, using the arm for leverage.",cues:"Lengthen up on the inhale, twist on the exhale. Switch sides."},
 {id:"standing-iliotibial",name:"Standing Iliotibial Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Cross one leg behind the other and lean to the side of the back leg, pushing the hip out.",cues:"Feel it down the outer leg and hip. Switch sides."},
 {id:"standing-leg-cross-abductor",name:"Standing Leg Cross Abductor Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Cross the ankles and fold forward over the straight legs to stretch the outer hips and IT band.",cues:"Soft knees, let the head hang. Switch sides."},
 {id:"standing-outer-hip",name:"Standing Outer Hip Stretch",area:"hips",type:"static",dur:35,bilateral:true,desc:"Cross one leg behind and shift the hip out to the side to stretch the outer hip.",cues:"Push the hip away from the midline. Switch sides."},
-{id:"standing-knee-to-chest",name:"Standing Knee to Chest Stretch",area:"hips",type:"balance",dur:30,bilateral:true,desc:"Standing, draw one knee up toward the chest and hold it with the hands.",cues:"Stand tall, don’t round the back. Switch sides."},
-{id:"lying-hip-flexor",name:"Lying Hip Flexor Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"Lying near the edge of a surface, let one leg hang down while hugging the other knee to the chest.",cues:"Let the hanging leg relax down. Switch sides."},
-{id:"kneeling-iliopsoas",name:"Kneeling Iliopsoas Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"In a half-kneel, tuck the pelvis and shift forward to stretch the deep hip flexor.",cues:"Squeeze the back glute. Stay tall. Switch sides."},
-{id:"crossover-kneeling-hip-flexor",name:"Crossover Kneeling Hip Flexor Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"In a half-kneel, side-bend away from the kneeling leg to add a stretch along the side of the hip.",cues:"Reach up and over to deepen it. Switch sides."},
+{id:"standing-knee-to-chest",name:"Standing Knee to Chest Stretch",area:"hips",sub:"chest",type:"balance",dur:30,bilateral:true,desc:"Standing, draw one knee up toward the chest and hold it with the hands.",cues:"Stand tall, don’t round the back. Switch sides."},
+{id:"lying-hip-flexor",name:"Lying Hip Flexor Stretch",area:"hips",sub:"hip flexor",type:"static",dur:40,bilateral:true,desc:"Lying near the edge of a surface, let one leg hang down while hugging the other knee to the chest.",cues:"Let the hanging leg relax down. Switch sides."},
+{id:"kneeling-iliopsoas",name:"Kneeling Iliopsoas Stretch",area:"hips",sub:"hip flexor",type:"static",dur:40,bilateral:true,desc:"In a half-kneel, tuck the pelvis and shift forward to stretch the deep hip flexor.",cues:"Squeeze the back glute. Stay tall. Switch sides."},
+{id:"crossover-kneeling-hip-flexor",name:"Crossover Kneeling Hip Flexor Stretch",area:"hips",sub:"hip flexor",type:"static",dur:40,bilateral:true,desc:"In a half-kneel, side-bend away from the kneeling leg to add a stretch along the side of the hip.",cues:"Reach up and over to deepen it. Switch sides."},
 {id:"flexion-extension-hip",name:"Flexion and Extension Hip Stretch",area:"hips",type:"mobility",dur:40,bilateral:true,desc:"On hands and knees, rock the hip back into flexion then forward into extension.",cues:"Move smoothly through the range. Switch sides."},
 {id:"hip-extension",name:"Hip Extension Stretch",area:"hips",type:"static",dur:35,bilateral:true,desc:"Extend one leg behind you and press the hip forward to lengthen the front of the hip.",cues:"Keep the torso tall. Switch sides."},
 {id:"hip-external-rotator",name:"Hip External Rotator Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"Seated or lying, bring one ankle across the opposite knee and draw the legs in to stretch the outer hip.",cues:"Flex the crossed foot. Switch sides."},
@@ -584,10 +705,10 @@ const DEFAULTS=[
 {id:"twisted-leg-lunge",name:"Twisted Leg Lunge Pose",area:"hips",type:"static",dur:40,bilateral:true,desc:"From a low lunge, rotate the torso toward the front leg and reach the arm up.",cues:"Open the chest toward the bent knee. Switch sides."},
 {id:"split-sprinter-lunge",name:"Split Sprinter Low Lunge",area:"hips",type:"static",dur:40,bilateral:true,desc:"A deep low lunge with the hips sunk and the back leg extended long.",cues:"Drop the hips low. Lengthen the back leg. Switch sides."},
 {id:"lunge-stretch",name:"Lunge Stretch",area:"hips",type:"static",dur:40,bilateral:true,desc:"Step into a lunge and sink the hips to stretch the hip flexor of the back leg.",cues:"Press the hips forward and down. Switch sides."},
-{id:"front-hamstring",name:"Front Hamstring Stretch",area:"legs",type:"static",dur:40,bilateral:true,desc:"Place one heel forward with the leg straight and hinge forward over it.",cues:"Keep the back flat, hinge from the hips. Switch sides."},
+{id:"front-hamstring",name:"Front Hamstring Stretch",area:"legs",sub:"hamstring",type:"static",dur:40,bilateral:true,desc:"Place one heel forward with the leg straight and hinge forward over it.",cues:"Keep the back flat, hinge from the hips. Switch sides."},
 {id:"single-straight-leg",name:"Single Straight Leg Stretch",area:"legs",type:"dynamic",dur:30,bilateral:true,desc:"On the back, draw one straight leg toward you while the other stays extended.",cues:"Alternate with control. Switch sides."},
 {id:"double-leg-stretch",name:"Double Leg Stretch",area:"core",type:"dynamic",dur:30,bilateral:false,desc:"On the back, extend the arms and legs away then circle them back in, a Pilates core move.",cues:"Keep the lower back grounded. Controlled."},
-{id:"standing-hamstrings-back",name:"Standing Hamstrings and Back Stretch",area:"legs",type:"static",dur:45,bilateral:false,desc:"Fold forward from standing to stretch both the hamstrings and the back.",cues:"Soft knees. Let the spine release."},
+{id:"standing-hamstrings-back",name:"Standing Hamstrings and Back Stretch",area:"legs",sub:"hamstring",type:"static",dur:45,bilateral:false,desc:"Fold forward from standing to stretch both the hamstrings and the back.",cues:"Soft knees. Let the spine release."},
 {id:"standing-half-bend",name:"Standing Half Bend",area:"core",type:"static",dur:30,bilateral:true,desc:"Standing, bend to one side reaching the arm overhead.",cues:"Lengthen up and over. Switch sides."},
 {id:"standing-lateral-side",name:"Standing Lateral Side Stretch",area:"core",type:"static",dur:30,bilateral:true,desc:"Reach one arm overhead and lean to the opposite side to open the waist.",cues:"Keep both feet planted. Switch sides."},
 {id:"standing-two-side-bend",name:"Standing Two Side Bend",area:"core",type:"dynamic",dur:30,bilateral:true,desc:"Alternate side bends left and right with the arms overhead.",cues:"Flow side to side with control."},
@@ -598,14 +719,14 @@ const DEFAULTS=[
 {id:"kneeling-lat",name:"Kneeling Lat Stretch",area:"back",type:"static",dur:40,bilateral:false,desc:"Kneel and walk the hands forward, sinking the chest toward the floor to stretch the lats.",cues:"Reach long, melt the chest down."},
 {id:"one-arm-lat",name:"One Arm Lat Stretch",area:"back",type:"static",dur:35,bilateral:true,desc:"Hold onto a support and lean away to stretch one side of the lats.",cues:"Sink the hip away from the hold. Switch sides."},
 {id:"side-lat",name:"Side Lat Stretch",area:"back",type:"static",dur:35,bilateral:true,desc:"Reach one arm overhead and lean to the side to stretch the lat and side body.",cues:"Lengthen through the fingertips. Switch sides."},
-{id:"kneeling-chest",name:"Kneeling Chest Stretch",area:"shoulders",type:"static",dur:40,bilateral:false,desc:"Kneel and place the hands on a raised surface, then sink the chest down between the arms.",cues:"Let the chest melt toward the floor."},
-{id:"seated-chest-clam",name:"Seated Chest Clam",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Seated, clasp the hands behind the head and draw the elbows back to open the chest.",cues:"Squeeze the shoulder blades, lift the chest."},
-{id:"chest-front-shoulder",name:"Chest and Front of Shoulder Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Place the arm against a wall and rotate the body away to open the chest and front shoulder.",cues:"Forearm flat, turn the chest open. Switch sides."},
-{id:"behind-head-chest",name:"Behind Head Chest Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Clasp the hands behind the head and draw the elbows wide and back to open the chest.",cues:"Lift the chest, widen the elbows."},
-{id:"back-pec",name:"Back Pec Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Reach one arm back and against a surface, turning away to stretch the pec.",cues:"Rotate the chest away from the arm. Switch sides."},
-{id:"standing-one-arm-chest",name:"Standing One Arm Chest Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Place one hand on a wall behind you and turn the body away to stretch the chest.",cues:"Feel the stretch across the front of the shoulder. Switch sides."},
-{id:"reverse-chest",name:"Reverse Chest Stretch",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Clasp the hands behind the back and lift the arms to open the chest and shoulders.",cues:"Roll the shoulders back and down."},
-{id:"superman-chest",name:"Superman Chest Stretch",area:"back",type:"static",dur:30,bilateral:false,desc:"Lying face down, reach the arms forward and lift them with the chest off the floor.",cues:"Lengthen through the fingertips. Lift gently."},
+{id:"kneeling-chest",name:"Kneeling Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:40,bilateral:false,desc:"Kneel and place the hands on a raised surface, then sink the chest down between the arms.",cues:"Let the chest melt toward the floor."},
+{id:"seated-chest-clam",name:"Seated Chest Clam",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Seated, clasp the hands behind the head and draw the elbows back to open the chest.",cues:"Squeeze the shoulder blades, lift the chest."},
+{id:"chest-front-shoulder",name:"Chest and Front of Shoulder Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:true,desc:"Place the arm against a wall and rotate the body away to open the chest and front shoulder.",cues:"Forearm flat, turn the chest open. Switch sides."},
+{id:"behind-head-chest",name:"Behind Head Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Clasp the hands behind the head and draw the elbows wide and back to open the chest.",cues:"Lift the chest, widen the elbows."},
+{id:"back-pec",name:"Back Pec Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:true,desc:"Reach one arm back and against a surface, turning away to stretch the pec.",cues:"Rotate the chest away from the arm. Switch sides."},
+{id:"standing-one-arm-chest",name:"Standing One Arm Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:true,desc:"Place one hand on a wall behind you and turn the body away to stretch the chest.",cues:"Feel the stretch across the front of the shoulder. Switch sides."},
+{id:"reverse-chest",name:"Reverse Chest Stretch",area:"shoulders",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Clasp the hands behind the back and lift the arms to open the chest and shoulders.",cues:"Roll the shoulders back and down."},
+{id:"superman-chest",name:"Superman Chest Stretch",area:"back",sub:"chest",type:"static",dur:30,bilateral:false,desc:"Lying face down, reach the arms forward and lift them with the chest off the floor.",cues:"Lengthen through the fingertips. Lift gently."},
 {id:"external-shoulder-rotation",name:"External Shoulder Rotation Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"With the elbow bent at the side, rotate the forearm outward to stretch the rotator cuff.",cues:"Keep the elbow tucked in. Switch sides."},
 {id:"internal-shoulder-rotation",name:"Internal Shoulder Rotation Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Reach one hand up the middle of the back and gently ease it higher.",cues:"Use a towel if the hands don’t meet. Switch sides."},
 {id:"rotator-cuff",name:"Rotator Cuff Stretch",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Bring one arm across or behind the body to gently stretch the rotator cuff.",cues:"Easy range, no forcing. Switch sides."},
@@ -631,15 +752,16 @@ const DEFAULTS=[
 {id:"kneeling-neck",name:"Kneeling Neck Stretch",area:"neck",type:"static",dur:30,bilateral:true,desc:"Kneeling, tilt the head to the side for a gentle neck stretch.",cues:"Relax the shoulders down. Switch sides."},
 {id:"plantar-flexion",name:"Plantar Flexion Stretch",area:"legs",type:"static",dur:25,bilateral:true,desc:"Point the foot and gently press the top of the foot toward the floor to stretch the front of the ankle.",cues:"Gentle pressure. Switch sides."},
 {id:"peroneals",name:"Peroneals Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Turn the sole of the foot inward and gently stretch the outer lower leg.",cues:"Easy range. Switch sides."},
-{id:"posterior-tibialis",name:"Posterior Tibialis Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Turn the sole outward gently to stretch the inner lower leg.",cues:"Subtle stretch. Switch sides."},
+{id:"posterior-tibialis",name:"Posterior Tibialis Stretch",area:"legs",sub:"shin",type:"static",dur:30,bilateral:true,desc:"Turn the sole outward gently to stretch the inner lower leg.",cues:"Subtle stretch. Switch sides."},
 {id:"heel-press",name:"Heel Press",area:"legs",type:"static",dur:30,bilateral:true,desc:"Press one heel down and back to stretch the calf, like a standing calf stretch.",cues:"Keep the leg straight, heel grounded. Switch sides."},
-{id:"standing-toe-up-calf",name:"Standing Toe Up Calf Stretch",area:"legs",type:"static",dur:30,bilateral:true,desc:"Place the toes up against a wall or step with the heel down and lean in to stretch the calf.",cues:"Keep the leg straight. Switch sides."},
-{id:"lying-calf",name:"Lying Calf Stretch",area:"legs",type:"static",dur:35,bilateral:true,desc:"On the back, raise one leg and draw the toes toward you with the hands or a towel.",cues:"Keep the leg as straight as comfortable. Switch sides."},
+{id:"standing-toe-up-calf",name:"Standing Toe Up Calf Stretch",area:"legs",sub:"calf",type:"static",dur:30,bilateral:true,desc:"Place the toes up against a wall or step with the heel down and lean in to stretch the calf.",cues:"Keep the leg straight. Switch sides."},
+{id:"lying-calf",name:"Lying Calf Stretch",area:"legs",sub:"calf",type:"static",dur:35,bilateral:true,desc:"On the back, raise one leg and draw the toes toward you with the hands or a towel.",cues:"Keep the leg as straight as comfortable. Switch sides."},
 {id:"lying-upper-body-rotation",name:"Lying Upper Body Rotation",area:"back",type:"mobility",dur:40,bilateral:true,desc:"Lying on one side with knees bent, rotate the top arm and chest open toward the floor.",cues:"Let the chest open with each breath. Switch sides."},
 {id:"lying-shoulder-sweep",name:"Lying Shoulder Sweep",area:"shoulders",type:"mobility",dur:35,bilateral:true,desc:"Lying on one side, sweep the top arm overhead and around in a wide arc.",cues:"Keep the arm close to the floor. Switch sides."},
 {id:"rollover",name:"Rollover",area:"back",type:"dynamic",dur:35,bilateral:false,desc:"On the back, roll the legs up and overhead, then back down with control.",cues:"Move slowly and protect the neck."},
 {id:"half-sun-salutation",name:"Half Sun Salutation",area:"back",type:"dynamic",dur:45,bilateral:false,desc:"Flow from standing to a forward fold to a halfway lift and back up, syncing with the breath.",cues:"Inhale to lengthen, exhale to fold."},
 {id:"standing-back-extension-flexion",name:"Standing Back Extension and Flexion",area:"back",type:"mobility",dur:35,bilateral:false,desc:"Standing, alternate gently arching back and rounding forward to mobilize the spine.",cues:"Move smoothly through the range."},
+{id:"seated-shoulder-flexor-depressor-retractor",name:"Seated Shoulder Flexor Depressor Retractor Stretch Bent Knee",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Sit with one knee bent and the other extended. Reach both arms forward at shoulder height, clasp the hands, round the upper back, and drop the head between the arms.",cues:"Reach the hands forward as you round through the upper back. Feel it across the rear shoulders and upper back."},
 {id:"standing-low-body-rotation",name:"Standing Low Body Rotation",area:"hips",type:"mobility",dur:35,bilateral:true,desc:"Standing, rotate the lower body and hips side to side.",cues:"Keep the upper body steady. Switch sides."},
 {id:"standing-upper-body-rotation",name:"Standing Upper Body Rotation",area:"back",type:"mobility",dur:35,bilateral:true,desc:"Standing, rotate the upper body side to side to mobilize the spine.",cues:"Let the arms swing freely. Switch sides."},
 {id:"twist-step",name:"Twist Step Stretch",area:"core",type:"dynamic",dur:30,bilateral:true,desc:"Step and rotate the torso, combining a gentle lunge with a twist.",cues:"Rotate toward the front leg. Switch sides."},
@@ -652,26 +774,14 @@ const DEFAULTS=[
 {id:"windshield-wipers",name:"Windshield Wipers",area:"hips",type:"mobility",dur:30,bilateral:false,desc:"Seated or lying with knees bent, drop both knees side to side like windshield wipers to rotate the hips and lower back.",cues:"Smooth side to side. Let the hips rotate."},
 {id:"scapular-pushups",name:"Scapular Pushups",area:"shoulders",type:"dynamic",dur:30,bilateral:false,desc:"In a plank or against a wall, keep the arms straight and push the shoulder blades apart, then squeeze them together.",cues:"Arms stay straight — move only the shoulder blades."},
 {id:"windmills",name:"Windmills / Lower Back Rotations",area:"back",type:"dynamic",dur:30,bilateral:false,desc:"Stand wide, hinge forward, and rotate to reach one hand toward the opposite foot while the other reaches up, alternating sides.",cues:"Reach one hand down, the other up. Alternate with control."},
+{id:"scorpion",name:"Scorpion Stretch",area:"back",type:"dynamic",dur:30,bilateral:true,desc:"Lie face down with arms out wide. Lift one leg and reach the foot across the body toward the opposite hand, rotating the lower spine and hip.",cues:"Keep the chest down. Rotate gently — don\u2019t force the reach. Switch sides."},
+{id:"reverse-prayer",name:"Reverse Prayer",area:"shoulders",type:"static",dur:30,bilateral:false,desc:"Bring the palms together behind the back, fingers pointing up, and gently press them flat to stretch the wrists, forearms and chest.",cues:"Draw the elbows back and lift the chest. Ease into it — wrists are delicate."},
+{id:"cow-face",name:"Cow Face Arms (Gomukhasana)",area:"shoulders",type:"static",dur:30,bilateral:true,desc:"Reach one arm overhead and bend it down the back, and the other arm behind and up the back, trying to clasp the hands between the shoulder blades.",cues:"Use a strap if the hands don\u2019t meet. Keep the top elbow pointing up. Switch sides."},
+{id:"dead-hang",name:"Dead Hang",area:"shoulders",type:"static",equip:"bar",dur:30,bilateral:false,desc:"Hang from a bar with both hands, arms straight, letting the body relax to decompress the spine and stretch the shoulders and lats.",cues:"Relax the shoulders and let gravity lengthen you. Keep a light grip-aware hold."},
 ];
-// Pre-built routines
-const PREBUILT=[
-{name:"GROOVE X — Squat Day",ids:["frog","90-90","pigeon","calf-wall","kneeling-hip-flexor","triangle"]},
-{name:"BOUNCE X",ids:["cobra","sphinx","thread-the-needle","standing-quad","neck-side"]},
-{name:"GROOVE Y — Hip Thrust Day",ids:["seated-single-hamstring","lying-glute","butterfly","pigeon","couch-stretch","triangle"]},
-{name:"BOUNCE Y",ids:["lizard","puppy-pose","thread-the-needle","standing-quad","cross-over-shoulder"]},
-{name:"Office Reset · A (~5 min)",ids:["seated-neck-side","reverse-shoulder","wrist-flexor","wrist-extensor","seated-back-twist","seated-glute","standing-hamstring"]},
-{name:"Office Reset · B (~5 min)",ids:["rotating-neck","behind-head-chest","finger-extension","wrist-circles","seated-rotation","figure-four","standing-side-bend"]},
-{name:"Before Bed · A (~10 min)",ids:["child-pose","butterfly","lying-glute","supine-twist","legs-up-wall","corpse"],dur:60},
-{name:"Before Bed · B (~10 min)",ids:["puppy-pose","sitting-wide-adductor","pigeon","lying-crossover","legs-up-wall","corpse"],dur:60},
-{name:"Before Bed · C (~10 min)",ids:["cat-cow","happy-baby","fire-log","supine-twist","legs-up-wall","corpse"],dur:60},
-{name:"Before Bed · D (~10 min)",ids:["sphinx","seated-glute","lying-knee-roll","legs-up-wall","corpse","butterfly"],dur:60},
-{name:"In Bed (~6 min)",ids:["knee-to-chest","double-knee-to-chest","lying-crossover","butterfly","happy-baby","lying-lower-back"]},
-{name:"Posture Fix",ids:["chin-tuck","reverse-shoulder","behind-head-chest","cobra","side-lat","kneeling-hip-flexor","kneeling-lat","kneeling-tspine"]},
-{name:"APT Assist (anterior pelvic tilt)",ids:["kneeling-hip-flexor","couch-stretch","standing-quad","lizard","child-pose","supine-twist","lying-glute","seated-single-hamstring"]},
-{name:"Mobility",ids:["standing-hip-openers","elephant-walks","windshield-wipers","cat-cow","scapular-pushups","thread-the-needle","windmills"],dur:30},
-{name:"Full Body (~8 min)",ids:["cat-cow","downward-dog","low-lunge","standing-hamstring","pigeon","thread-the-needle","child-pose"]},
-{name:"Nerve Flossing",ids:["floss-sciatic","floss-median","floss-ulnar","floss-radial","floss-femoral"]},
-];
+// Pre-built routines (removed)
+const PREBUILT=[];
+const OLD_PREBUILT_NAMES=["GROOVE X — Squat Day","BOUNCE X","GROOVE Y — Hip Thrust Day","BOUNCE Y","Office Reset · A (~5 min)","Office Reset · B (~5 min)","Before Bed · A (~10 min)","Before Bed · B (~10 min)","Before Bed · C (~10 min)","Before Bed · D (~10 min)","In Bed (~6 min)","Posture Fix","APT Assist (anterior pelvic tilt)","Mobility","Full Body (~8 min)","Nerve Flossing"];
 /* ── GUIDE CONTENT ── */
 const GUIDE=[
   {q:'Static stretching',a:'Holding a stretch still for 15–60 seconds. The most common type — good for improving flexibility and cooling down. Ease to the point of tension (not pain) and breathe. Best done when muscles are already warm.'},
@@ -679,7 +789,7 @@ const GUIDE=[
   {q:'Mobility drills',a:'Movements that take a joint actively through its range — cat-cow, hip circles, T-spine rotations. They build usable, controlled range rather than just passive flexibility. Great as a warm-up or daily maintenance. Tagged "mobility".'},
   {q:'Balance poses',a:'Standing poses on one leg — tree, dancer, figure-four. They stretch while challenging stability and proprioception. Use a wall or chair for support when needed. Tagged "balance".'},
   {q:'Restorative poses',a:'Passive, fully-supported holds you can stay in for a minute or more — legs up the wall, corpse, crocodile. They calm the nervous system and are ideal before bed. Tagged "restorative".'},
-  {q:'Nerve flossing (neural glides)',a:'A gentle technique to mobilize a nerve through its range — useful for tightness, mild nerve irritation, or sciatica-type symptoms. Unlike stretching, you do NOT hold: you glide smoothly back and forth, usually 8–10 reps. Golden rule: stay out of pain and tingling. If you feel pins and needles, you\u2019ve gone too far — ease off. Tagged "floss". If symptoms are severe or persistent, see a physio rather than self-treating.'},
+  {q:'Nerve flossing (neural glides)',a:'A gentle technique to mobilize a nerve through its range — useful for tightness, mild nerve irritation, or sciatica-type symptoms. Unlike stretching, you do NOT hold: you glide smoothly back and forth, usually 8–10 reps. Golden rule: stay out of pain and tingling. If you feel pins and needles, you\u2019ve gone too far — ease off. Tagged "Floss". If symptoms are severe or persistent, see a physio rather than self-treating.'},
   {q:'How long to hold?',a:'Static holds: 15–30s for general flexibility, 45–90s for deeper release (yin-style). Dynamic/mobility: 30s of controlled reps. Consistency matters more than duration — daily short sessions beat occasional long ones.'},
   {q:'When to stretch',a:'Dynamic and mobility work before activity as a warm-up. Static holds after activity or as a standalone session when muscles are warm. Gentle stretching or restorative poses before bed can aid relaxation. Avoid deep static stretching of cold muscles.'},
   {q:'Don\u2019t push into pain',a:'Stretching should feel like tension or mild discomfort, never sharp or stabbing pain. Pain is your body signalling potential injury. Ease back to a comfortable edge, keep breathing, and never bounce or force a position. Progress comes from consistency, not intensity.'},
@@ -690,23 +800,28 @@ const GUIDE=[
 /* ── STATE ── */
 let lib=JSON.parse(localStorage.getItem('sx-lib')||'null')||DEFAULTS.map(s=>({...s}));
 let routines=JSON.parse(localStorage.getItem('sx-routines')||'[]');
-let session=JSON.parse(localStorage.getItem('sx-session')||'[]'); // current setup list
+const BILAT='<span class="bilat" title="works both sides"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M3 12h18"/></svg></span>';
 let userImgs=JSON.parse(localStorage.getItem('sx-imgs')||'{}');
 let history=JSON.parse(localStorage.getItem('sx-history')||'[]');
-let settings=JSON.parse(localStorage.getItem('sx-settings')||'{"prepTime":4,"switchTime":4,"beepOn":true,"sideOn":true,"prepBeepOn":true,"breathOn":true,"voiceOn":false,"volume":0.8,"soundWave":"sine","soundPitch":1,"theme":"dark"}');
+let settings=JSON.parse(localStorage.getItem('sx-settings')||'{"prepTime":4,"switchTime":4,"beepOn":true,"sideOn":true,"prepBeepOn":true,"breathOn":true,"voiceOn":false,"volume":0.8,"soundWave":"sine","soundPitch":1,"theme":"blueprint"}');
 if(settings.switchTime==null)settings.switchTime=4;
 
 let libArea='',imgTarget=null,dragSrc=null;
 let tInterval=null,tIdx=0,tLeft=0,tPhase='stretch',sideSwitched=false,sessionStretches=[];
 
 function save(){
-  localStorage.setItem('sx-lib',JSON.stringify(lib));
-  localStorage.setItem('sx-routines',JSON.stringify(routines));
-  localStorage.setItem('sx-session',JSON.stringify(session));
-  localStorage.setItem('sx-history',JSON.stringify(history));
-  try{localStorage.setItem('sx-imgs',JSON.stringify(userImgs));}catch(e){}
+  try{
+    localStorage.setItem('sx-lib',JSON.stringify(lib));
+    localStorage.setItem('sx-routines',JSON.stringify(routines));
+    localStorage.setItem('sx-session',JSON.stringify(session));
+    localStorage.setItem('sx-history',JSON.stringify(history));
+    localStorage.setItem('sx-imgs',JSON.stringify(userImgs));
+  }catch(e){
+    if(!window._storageWarned){window._storageWarned=true;
+      alert('Storage is full, so recent changes may not be saved between sessions. Export a backup (Settings → Data) and remove some uploaded photos to free space.');}
+  }
 }
-function saveSetting(k,v){settings[k]=v;localStorage.setItem('sx-settings',JSON.stringify(settings));}
+function saveSetting(k,v){settings[k]=v;try{localStorage.setItem('sx-settings',JSON.stringify(settings));}catch(e){}}
 function uid(){return 'x'+Date.now()+Math.random().toString(36).slice(2,5);}
 // Makes a clean, readable, unique id from a stretch name → e.g. "custom-hip-flexor"
 function slugId(name){
@@ -729,11 +844,24 @@ function imgTag(id,opts){
   opts=opts||{};
   const cls=opts.cls||'thumb';
   const big=opts.big?'1':'0';
+  // library/zoom mode: no upload affordance, neutral placeholder if missing
+  if(opts.zoom){
+    if(userImgs[id])return `<img src="${userImgs[id]}" class="${cls}">`;
+    return `<img src="photos/${id}.${IMG_EXTS[0]}" class="${cls}" data-ix="0" onerror="imgFallbackPlain(this,'${id}')">`;
+  }
   if(userImgs[id]){
     return `<img src="${userImgs[id]}" class="${cls}" onclick="uploadImg('${id}')" style="cursor:pointer">`;
   }
   // start at format index 0; onerror advances to the next format
   return `<img src="photos/${id}.${IMG_EXTS[0]}" class="${cls}" data-ix="0" onclick="uploadImg('${id}')" style="cursor:pointer" onerror="imgFallback(this,'${id}',${big})">`;
+}
+// Library placeholder: try other formats, then a neutral (non-plus) box, no upload
+function imgFallbackPlain(el,id){
+  let ix=parseInt(el.getAttribute('data-ix')||'0')+1;
+  if(ix<IMG_EXTS.length){el.setAttribute('data-ix',ix);el.src='photos/'+id+'.'+IMG_EXTS[ix];return;}
+  const ph=document.createElement('div');
+  ph.className='thumb-ph';
+  el.replaceWith(ph);
 }
 // On error: try the next file extension; if none left, show the + placeholder
 function imgFallback(el,id,big){
@@ -749,40 +877,40 @@ function imgFallback(el,id,big){
   ph.onclick=()=>uploadImg(id);
   el.replaceWith(ph);
 }
-function getStretch(id){return lib.find(s=>s.id===id);}
 
 /* ── THEME ── */
 const THEMES=[
-  {cat:'Calm',list:[
-    {id:'dark',name:'Dark',bg:'#0f0f0f',accent:'#c8f060'},
-    {id:'light',name:'Light',bg:'#f5f3ef',accent:'#5a8a00'},
-    {id:'sage',name:'Sage',bg:'#eef0e9',accent:'#6b8f5e'},
-    {id:'clay',name:'Clay',bg:'#f3e9e1',accent:'#c2683f'},
-    {id:'ocean',name:'Ocean',bg:'#0e1a24',accent:'#4fb3d9'},
-    {id:'dusk',name:'Dusk',bg:'#1a1628',accent:'#b18cf0'},
+  {cat:'Technical',list:[
+    {id:'blueprint',name:'Blueprint',bg:'#0a0e22',accent:'#ed3426'},
+    {id:'concrete',name:'Concrete',bg:'#26282b',accent:'#ed3426'},
+    {id:'paper',name:'Paper',bg:'#ddd7c9',accent:'#d62f23'},
   ]},
-  {cat:'Utility',list:[
-    {id:'amoled',name:'AMOLED',bg:'#000000',accent:'#c8f060'},
-    {id:'contrast',name:'Contrast',bg:'#000000',accent:'#ffe600'},
-    {id:'mono',name:'Mono',bg:'#181818',accent:'#bbbbbb'},
-    {id:'future',name:'Future',bg:'#fafbfc',accent:'#2d6cff'},
+  {cat:'Nocturne',list:[
+    {id:'moonlight',name:'Moonlight',bg:'#0c1018',accent:'#8fb3ff'},
+    {id:'neon',name:'Neon',bg:'#08090d',accent:'#34e878'},
+    {id:'daybreak',name:'Daybreak',bg:'#e7eaf2',accent:'#3f5bd4'},
   ]},
-  {cat:'Sci-fi',list:[
-    {id:'scifi',name:'Sci-fi',bg:'#060d17',accent:'#22d3ee'},
-    {id:'techno',name:'Techno',bg:'#0d0716',accent:'#ff2bd6'},
+  {cat:'Terrain',list:[
+    {id:'clay',name:'Clay',bg:'#211712',accent:'#d9542f'},
+    {id:'ocean',name:'Ocean',bg:'#06151a',accent:'#2bb6c7'},
+    {id:'sage',name:'Sage',bg:'#e2e7da',accent:'#5f8a3a'},
   ]},
-  {cat:'Celestial',list:[
-    {id:'galaxy',name:'Galaxy',bg:'#0b0820',accent:'#9d7bff'},
-    {id:'starlight',name:'Starlight',bg:'#0a0f1e',accent:'#d4dcf0'},
-    {id:'moonlight',name:'Moonlight',bg:'#11161f',accent:'#8fb3d9'},
-    {id:'cosmic',name:'Cosmic',bg:'#050308',accent:'#7af0d4'},
+  {cat:'Mineral',list:[
+    {id:'amethyst',name:'Amethyst',bg:'#1a1230',accent:'#b884ff'},
+    {id:'topaz',name:'Topaz',bg:'#1a160e',accent:'#e6b143'},
+    {id:'quartz',name:'Quartz',bg:'#f0e8ed',accent:'#c44d8a'},
+  ]},
+  {cat:'Mono',list:[
+    {id:'noir',name:'Noir',bg:'#0a0a0b',accent:'#d4d4d8'},
+    {id:'slate',name:'Slate',bg:'#14171c',accent:'#8b9bb4'},
+    {id:'bone',name:'Bone',bg:'#e9e9e7',accent:'#3f3f46'},
   ]},
 ];
-const THEME_BG={};THEMES.forEach(c=>c.list.forEach(t=>THEME_BG[t.id]=t.bg));
-function themeName(id){for(const c of THEMES)for(const t of c.list)if(t.id===id)return t.name;return 'Dark';}
+const THEME_BG={blueprint:'#0a0e22',carbon:'#0d0d0f',concrete:'#26282b',paper:'#ddd7c9',cyan:'#06141a',amber:'#1a1408',moonlight:'#0c1018',sunset:'#1a0f1e',neon:'#08090d',clay:'#211712',ocean:'#06151a',moss:'#10160f',amethyst:'#1a1230',garnet:'#1c0d10',topaz:'#1a160e',daybreak:'#e7eaf2',sand:'#e8dec9',quartz:'#f0e8ed',sage:'#e2e7da',noir:'#0a0a0b',slate:'#14171c',bone:'#e9e9e7'};
+function themeName(id){for(const c of THEMES)for(const t of c.list)if(t.id===id)return t.name;return id?id.charAt(0).toUpperCase()+id.slice(1):'Blueprint';}
 function setTheme(t){
   document.documentElement.setAttribute('data-theme',t);
-  document.getElementById('theme-color-meta').content=THEME_BG[t]||'#0f0f0f';
+  document.getElementById('theme-color-meta').content=THEME_BG[t]||'#0a0e22';
   saveSetting('theme',t);
   const lbl=document.getElementById('theme-current');if(lbl)lbl.textContent=themeName(t);
   document.querySelectorAll('.theme-sw').forEach(sw=>sw.classList.toggle('on',sw.dataset.t===t));
@@ -802,7 +930,7 @@ function renderThemeGrid(){
   });
   g.innerHTML=html;
 }
-setTheme(settings.theme||'dark');
+setTheme(settings.theme||'blueprint');
 
 
 /* ── AUDIO + VOICE ── */
@@ -821,35 +949,60 @@ function beep(freq,dur,vol,delay){tone(freq,dur,vol,delay,settings.soundWave||'s
 
 // Sound option library — richer, smoother patterns. Each is a named pattern.
 const SOUNDS={
-  chime:    ()=>{tone(880,0.18,0.3,0,'sine');tone(1320,0.14,0.12,0.01,'sine');},
-  ding:     ()=>{tone(1047,0.22,0.32,0,'sine');tone(1568,0.12,0.1,0,'sine');},
-  blip:     ()=>{tone(560,0.07,0.28,0,'triangle');},
-  marimba:  ()=>{tone(587,0.16,0.32,0,'sine');tone(880,0.14,0.2,0.08,'sine');tone(1175,0.12,0.12,0.16,'sine');},
-  pluck:    ()=>{tone(660,0.09,0.3,0,'triangle');tone(660,0.14,0.12,0.02,'sine');},
-  rise:     ()=>{tone(523,0.1,0.28,0,'sine');tone(659,0.1,0.3,0.1,'sine');tone(880,0.16,0.34,0.2,'sine');},
-  fall:     ()=>{tone(880,0.1,0.3,0,'sine');tone(659,0.1,0.3,0.1,'sine');tone(523,0.16,0.32,0.2,'sine');},
-  twotone:  ()=>{tone(700,0.12,0.3,0,'sine');tone(1050,0.16,0.32,0.13,'sine');},
-  wiggle:   ()=>{tone(659,0.1,0.28,0,'sine');tone(880,0.1,0.3,0.1,'sine');tone(659,0.14,0.3,0.2,'sine');},
-  bell:     ()=>{tone(784,0.4,0.32,0,'sine');tone(1175,0.3,0.14,0.01,'sine');tone(1568,0.2,0.07,0.02,'sine');},
-  fanfare:  ()=>{tone(523,0.16,0.36,0,'sine');tone(659,0.16,0.36,0.16,'sine');tone(784,0.16,0.36,0.32,'sine');tone(1047,0.4,0.4,0.48,'sine');},
-  chord:    ()=>{tone(523,0.6,0.26,0,'sine');tone(659,0.6,0.24,0,'sine');tone(784,0.6,0.24,0,'sine');tone(1047,0.6,0.18,0,'sine');},
-  sparkle:  ()=>{tone(1047,0.1,0.26,0,'sine');tone(1319,0.1,0.26,0.08,'sine');tone(1568,0.1,0.26,0.16,'sine');tone(2093,0.18,0.24,0.24,'sine');},
-  gong:     ()=>{tone(196,0.7,0.4,0,'sine');tone(294,0.6,0.18,0.01,'sine');tone(98,0.7,0.2,0,'sine');},
-  arcade:   ()=>{tone(523,0.08,0.28,0,'square');tone(784,0.08,0.26,0.08,'square');tone(1047,0.16,0.28,0.16,'square');},
-  tick:     ()=>{tone(1200,0.05,0.22,0,'triangle');},
-  soft:     ()=>{tone(640,0.12,0.22,0,'sine');},
+  // — switch sides —
+  wiggle:()=>{tone(659,0.1,0.28,0,'sine');tone(880,0.1,0.3,0.1,'sine');tone(659,0.14,0.3,0.2,'sine');},
+  bellpair:()=>{tone(880,0.3,0.3,0,'sine');tone(1108,0.34,0.28,0.16,'sine');},
+  triping:()=>{tone(1318,0.08,0.26,0,'sine');tone(1318,0.08,0.26,0.1,'sine');tone(1318,0.12,0.26,0.2,'sine');},
+  pingpong2:()=>{tone(988,0.1,0.28,0,'sine');tone(1318,0.1,0.28,0.1,'sine');tone(988,0.12,0.28,0.2,'sine');},
+  sw_rock:()=>{tone(740,0.1,0.28,0,'sine');tone(554,0.1,0.28,0.1,'sine');tone(740,0.1,0.28,0.2,'sine');tone(554,0.14,0.3,0.3,'sine');},
+  sw_flutter:()=>{tone(880,0.08,0.26,0,'sine');tone(988,0.08,0.28,0.09,'sine');tone(880,0.08,0.26,0.18,'sine');tone(988,0.12,0.3,0.27,'sine');},
+  sw_wobble_oct:()=>{tone(523,0.11,0.28,0,'sine');tone(1047,0.11,0.3,0.11,'sine');tone(523,0.15,0.3,0.22,'sine');},
+  sw_low_3rd:()=>{tone(392,0.11,0.3,0,'sine');tone(494,0.11,0.32,0.11,'sine');tone(392,0.15,0.32,0.22,'sine');},
+  sw_inv_5th:()=>{tone(880,0.11,0.28,0,'sine');tone(587,0.11,0.3,0.11,'sine');tone(880,0.15,0.3,0.22,'sine');},
+  sw_inv_oct:()=>{tone(1047,0.11,0.28,0,'sine');tone(523,0.11,0.3,0.11,'sine');tone(1047,0.15,0.3,0.22,'sine');},
+  sw_min_wide:()=>{tone(494,0.11,0.28,0,'sine');tone(740,0.11,0.3,0.11,'sine');tone(494,0.15,0.3,0.22,'sine');},
+  // — next stretch —
+  notify:()=>{tone(784,0.1,0.3,0,'sine');tone(1175,0.16,0.32,0.1,'sine');},
+  pad:()=>{tone(440,0.5,0.18,0,'sine');tone(554,0.5,0.14,0,'sine');},
+  crystal:()=>{tone(1568,0.5,0.24,0,'sine');tone(2349,0.36,0.1,0.03,'sine');},
+  glow:()=>{tone(659,0.5,0.14,0,'sine');tone(988,0.36,0.08,0.08,'sine');},
+  pixel:()=>{tone(1047,0.05,0.26,0,'square');tone(1047,0.05,0.26,0.08,'square');},
+  nx_soft:()=>{tone(740,0.4,0.26,0,'sine');tone(880,0.3,0.18,0.04,'sine');},
+  // — countdown —
+  ping:()=>{tone(1318,0.16,0.28,0,'sine');},
+  softping:()=>{tone(880,0.18,0.22,0,'sine');},
+  tick:()=>{tone(1200,0.05,0.22,0,'triangle');},
   woodblock:()=>{tone(900,0.05,0.3,0,'triangle');tone(1800,0.03,0.1,0,'sine');},
-  drop:     ()=>{tone(784,0.1,0.28,0,'sine');tone(523,0.16,0.3,0.08,'sine');},
-  ping:     ()=>{tone(1318,0.16,0.28,0,'sine');},
+  beep:()=>{tone(800,0.08,0.26,0,'sine');},
+  metronome:()=>{tone(1000,0.04,0.3,0,'square');},
+  pluck2:()=>{tone(523,0.1,0.3,0,'triangle');tone(523,0.16,0.1,0.02,'sine');},
+  cd_chime:()=>{tone(1047,0.18,0.28,0,'sine');},
+  cd_soft:()=>{tone(784,0.16,0.24,0,'sine');},
+  cd_round:()=>{tone(880,0.2,0.26,0,'sine');},
+  // — routine complete —
+  celebrate:()=>{tone(523,0.1,0.34,0,'sine');tone(784,0.1,0.34,0.1,'sine');tone(1047,0.1,0.34,0.2,'sine');tone(1319,0.3,0.36,0.3,'sine');},
+  bigwin:()=>{tone(392,0.16,0.36,0,'triangle');tone(523,0.16,0.36,0.16,'triangle');tone(659,0.16,0.36,0.32,'triangle');tone(1047,0.5,0.42,0.48,'triangle');},
+  chime_done:()=>{tone(784,0.2,0.3,0,'sine');tone(1175,0.2,0.3,0.16,'sine');tone(1568,0.4,0.32,0.32,'sine');},
+  done_hirajoshi:()=>{tone(523,0.18,0.32,0,'sine');tone(587,0.18,0.32,0.18,'sine');tone(698,0.18,0.32,0.36,'sine');tone(784,0.18,0.34,0.54,'sine');tone(1047,0.55,0.4,0.72,'sine');},
+  done_mixo:()=>{tone(523,0.16,0.32,0,'triangle');tone(659,0.16,0.32,0.16,'triangle');tone(784,0.16,0.32,0.32,'triangle');tone(932,0.16,0.34,0.48,'triangle');tone(1047,0.5,0.4,0.64,'triangle');},
+  done_fanfare:()=>{tone(392,0.16,0.36,0,'triangle');tone(523,0.16,0.36,0.16,'triangle');tone(659,0.16,0.36,0.32,'triangle');tone(784,0.16,0.38,0.48,'triangle');tone(1047,0.55,0.42,0.64,'triangle');},
+  done_chordlong:()=>{tone(523,0.14,0.28,0,'sine');tone(659,0.14,0.28,0.14,'sine');tone(784,0.14,0.28,0.28,'sine');tone(1047,0.14,0.3,0.42,'sine');tone(523,0.7,0.24,0.56,'sine');tone(659,0.7,0.22,0.56,'sine');tone(784,0.7,0.22,0.56,'sine');tone(1047,0.7,0.2,0.56,'sine');},
+  done_shimmer:()=>{tone(880,0.2,0.24,0,'sine');tone(1175,0.2,0.24,0.2,'sine');tone(1568,0.2,0.26,0.4,'sine');tone(1976,0.2,0.26,0.6,'sine');tone(1568,0.55,0.28,0.8,'sine');},
+  done_temple:()=>{tone(523,0.4,0.32,0,'sine');tone(659,0.4,0.28,0.3,'sine');tone(784,0.4,0.28,0.6,'sine');tone(1047,0.8,0.36,0.9,'sine');},
+  done_gong:()=>{tone(147,0.6,0.4,0,'sine');tone(220,0.5,0.2,0.3,'sine');tone(294,0.5,0.18,0.6,'sine');tone(294,0.9,0.32,0.9,'sine');tone(147,0.9,0.2,0.9,'sine');},
+  done_chime:()=>{tone(784,0.18,0.3,0,'sine');tone(1047,0.18,0.3,0.18,'sine');tone(1319,0.18,0.3,0.36,'sine');tone(1047,0.18,0.3,0.54,'sine');tone(1568,0.5,0.32,0.72,'sine');},
+  done_majpenta:()=>{tone(523,0.14,0.3,0,'sine');tone(587,0.14,0.3,0.14,'sine');tone(659,0.14,0.3,0.28,'sine');tone(784,0.14,0.32,0.42,'sine');tone(880,0.14,0.34,0.56,'sine');tone(1047,0.5,0.4,0.7,'sine');},
+  done_grand:()=>{tone(523,0.16,0.34,0,'sine');tone(784,0.16,0.34,0.16,'sine');tone(1047,0.16,0.36,0.32,'sine');tone(1319,0.16,0.36,0.48,'sine');tone(1568,0.16,0.38,0.64,'sine');tone(2093,0.6,0.42,0.8,'sine');},
+  done_gentle:()=>{tone(659,0.2,0.26,0,'sine');tone(784,0.2,0.26,0.2,'sine');tone(988,0.2,0.28,0.4,'sine');tone(880,0.2,0.28,0.6,'sine');tone(1047,0.6,0.32,0.8,'sine');},
 };
-// Which sound options are offered per event
+const ALL_SOUNDS=Object.keys(SOUNDS);
 const SOUND_CHOICES={
-  switchSide:['twotone','wiggle','rise','bell','drop'],
-  nextUp:    ['ding','marimba','pluck','soft','ping'],
-  countdown: ['tick','blip','woodblock','soft','ping'],
-  done:      ['fanfare','chord','bell','sparkle','gong'],
+  switchSide:["wiggle","bellpair","triping","pingpong2","sw_rock","sw_flutter","sw_wobble_oct","sw_low_3rd","sw_inv_5th","sw_inv_oct","sw_min_wide"],
+  nextUp:["notify","pad","crystal","glow","pixel","nx_soft"],
+  countdown:["ping","softping","tick","woodblock","beep","metronome","pluck2","cd_chime","cd_soft","cd_round"],
+  done:["celebrate","bigwin","chime_done","done_hirajoshi","done_mixo","done_fanfare","done_chordlong","done_shimmer","done_temple","done_gong","done_chime","done_majpenta","done_grand","done_gentle"],
 };
-const SOUND_DEFAULTS={switchSide:'twotone',nextUp:'ding',countdown:'tick',done:'fanfare'};
+const SOUND_DEFAULTS={switchSide:'wiggle',nextUp:'notify',countdown:'ping',done:'celebrate'};
 function soundFor(event){
   const chosen=(settings.sounds&&settings.sounds[event])||SOUND_DEFAULTS[event];
   return SOUNDS[chosen]?chosen:SOUND_DEFAULTS[event];
@@ -874,24 +1027,39 @@ function playSound(type){
   else if(type==='pnfRelax')tone(550,0.15,0.35,0,'sine');
 }
 function previewSound(name){if(SOUNDS[name])SOUNDS[name]();}
-function testSounds(){playSound('switchSide');setTimeout(()=>playSound('prepEnd'),700);setTimeout(()=>playSound('countdown'),1300);setTimeout(()=>{playSound('done');speak('Test');},1900);}
 document.addEventListener('touchstart',()=>{try{getCtx().resume();}catch(e){}},{once:true});
 
 /* ── NAV ── */
 function show(p){
   if(p!=='go')releaseWakeLock();
   document.querySelectorAll('.pg').forEach(el=>el.classList.remove('on'));
-  // nav highlight: setup/go map to no specific tab highlight beyond go
-  const navMap={routines:'routines',library:'library',go:'go',setup:'routines',progress:'progress',settings:'settings',guide:'library'};
+  // nav highlight (editing a routine lights Routines; the timer lights none)
+  const navMap={routines:'routines',library:'library',setup:'routines',progress:'progress',settings:'settings',guide:'library'};
   document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.p===navMap[p]));
   document.getElementById('pg-'+p).classList.add('on');
   window.scrollTo(0,0);
+  updateGoNav();
   if(p==='routines')renderRoutines();
   if(p==='library')renderLib();
   if(p==='setup')renderSetup();
   if(p==='progress')renderProgress();
   if(p==='guide')renderGuide();
   if(p==='settings')renderSettings();
+}
+function updateGoNav(){updateResumeBar();}
+function fmtT(s){s=Math.max(0,Math.round(s));return s>=60?Math.floor(s/60)+':'+String(s%60).padStart(2,'0'):s+'s';}
+function updateResumeBar(){
+  const bar=document.getElementById('resume-bar');if(!bar)return;
+  const onTimer=document.getElementById('pg-go').classList.contains('on');
+  const live=sessionActive&&sessionStretches.length&&tIdx<sessionStretches.length;
+  if(live&&!onTimer){
+    const cur=sessionStretches[tIdx];
+    document.getElementById('rb-name').textContent=cur?cur.name:'Session';
+    document.getElementById('rb-sub').textContent=(tIdx+1)+' / '+sessionStretches.length+(tInterval?'':' · paused');
+    document.getElementById('rb-time').textContent=fmtT(tLeft);
+    document.getElementById('rb-prog').style.width=(100*tIdx/sessionStretches.length).toFixed(1)+'%';
+    bar.classList.add('on');document.body.classList.add('has-resume');
+  } else {bar.classList.remove('on');document.body.classList.remove('has-resume');}
 }
 
 /* ── SETTINGS UI ── */
@@ -925,7 +1093,6 @@ function renderSettings(){
   const vol=s.volume!=null?s.volume:0.8;
   document.getElementById('set-vol').value=vol;
   document.getElementById('vol-label').textContent=Math.round(vol*100)+'%';
-  document.getElementById('tog-equip').checked=!!s.showEquip;
   const sk=document.getElementById('tog-skipprep');if(sk)sk.checked=!!s.skipFirstPrep;
   renderThemeGrid();
   renderSoundPickers();
@@ -954,22 +1121,49 @@ function pickSound(ev,name){
   previewSound(name);
   renderSoundPickers();
 }
+function rankVoice(v){
+  const n=(v.name||'').toLowerCase();
+  let score=0;
+  // strongly prefer modern neural/premium engines
+  if(/neural|natural|enhanced|premium|wavenet|studio/.test(n))score+=100;
+  // OS-bundled high-quality voices (Apple, Google, Microsoft Online)
+  if(v.localService===false)score+=15; // cloud voices are usually higher fidelity
+  if(/google/.test(n)&&v.lang&&v.lang.startsWith('en'))score+=40;
+  if(/siri/.test(n))score+=60;
+  if(/online|microsoft.*online/.test(n))score+=35;
+  // known good Apple system voices (compact/eloquence are not)
+  if(/samantha|alex|ava|tom|zoe|nicky|aaron|evan|nathan|allison|susan|karen|daniel|moira|tessa|fiona|serena|rishi|stephanie/.test(n))score+=25;
+  // explicitly downrank known low-quality/robotic engines
+  if(/compact|espeak|festival|pico|robot|whisper(?!.*neural)/.test(n))score-=80;
+  if(/microsoft (zira|david|mark|james|hazel|catherine)(?! online)/.test(n))score-=20; // legacy SAPI voices
+  return score;
+}
 function renderVoicePicker(){
   const el=document.getElementById('voice-options');if(!el)return;
   if(!settings.voiceOn){el.innerHTML='';return;}
   let voices=[];
   try{voices=speechSynthesis.getVoices();}catch(e){}
   const localVoices=voices.filter(v=>v.lang&&v.lang.startsWith('en'));
-  const list=localVoices.length?localVoices:voices;
+  const pool=localVoices.length?localVoices:voices;
+  const ranked=pool.map(v=>({v,score:rankVoice(v)})).sort((a,b)=>b.score-a.score);
+  const goodOnly=!!settings.voiceFilterGood;
+  // "best" = clearly above the low-quality cutoff; if nothing scores well, fall back to showing all
+  const best=ranked.filter(r=>r.score>0);
+  const list=(goodOnly&&best.length)?best.map(r=>r.v):ranked.map(r=>r.v);
   let opts='<option value="">Device default</option>'+list.map(v=>`<option value="${v.voiceURI}" ${settings.voiceURI===v.voiceURI?'selected':''}>${v.name} (${v.lang})</option>`).join('');
   el.innerHTML=`
-    <div class="srow"><div><div class="slbl">Voice</div><div class="ssub">${list.length?list.length+' available on this device':'Loading voices…'}</div></div></div>
+    <div class="srow"><div><div class="slbl">Voice</div><div class="ssub">${best.length?best.length+' high-quality voice'+(best.length!==1?'s':'')+' found':'No high-quality voices detected on this device'}</div></div></div>
     <div style="padding:0 16px 12px"><select class="fi" id="voice-select" onchange="saveSetting('voiceURI',this.value);previewVoice()" style="margin:0">${opts}</select></div>
+    ${best.length&&best.length<ranked.length?`<div class="srow"><div><div class="slbl">Best voices only</div><div class="ssub">Hide low-quality / robotic voices</div></div>
+      <label class="tog"><input type="checkbox" ${goodOnly?'checked':''} onchange="saveSetting('voiceFilterGood',this.checked);renderVoicePicker()"><span class="tog-sl"></span></label></div>`:''}
     <div class="srow"><div><div class="slbl">Speed</div><div class="ssub" id="vrate-label">${(settings.voiceRate||1).toFixed(1)}x</div></div>
       <input type="range" min="0.5" max="1.5" step="0.1" value="${settings.voiceRate||1}" oninput="setVoiceRate(this.value)" style="width:90px;accent-color:var(--accent)"></div>
     <div class="srow"><div><div class="slbl">Pitch</div><div class="ssub" id="vpitch-label">${(settings.voicePitch||1).toFixed(1)}</div></div>
       <input type="range" min="0.5" max="1.5" step="0.1" value="${settings.voicePitch||1}" oninput="setVoicePitch(this.value)" style="width:90px;accent-color:var(--accent)"></div>
-    <div class="srow"><button class="btn sm" onclick="previewVoice()">▶ preview voice</button></div>`;
+    <div class="srow"><button class="btn sm" onclick="previewVoice()">▶ preview voice</button></div>
+    ${!best.length?'<div class="srow"><div class="ssub" style="line-height:1.5">This device doesn\u2019t expose any premium voices to the browser. On iOS/macOS, downloading an "Enhanced" or "Premium" Siri voice in Settings \u2192 Accessibility \u2192 Spoken Content usually fixes this.</div></div>':''}`;
+  // auto-pick the top-ranked voice the first time voice cues are enabled, so people aren't stuck on a bad default
+  if(!settings.voiceURI&&best.length){saveSetting('voiceURI',best[0].v.voiceURI);el.querySelector('#voice-select').value=best[0].v.voiceURI;}
 }
 function setVoiceRate(v){settings.voiceRate=parseFloat(v);document.getElementById('vrate-label').textContent=parseFloat(v).toFixed(1)+'x';saveSetting('voiceRate',settings.voiceRate);}
 function setVoicePitch(v){settings.voicePitch=parseFloat(v);document.getElementById('vpitch-label').textContent=parseFloat(v).toFixed(1);saveSetting('voicePitch',settings.voicePitch);}
@@ -978,7 +1172,6 @@ if('speechSynthesis' in window){speechSynthesis.onvoiceschanged=()=>{if(document
 function adjPrepTime(d){settings.prepTime=Math.max(0,Math.min(60,settings.prepTime+d));document.getElementById('set-prep').textContent=settings.prepTime+'s';saveSetting('prepTime',settings.prepTime);}
 function adjSwitchTime(d){const cur=settings.switchTime!=null?settings.switchTime:4;settings.switchTime=Math.max(0,Math.min(30,cur+d));document.getElementById('set-switch').textContent=settings.switchTime+'s';saveSetting('switchTime',settings.switchTime);}
 function setVol(v){settings.volume=parseFloat(v);document.getElementById('vol-label').textContent=Math.round(v*100)+'%';saveSetting('volume',settings.volume);}
-function pitchLabel(v){return v<0.8?'Low':v>1.3?'High':'Normal';}
 
 
 /* ── GUIDE ── */
@@ -1019,7 +1212,7 @@ function renderRoutines(){
       ${canReorder?'<span class="dh" style="font-size:18px;opacity:0.4" onclick="event.stopPropagation()">⠿</span>':''}
       <div style="flex:1"><div style="font-size:16px">${r.name}${r.day?` <span style="font-size:10px;color:var(--accent);font-family:'DM Mono',monospace">${r.day.slice(0,3)}</span>`:''}</div>
       <div style="font-size:12px;color:var(--muted);margin-top:3px">${r.stretches.length} stretches · ~${Math.max(1,mins)} min</div></div>
-      <button class="btn sm" onclick="event.stopPropagation();loadRoutine(${i})">open</button>
+      <button class="btn sm ac" onclick="event.stopPropagation();goRoutine(${i})">go</button>
       <button class="btn sm" onclick="event.stopPropagation();routineMenu(${i})">⋯</button>
     </div>`;
   }).join('');
@@ -1034,7 +1227,6 @@ function routineMenu(i){
     <p style="font-size:12px;color:var(--muted);margin-bottom:16px">${r.stretches.length} stretches · ~${Math.max(1,Math.round(r.stretches.reduce((a,s)=>a+s.dur,0)/60))} min</p>
     <div style="display:flex;flex-direction:column;gap:10px">
       <button class="btn" onclick="renameRoutine(${i})">✏️ Rename</button>
-      <button class="btn" onclick="editRoutineContents(${i})">⠿ Edit stretches</button>
       <button class="btn" onclick="scheduleRoutine(${i})">📅 Schedule day${r.day?' · '+r.day.slice(0,3):''}</button>
       <button class="btn" onclick="routineTiming(${i})">⏱ Timing overrides${r.prepTime!=null||r.switchTime!=null?' · on':''}</button>
       <button class="btn" onclick="duplicateRoutine(${i})">⧉ Duplicate</button>
@@ -1075,6 +1267,7 @@ function saveRoutineTiming(i){
   const sw=document.getElementById('rt-switch').value;
   if(p==='')delete routines[i].prepTime;else routines[i].prepTime=Math.max(0,Math.min(60,+p));
   if(sw==='')delete routines[i].switchTime;else routines[i].switchTime=Math.max(0,Math.min(30,+sw));
+  if(window._editingRoutine===i){window._routinePrep=routines[i].prepTime;window._routineSwitch=routines[i].switchTime;}
   save();closeModal();renderRoutines();
 }
 function renameRoutine(i){
@@ -1083,29 +1276,30 @@ function renameRoutine(i){
     <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmRename(${i})">Save</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
   setTimeout(()=>{const el=document.getElementById('m-rename');if(el){el.focus();el.select();}},80);
 }
-function confirmRename(i){const n=document.getElementById('m-rename')?.value.trim();if(!n)return;routines[i].name=n;save();closeModal();renderRoutines();}
-function editRoutineContents(i){
-  // load into setup, but remember we're editing this routine index
-  session=routines[i].stretches.map(s=>({...s,qid:uid()}));
-  window._setupTitle=routines[i].name;
-  window._editingRoutine=i;
-  save();closeModal();show('setup');
-}
+function confirmRename(i){const n=document.getElementById('m-rename')?.value.trim();if(!n)return;routines[i].name=n;if(window._editingRoutine===i)window._setupTitle=n;save();closeModal();renderRoutines();if(document.getElementById('pg-setup').classList.contains('on'))renderSetup();}
 function duplicateRoutine(i){
   const r=routines[i];
   routines.push({id:uid(),name:r.name+' (copy)',stretches:r.stretches.map(s=>({...s,qid:uid()}))});
   save();closeModal();renderRoutines();
 }
-function loadRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=null;window._routinePrep=routines[i].prepTime;window._routineSwitch=routines[i].switchTime;save();show('setup');}
-function delRoutine(i){if(!confirm('Delete "'+routines[i].name+'"?'))return;routines.splice(i,1);save();closeModal();renderRoutines();}
+function loadRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=i;window._routinePrep=routines[i].prepTime;window._routineSwitch=routines[i].switchTime;save();show('setup');}
+function goRoutine(i){session=routines[i].stretches.map(s=>({...s,qid:uid()}));window._setupTitle=routines[i].name;window._editingRoutine=null;window._routinePrep=routines[i].prepTime;window._routineSwitch=routines[i].switchTime;save();startGo();}
+function delRoutine(i){confirmSheet('Delete "'+routines[i].name+'"? This can\u2019t be undone.',()=>doDelRoutine(i));}
+function doDelRoutine(i){routines.splice(i,1);
+  if(window._editingRoutine===i){window._editingRoutine=null;save();show('routines');return;}
+  if(window._editingRoutine!=null&&window._editingRoutine>i)window._editingRoutine--;
+  save();renderRoutines();}
+function openRoutineOptions(){if(window._editingRoutine!=null&&routines[window._editingRoutine])routineMenu(window._editingRoutine);}
 
 /* ── SESSION SETUP ── */
 function renderSetup(){
   document.getElementById('setup-title').textContent=window._setupTitle||'session';
   document.getElementById('setup-count').textContent=session.length+' stretch'+(session.length!==1?'es':'');
+  const editing=window._editingRoutine!=null&&routines[window._editingRoutine];
+  document.getElementById('setup-opts').style.display=editing?'':'none';
   // save slot adapts: editing existing routine vs new
   const slot=document.getElementById('setup-save-slot');
-  if(window._editingRoutine!=null&&routines[window._editingRoutine]){
+  if(editing){
     slot.innerHTML=`<button class="btn ac" style="width:100%;margin-bottom:8px" onclick="saveRoutineChanges()">save changes to "${routines[window._editingRoutine].name}"</button>
       <button class="btn" style="width:100%" onclick="saveSetupAsRoutine()">save as new routine</button>`;
   } else {
@@ -1118,7 +1312,7 @@ function renderSetup(){
       <div class="qi2-top">
         <span class="dh">⠿</span>
         ${imgTag(s.id)}
-        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span>${s.bilateral?' · ↔':''}</div></div>
+        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${catOf(s)}</span>${s.bilateral?BILAT:''}</div></div>
         <button class="xbtn" onclick="removeSetup(${i})">✕</button>
       </div>
       <div class="qi2-bot">
@@ -1151,15 +1345,6 @@ function saveRoutineChanges(){
   if(btn){const o=btn.textContent;btn.textContent='✓ saved!';setTimeout(()=>{if(btn)btn.textContent=o;},1500);}
 }
 
-function quickStart(){
-  // nav "go" button: resume an in-progress session, else open setup, else routines
-  if(sessionActive&&sessionStretches.length&&tIdx<sessionStretches.length){
-    show('go');renderTimer();return;
-  }
-  if(session.length){show('setup');}
-  else{show('routines');}
-}
-
 /* ── TIMER ── */
 function startGo(){
   if(!session.length){alert('Add some stretches first.');return;}
@@ -1169,16 +1354,15 @@ function startGo(){
   tPhase=(ePrep()>0&&!skipFirst)?'prep':'stretch';
   tLeft=tPhase==='prep'?ePrep():sessionStretches[0].dur;
   _sessionStart=Date.now();
-  sessionActive=true;
+  sessionActive=true;updateGoNav();
   requestWakeLock();
   show('go');renderTimer();
 }
-function endRoutine(){
-  if(!confirm('End this session? Your progress won\u2019t be logged.'))return;
+function endRoutine(){confirmSheet('End this session? Your progress won\u2019t be logged.',()=>{
   clearInterval(tInterval);tInterval=null;stopBreathPacer();releaseWakeLock();
-  sessionActive=false;tIdx=0;
+  sessionActive=false;tIdx=0;updateGoNav();
   show('setup');
-}
+},'End session');}
 let sessionActive=false;
 let _sessionStart=null,pnfCycle=0,switchReturn=0;
 // Effective timing: routine override (stashed on load) → global setting
@@ -1189,7 +1373,7 @@ function renderTimer(){
   const el=document.getElementById('go-inner');
   if(tIdx>=sessionStretches.length){
     logSession();
-    sessionActive=false;releaseWakeLock();
+    sessionActive=false;releaseWakeLock();updateGoNav();
     el.innerHTML=`<div class="done-pg"><div class="big">✓</div><h2>all done</h2><p id="done-sub">Great session.</p>
       <button class="btn ac" onclick="startGo()">go again</button>
       <button class="btn" style="margin-top:8px" onclick="show('routines')">done</button></div>`;
@@ -1217,7 +1401,7 @@ function renderTimer(){
       <button class="img-change" onclick="imgOptions('${s.id}')">change photo</button>
     </div>
     <div class="timer-body">
-      <div class="tlabel">${tPhase==='prep'?'get ready':tPhase==='switch'?'switch sides':s.area}</div>
+      <div class="tlabel">${tPhase==='prep'?'get ready':tPhase==='switch'?'switch sides':catOf(s)}</div>
       <div class="tname">${s.name}</div>
       ${tPhase==='prep'?`<div class="phase-banner prep" style="display:flex;align-items:center;gap:10px;justify-content:center">${imgSrc(s.id)?`<img src="${imgSrc(s.id)}" style="width:32px;height:32px;border-radius:6px;object-fit:cover" onerror="this.style.display='none'">`:''}<span>⏱ Next: ${s.name}</span></div>`:''}
       ${tPhase==='switch'?`<div class="phase-banner side">↔ Switch sides — reposition</div>`:''}
@@ -1227,8 +1411,8 @@ function renderTimer(){
         <div class="ring-wrap" id="ring-wrap" ontouchstart="ringTouchStart(event)" ontouchmove="ringTouchMove(event)" ontouchend="ringTouchEnd(event)" onmousedown="ringMouseDown(event)">
           <div class="breath-ring" id="breath-ring"></div>
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="60" r="54" fill="none" stroke="var(--border)" stroke-width="5"/>
-            <circle id="arc" cx="60" cy="60" r="54" fill="none" stroke="${ringCol}" stroke-width="5" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${(circ*(1-pct)).toFixed(1)}" stroke-linecap="round"/>
+            <circle cx="60" cy="60" r="54" fill="none" stroke="var(--border)" stroke-width="3.5"/>
+            <circle id="arc" cx="60" cy="60" r="54" fill="none" stroke="${ringCol}" stroke-width="6" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${(circ*(1-pct)).toFixed(1)}" stroke-linecap="round" style="filter:drop-shadow(0 0 5px ${ringCol})"/>
           </svg>
           <div class="tnum" id="tnum">${tLeft}</div>
         </div>
@@ -1244,7 +1428,7 @@ function renderTimer(){
       </div>
     </div>
     <div class="plist">
-      ${sessionStretches.map((q,i)=>`<div class="pl-row ${i<tIdx?'done':i===tIdx?'cur':''}"><div class="pl-dot"></div><span>${q.name}${q.bilateral?' ↔':''}</span><span class="pl-dur">${q.dur}s</span></div>`).join('')}
+      ${sessionStretches.map((q,i)=>`<div class="pl-row ${i<tIdx?'done':i===tIdx?'cur':''}"><div class="pl-dot"></div><span>${q.name}${q.bilateral?' '+BILAT:''}</span><span class="pl-dur">${q.dur}s</span></div>`).join('')}
     </div>`;
   if(settings.breathOn&&tPhase==='stretch'&&total>=40)startBreathPacer();
   if(isPlaying)tickT();
@@ -1301,6 +1485,7 @@ function tickT(){
   clearInterval(tInterval);
   tInterval=setInterval(()=>{
     if(scrubbing)return;
+    updateResumeBar();
     const s=sessionStretches[tIdx];
     if(tPhase==='stretch'&&s.bilateral&&!s.pnf&&settings.sideOn&&!sideSwitched&&tLeft===Math.floor(s.dur/2)){
       // pause briefly to switch sides
@@ -1439,7 +1624,7 @@ function randomModal(){
     const dur=parseInt(document.getElementById('rand-dur').value)||10;
     const cnt=parseInt(document.getElementById('rand-cnt').value)||8;
     const areas=window._randAreas.size?[...window._randAreas]:['neck','shoulders','back','hips','legs','core'];
-    let pool=lib.filter(s=>areas.includes(s.area)&&s.type!=='dynamic'&&(settings.showEquip||!s.equip));
+    let pool=lib.filter(s=>areas.includes(s.area)&&s.type!=='dynamic');
     // shuffle
     for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
     const picks=pool.slice(0,Math.min(cnt,pool.length));
@@ -1470,7 +1655,7 @@ function buildRoutineModal(){
     document.getElementById('m-build-list').innerHTML=filtered.map(s=>`
       <div class="build-stretch" onclick="toggleBuildSel('${s.id}')">
         <div class="check-circle ${selected.has(s.id)?'on':''}"></div>
-        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}</div></div>
+        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${catOf(s)}</span><span>${s.dur}s</span>${s.bilateral?BILAT:''}</div></div>
       </div>`).join('');
     document.getElementById('m-build-count').textContent=selected.size?`${selected.size} selected`:'';
   }
@@ -1479,7 +1664,7 @@ function buildRoutineModal(){
   window.toggleCustomForm=()=>{const f=document.getElementById('m-custom-form');f.style.display=f.style.display==='none'?'block':'none';};
   window.addCustomAndSelect=()=>{
     const n=document.getElementById('m-cs-name').value.trim();if(!n)return;
-    const s={id:slugId(n),name:n,area:document.getElementById('m-cs-area').value,desc:document.getElementById('m-cs-desc').value.trim(),cues:document.getElementById('m-cs-cues').value.trim(),dur:+document.getElementById('m-cs-dur').value||30,bilateral:document.getElementById('m-cs-bil').checked,pnf:document.getElementById('m-cs-pnf').checked};
+    const s={id:slugId(n),name:n,area:document.getElementById('m-cs-area').value,cat:document.getElementById('m-cs-area').value,desc:document.getElementById('m-cs-desc').value.trim(),cues:document.getElementById('m-cs-cues').value.trim(),dur:+document.getElementById('m-cs-dur').value||30,bilateral:document.getElementById('m-cs-bil').checked,pnf:document.getElementById('m-cs-pnf').checked};
     lib.push(s);save();selected.add(s.id);
     document.getElementById('m-cs-name').value='';document.getElementById('m-cs-desc').value='';document.getElementById('m-cs-cues').value='';
     document.getElementById('m-custom-form').style.display='none';renderList();
@@ -1502,7 +1687,7 @@ function buildRoutineModal(){
       <button class="btn" style="width:100%" onclick="toggleCustomForm()">+ add a custom stretch</button>
       <div id="m-custom-form" style="display:none;margin-top:10px">
         <label class="fl">Name</label><input class="fi" id="m-cs-name" placeholder="e.g. Hip flexor stretch">
-        <label class="fl">Area</label><select class="fi" id="m-cs-area"><option value="neck">neck</option><option value="shoulders">shoulders</option><option value="back">back</option><option value="hips">hips</option><option value="legs">legs</option><option value="core">core</option></select>
+        <label class="fl">Category</label><select class="fi" id="m-cs-area">${CATS.map(a=>`<option value="${a}">${a}</option>`).join('')}</select>
         <label class="fl">Instructions</label><textarea class="fi" id="m-cs-desc" rows="2"></textarea>
         <label class="fl">Coaching cues (shown on timer)</label><textarea class="fi" id="m-cs-cues" rows="2"></textarea>
         <label class="fl">Duration (seconds)</label><input class="fi" type="number" id="m-cs-dur" value="30" min="5" max="300">
@@ -1561,39 +1746,28 @@ function assignBatch(i,id){if(!id)return;userImgs[id]=batchQueue[i];save();rende
 
 /* ── LIBRARY ── */
 function renderLib(){
-  const areas=['neck','shoulders','back','hips','legs','core','nerve'];
-  const types=['dynamic','mobility','floss','restorative','balance'];
-  document.getElementById('lib-chips').innerHTML=['',...areas,...types].map(a=>`<button class="chip ${libArea===a?'on':''}" onclick="setArea('${a}')">${a||'all'}</button>`).join('');
+  document.getElementById('lib-chips').innerHTML=['',...CATS].map(a=>`<button class="chip ${libArea===a?'on':''}" onclick="setArea('${a}')">${a||'all'}</button>`).join('');
   const q=(document.getElementById('lib-search')?.value||'').toLowerCase();
-  const showEquip=!!settings.showEquip;
   const filtered=lib.filter(s=>{
-    if(!showEquip&&s.equip)return false;
-    const matchQ=!q||s.name.toLowerCase().includes(q)||(s.area||'').includes(q)||(s.desc||'').toLowerCase().includes(q);
-    if(types.includes(libArea))return s.type===libArea&&matchQ;
-    return (!libArea||s.area===libArea)&&matchQ;
+    const matchQ=!q||s.name.toLowerCase().includes(q)||(catOf(s).toLowerCase()).includes(q)||(s.sub||'').includes(q)||(s.desc||'').toLowerCase().includes(q);
+    return (!libArea||catOf(s)===libArea)&&matchQ;
   });
   const el=document.getElementById('lib-list');
-  if(!filtered.length){el.innerHTML='<div class="empty">No stretches found.'+(!showEquip?'<br><span style="font-size:12px">Tip: enable equipment stretches in Settings for more.</span>':'')+'</div>';return;}
+  if(!filtered.length){el.innerHTML='<div class="empty">No stretches found.</div>';return;}
   el.innerHTML=filtered.map(s=>{
-    const inS=session.some(q=>q.id===s.id);
-    const typeLabel=s.type&&s.type!=='static'?`<span class="type-pill">${s.type}</span> `:'';
+    const cat=catOf(s);
+    const typeLabel=s.type&&s.type!=='static'&&s.type.toLowerCase()!==cat.toLowerCase()?`<span class="type-pill">${s.type}</span>`:'';
     return`<div class="row">
-      <div onpointerdown="holdImgStart(event,'${s.id}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()">${imgTag(s.id)}</div>
-      <div class="ri" onclick="editStretchModal('${s.id}')" onpointerdown="holdRowStart(event,'${s.id}')" onpointerup="holdEnd()" onpointercancel="holdEnd()" onpointerleave="holdEnd()" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm">${typeLabel}<span class="pill">${s.area}</span> · ${s.dur}s${s.bilateral?' · ↔':''}</div></div>
-      ${inS?'<div class="qdot"></div>':''}
-      <button class="btn sm ${inS?'red':''}" onclick="toggleSession('${s.id}')">${inS?'remove':'add'}</button>
+      <div onclick="zoomImage('${s.id}')" style="cursor:pointer">${imgTag(s.id,{zoom:true})}</div>
+      <div class="ri" onclick="infoPopup('${s.id}')" style="cursor:pointer"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${cat}</span>${typeLabel}${s.bilateral?BILAT:''}</div></div>
+      <button class="btn addbtn" onclick="event.stopPropagation();addToRoutinePrompt('${s.id}')" title="add to a routine">+</button>
     </div>`;
   }).join('');
 }
-// press-and-hold handlers
-let holdTimer=null;
-function holdRowStart(e,id){clearTimeout(holdTimer);holdTimer=setTimeout(()=>{e.preventDefault&&e.preventDefault();infoPopup(id);},500);}
-function holdImgStart(e,id){clearTimeout(holdTimer);holdTimer=setTimeout(()=>{if(imgSrc(id)&&!String(imgSrc(id)).startsWith('photos/')||userImgs[id]){zoomImage(id);}else{zoomImage(id);}},500);}
-function holdEnd(){clearTimeout(holdTimer);}
 function infoPopup(id){
   const s=lib.find(l=>l.id===id);if(!s)return;
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:2px">${s.name}</p>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">${s.type||'static'} · ${s.area}${s.equip?' · '+s.equip:''}</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px">${s.type||'static'} · ${catOf(s)}${s.equip?' · '+s.equip:''}</p>
     <div class="info-pop">
       <div class="ip-row"><span class="ip-k">Duration</span><span>${s.dur}s${s.bilateral?' per side':''}</span></div>
       <div class="ip-row"><span class="ip-k">Type</span><span>${s.type||'static'}</span></div>
@@ -1601,8 +1775,8 @@ function infoPopup(id){
       <div class="ip-row"><span class="ip-k">How to</span><span>${s.desc||'—'}</span></div>
     </div>
     <div style="display:flex;gap:8px;margin-top:14px">
-      <button class="btn ac" style="flex:1" onclick="toggleSession('${id}');closeModal()">${session.some(q=>q.id===id)?'In session':'Add to session'}</button>
-      <button class="btn" onclick="editStretchModal('${id}')">Edit</button>
+      <button class="btn ac" style="flex:1" onclick="editStretchModal('${id}')">Edit</button>
+      <button class="btn" onclick="addToRoutinePrompt('${id}')">+ Add to routine</button>
     </div>
     <button class="btn ghost" style="width:100%;margin-top:8px" onclick="closeModal()">Close</button>`);
 }
@@ -1610,16 +1784,15 @@ function zoomImage(id){
   const src=userImgs[id]||('photos/'+id+'.jpg');
   let ov=document.getElementById('img-zoom');
   if(!ov){ov=document.createElement('div');ov.id='img-zoom';ov.className='img-zoom-overlay';ov.onclick=()=>ov.classList.remove('on');document.body.appendChild(ov);}
-  ov.innerHTML=`<img src="${src}" onerror="this.style.display='none'">`;
+  ov.innerHTML=`<img src="${src}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{innerHTML:'<div style=&quot;color:var(--muted);font-family:monospace;padding:40px;text-align:center&quot;>No image yet.<br>Tap a stretch → Edit to add one.</div>'}))">`;
   ov.classList.add('on');
 }
 function editStretchModal(id){
   const s=lib.find(l=>l.id===id);if(!s)return;
-  const areas=['neck','shoulders','back','hips','legs','core','nerve'];
   const fname=id+'.jpg';
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Edit stretch</p>
     <label class="fl">Name</label><input class="fi" id="e-name" value="${(s.name||'').replace(/"/g,'&quot;')}">
-    <label class="fl">Area</label><select class="fi" id="e-area">${areas.map(a=>`<option value="${a}" ${s.area===a?'selected':''}>${a}</option>`).join('')}</select>
+    <label class="fl">Category</label><select class="fi" id="e-area">${CATS.map(a=>`<option value="${a}" ${catOf(s)===a?'selected':''}>${a}</option>`).join('')}</select>
     <label class="fl">Instructions</label><textarea class="fi" id="e-desc" rows="2">${s.desc||''}</textarea>
     <label class="fl">Coaching cues</label><textarea class="fi" id="e-cues" rows="2">${s.cues||''}</textarea>
     <label class="fl">Default duration (seconds)</label><input class="fi" type="number" id="e-dur" value="${s.dur}" min="5" max="300">
@@ -1652,7 +1825,7 @@ function flashCopied(){
 function confirmEditStretch(id){
   const s=lib.find(l=>l.id===id);if(!s)return;
   const n=document.getElementById('e-name').value.trim();if(!n)return;
-  s.name=n;s.area=document.getElementById('e-area').value;
+  s.name=n;s.cat=document.getElementById('e-area').value;s.area=s.cat;
   s.desc=document.getElementById('e-desc').value.trim();
   s.cues=document.getElementById('e-cues').value.trim();
   s.dur=+document.getElementById('e-dur').value||30;
@@ -1660,23 +1833,82 @@ function confirmEditStretch(id){
   s.pnf=document.getElementById('e-pnf').checked;
   save();closeModal();renderLib();
 }
-function deleteStretch(id){
-  if(!confirm('Delete this stretch from the library? It stays in any saved routines.'))return;
+function deleteStretch(id){confirmSheet('Delete this stretch from the library? It stays in any saved routines.',()=>{
   const i=lib.findIndex(l=>l.id===id);if(i>=0)lib.splice(i,1);
   const si=session.findIndex(q=>q.id===id);if(si>=0)session.splice(si,1);
+  save();renderLib();
+});}
+function setArea(a){libArea=a;renderLib();}
+/* ── ADD A LIBRARY STRETCH TO A ROUTINE ── */
+function addToRoutinePrompt(id){
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:4px">Add "${s.name}"</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Add this stretch to a routine.</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn ac" onclick="addToNewRoutine('${id}')">+ New routine</button>
+      ${routines.length?`<button class="btn" onclick="pickExistingRoutine('${id}')">Add to existing routine</button>`:''}
+    </div>
+    <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function addToNewRoutine(id){
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">New routine</p>
+    <label class="fl">Name</label><input class="fi" id="m-nrn" placeholder="e.g. My morning flow" style="margin-bottom:14px">
+    <div style="display:flex;gap:8px"><button class="btn ac" style="flex:1" onclick="confirmNewRoutine('${id}')">Create</button><button class="btn" onclick="closeModal()">Cancel</button></div>`);
+  setTimeout(()=>document.getElementById('m-nrn')?.focus(),80);
+}
+function confirmNewRoutine(id){
+  const n=document.getElementById('m-nrn')?.value.trim();if(!n)return;
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  routines.push({id:uid(),name:n,stretches:[{...s,qid:uid()}]});
   save();closeModal();renderLib();
 }
-function setArea(a){libArea=a;renderLib();}
-function toggleSession(id){
-  const i=session.findIndex(q=>q.id===id);
-  if(i>=0)session.splice(i,1);
-  else{const s=lib.find(l=>l.id===id);if(s){session.push({...s,qid:uid()});if(!window._setupTitle)window._setupTitle='Custom session';}}
-  save();renderLib();
+function pickExistingRoutine(id){
+  const s=lib.find(l=>l.id===id);if(!s)return;
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Add to which routine?</p>
+    <div style="display:flex;flex-direction:column;gap:8px;max-height:50vh;overflow-y:auto">
+      ${routines.map((r,i)=>`<button class="btn" style="text-align:left" onclick="addToExistingRoutine('${id}',${i})">${r.name} <span style="color:var(--muted)">· ${r.stretches.length}</span></button>`).join('')}
+    </div>
+    <button class="btn ghost" style="width:100%;margin-top:10px" onclick="closeModal()">Cancel</button>`);
+}
+function addToExistingRoutine(id,ri){
+  const s=lib.find(l=>l.id===id);if(!s||!routines[ri])return;
+  routines[ri].stretches.push({...s,qid:uid()});
+  save();closeModal();renderLib();
+}
+function addToSessionModal(){
+  let selected=new Set();
+  function renderList(){
+    const q=(document.getElementById('m-add-search')?.value||'').toLowerCase();
+    const filtered=lib.filter(s=>(!q||s.name.toLowerCase().includes(q)||(s.area||'').includes(q)||(s.sub||'').includes(q)));
+    document.getElementById('m-add-list').innerHTML=filtered.map(s=>`
+      <div class="build-stretch" onclick="toggleAddSel('${s.id}')">
+        <div class="check-circle ${selected.has(s.id)?'on':''}"></div>
+        <div class="ri"><div class="rn">${s.name}</div><div class="rm"><span class="pill">${catOf(s)}</span><span>${s.dur}s</span>${s.bilateral?BILAT:''}</div></div>
+      </div>`).join('');
+    document.getElementById('m-add-count').textContent=selected.size?`${selected.size} selected`:'';
+  }
+  window.toggleAddSel=id=>{selected.has(id)?selected.delete(id):selected.add(id);renderList();};
+  window._addSearch=renderList;
+  window.confirmAddToSession=()=>{
+    if(!selected.size){closeModal();return;}
+    lib.filter(s=>selected.has(s.id)).forEach(s=>session.push({...s,qid:uid()}));
+    save();closeModal();renderSetup();
+  };
+  openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:12px">Add stretches</p>
+    <input class="fi" id="m-add-search" placeholder="Search stretches…" oninput="_addSearch()" style="margin-bottom:12px">
+    <div id="m-add-list" style="max-height:50vh;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;align-items:center">
+      <span id="m-add-count" style="flex:1;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace"></span>
+      <button class="btn ac" onclick="confirmAddToSession()">Add</button>
+      <button class="btn" onclick="closeModal()">Cancel</button>
+    </div>`);
+  renderList();
 }
 function addStretchModal(){
   openModal(`<p style="font-size:18px;font-weight:500;margin-bottom:14px">Custom stretch</p>
     <label class="fl">Name</label><input class="fi" id="m-cn" placeholder="e.g. Side bend">
-    <label class="fl">Area</label><select class="fi" id="m-ca"><option value="neck">neck</option><option value="shoulders">shoulders</option><option value="back">back</option><option value="hips">hips</option><option value="legs">legs</option><option value="core">core</option></select>
+    <label class="fl">Category</label><select class="fi" id="m-ca">${CATS.map(a=>`<option value="${a}">${a}</option>`).join('')}</select>
     <label class="fl">Instructions</label><textarea class="fi" id="m-cd" rows="2"></textarea>
     <label class="fl">Coaching cues (shown on timer)</label><textarea class="fi" id="m-cc" rows="2"></textarea>
     <label class="fl">Duration (seconds)</label><input class="fi" type="number" id="m-cdur" value="30" min="5" max="300">
@@ -1687,7 +1919,7 @@ function addStretchModal(){
 }
 function confirmAddStretch(){
   const n=document.getElementById('m-cn')?.value.trim();if(!n)return;
-  lib.push({id:slugId(n),name:n,area:document.getElementById('m-ca').value,desc:document.getElementById('m-cd').value.trim(),cues:document.getElementById('m-cc').value.trim(),dur:+document.getElementById('m-cdur').value||30,bilateral:document.getElementById('m-cbil').checked,pnf:document.getElementById('m-cpnf').checked});
+  lib.push({id:slugId(n),name:n,area:document.getElementById('m-ca').value,cat:document.getElementById('m-ca').value,desc:document.getElementById('m-cd').value.trim(),cues:document.getElementById('m-cc').value.trim(),dur:+document.getElementById('m-cdur').value||30,bilateral:document.getElementById('m-cbil').checked,pnf:document.getElementById('m-cpnf').checked});
   save();closeModal();renderLib();
 }
 
@@ -1705,11 +1937,12 @@ function onImportFile(e){
   r.onload=ev=>{
     try{
       const d=JSON.parse(ev.target.result);
-      if(!confirm('This will replace your current routines, library, images and history. Continue?'))return;
-      if(d.lib)lib=d.lib;if(d.routines)routines=d.routines;if(d.userImgs)userImgs=d.userImgs;if(d.history)history=d.history;if(d.settings)settings=Object.assign(settings,d.settings);
-      save();localStorage.setItem('sx-settings',JSON.stringify(settings));
-      setTheme(settings.theme||'dark');
-      alert('Imported successfully!');show('routines');
+      confirmSheet('This will replace your current routines, library, images and history. Continue?',()=>{
+        if(d.lib)lib=d.lib;if(d.routines)routines=d.routines;if(d.userImgs)userImgs=d.userImgs;if(d.history)history=d.history;if(d.settings)settings=Object.assign(settings,d.settings);
+        save();try{localStorage.setItem('sx-settings',JSON.stringify(settings));}catch(e){}
+        setTheme(settings.theme||'blueprint');
+        show('routines');
+      },'Replace');
     }catch(err){alert('Could not read that file.');}
   };
   r.readAsText(f);e.target.value='';
@@ -1717,38 +1950,97 @@ function onImportFile(e){
 
 /* ── MODAL ── */
 function openModal(html){document.getElementById('sheet').innerHTML=html;document.getElementById('overlay').classList.add('on');}
+function confirmSheet(msg,onYes,yesLabel){
+  openModal(`<p style="font-size:16px;font-weight:500;line-height:1.45;margin-bottom:18px">${msg}</p>
+    <div style="display:flex;gap:8px">
+      <button class="btn red" style="flex:1" id="cf-yes">${yesLabel||'Delete'}</button>
+      <button class="btn" style="flex:1" onclick="closeModal()">Cancel</button>
+    </div>`);
+  document.getElementById('cf-yes').onclick=()=>{closeModal();onYes();};
+}
 function closeModal(){document.getElementById('overlay').classList.remove('on');}
 function maybeClose(e){if(e.target===document.getElementById('overlay'))closeModal();}
 
 /* ── INIT ── */
 (function(){
-  const LIB_VERSION=3; // overhaul + mobility moves + PNF
+  const LIB_VERSION=5; // category overhaul (20 cats), presets removed
   const savedVersion=parseInt(localStorage.getItem('sx-libversion')||'1');
   if(savedVersion<LIB_VERSION){
     // Overhaul migration: replace built-in stretches with new library,
     // but KEEP user's custom stretches (ids starting with 'custom-' or 'x') and their images.
     const customs=lib.filter(s=>/^(custom-|x\d)/.test(s.id));
     lib=DEFAULTS.map(s=>({...s})).concat(customs);
-    // Rebuild prebuilt routines fresh (drop old built-ins, keep user-created ones
-    // that don't collide with prebuilt names)
-    const prebuiltNames=new Set(PREBUILT.map(p=>p.name));
-    routines=routines.filter(r=>!prebuiltNames.has(r.name)); // remove old built-ins by name
-    PREBUILT.forEach(p=>{
-      const stretches=p.ids.map(id=>getStretch(id)).filter(Boolean).map(s=>({...s,qid:uid(),dur:p.dur||s.dur}));
-      if(stretches.length)routines.unshift({id:uid(),name:p.name,stretches});
-    });
+    // Remove old preset routines (keep user-created routines)
+    const drop=new Set([...PREBUILT.map(p=>p.name),...OLD_PREBUILT_NAMES]);
+    routines=routines.filter(r=>!drop.has(r.name));
     localStorage.setItem('sx-libversion',String(LIB_VERSION));
   } else {
     // normal merge for same-version updates
     const ids=new Set(lib.map(s=>s.id));
     DEFAULTS.forEach(s=>{if(!ids.has(s.id)){lib.push({...s});ids.add(s.id);}});
-    const names=new Set(routines.map(r=>r.name));
-    PREBUILT.forEach(p=>{
-      if(!names.has(p.name)){
-        const stretches=p.ids.map(id=>getStretch(id)).filter(Boolean).map(s=>({...s,qid:uid(),dur:p.dur||s.dur}));
-        if(stretches.length)routines.push({id:uid(),name:p.name,stretches});
-      }
-    });
+  }
+  // assign categories (built-ins authoritative; customs keep their own cat)
+  lib.forEach(s=>{if(CAT[s.id])s.cat=CAT[s.id];else if(!s.cat)s.cat=catOf(s);});
+  // one-time patch: "Squat Mobility" -> "Prayer Squat Yoga Pose" rename (matches the real liftmanual page), fix any already-saved copies
+  if(!localStorage.getItem('sx-patched-squathold-v2')){
+    lib.forEach(s=>{if(s.id==='deep-squat')s.name='Prayer Squat Yoga Pose';});
+    routines.forEach(r=>r.stretches.forEach(s=>{if(s.id==='deep-squat')s.name='Prayer Squat Yoga Pose';}));
+    localStorage.setItem('sx-patched-squathold-v2','1');
+    localStorage.setItem('sx-patched-squathold','1'); // supersedes the old patch
+  }
+  // one-time seed: GROOVE/BOUNCE routines (added once; won't re-add if later deleted)
+  if(!localStorage.getItem('sx-seeded-groovebounce')){
+    const mk=(ids)=>ids.map(id=>{const s=lib.find(l=>l.id===id);return s?{...s,qid:uid()}:null;}).filter(Boolean);
+    const seedRoutines=[
+      {id:uid(),name:'GROOVE X — Squat Day',stretches:mk(['deep-squat','standing-quad','seated-single-hamstring','calf-wall','frog','cow-face','scorpion'])},
+      {id:uid(),name:'BOUNCE X',stretches:mk(['chest-front-shoulder','dead-hang','overhead-triceps','wrist-flexor','reverse-prayer','seated-back-twist','sphinx'])},
+      {id:uid(),name:'GROOVE Y — Hip Thrust Day',stretches:mk(['deep-squat','seated-groin','figure-four','butterfly','calf-wall','cow-face','scorpion'])},
+      {id:uid(),name:'BOUNCE Y',stretches:mk(['chest-front-shoulder','puppy-pose','dead-hang','overhead-triceps','wrist-flexor','reverse-prayer','seated-back-twist','sphinx'])},
+    ];
+    routines=routines.concat(seedRoutines);
+    localStorage.setItem('sx-seeded-groovebounce','1');
+  }
+  // one-time seed: yin-style short sessions (added once; won't re-add if later deleted)
+  if(!localStorage.getItem('sx-seeded-yinshort')){
+    const mkD=(specs)=>specs.map(([id,dur])=>{const s=lib.find(l=>l.id===id);return s?{...s,qid:uid(),dur}:null;}).filter(Boolean);
+    const yinShort=[
+      {id:uid(),name:'Groove Yin',stretches:mkD([['butterfly',90],['pigeon',75],['happy-baby',60],['seated-single-hamstring',60],['lying-quad',60],['sphinx',75],['supine-twist',60]])},
+      {id:uid(),name:'Bounce Yin',stretches:mkD([['child-pose',90],['puppy-pose',75],['sphinx',75],['reverse-prayer',60],['cow-face',60],['seated-back-twist',60]])},
+    ];
+    routines=routines.concat(yinShort);
+    localStorage.setItem('sx-seeded-yinshort','1');
+  }
+  // one-time seed: long rest-day yin sessions (added once; won't re-add if later deleted)
+  if(!localStorage.getItem('sx-seeded-yinlong')){
+    const mkD2=(specs)=>specs.map(([id,dur])=>{const s=lib.find(l=>l.id===id);return s?{...s,qid:uid(),dur}:null;}).filter(Boolean);
+    const yinLong=[
+      {id:uid(),name:'Yin A — Deep Hips & Hamstrings',stretches:mkD2([['child-pose',120],['pigeon',150],['frog',150],['seated-single-hamstring',120],['sphinx',90],['supine-twist',90],['legs-up-wall',180],['corpse',120]])},
+      {id:uid(),name:'Yin B — Spine & Adductors',stretches:mkD2([['puppy-pose',120],['butterfly',150],['sitting-wide-adductor',150],['double-pigeon',120],['thread-the-needle',90],['seated-back-twist',90],['legs-up-wall',180],['corpse',120]])},
+    ];
+    routines=routines.concat(yinLong);
+    localStorage.setItem('sx-seeded-yinlong','1');
+  }
+  // one-time seed: office routines (added once; won't re-add if later deleted)
+  if(!localStorage.getItem('sx-seeded-office')){
+    const mkD3=(specs)=>specs.map(([id,dur])=>{const s=lib.find(l=>l.id===id);return s?{...s,qid:uid(),dur}:null;}).filter(Boolean);
+    const office=[
+      {id:uid(),name:'Office · Lower Body',stretches:mkD3([['deep-squat',30],['standing-hip-flexor',45],['standing-hamstring',40],['standing-quad',40],['standing-figure-four',40]])},
+      {id:uid(),name:'Office · Upper Body & Wrists',stretches:mkD3([['chin-tuck',20],['chest-front-shoulder',40],['cross-over-shoulder',35],['overhead-triceps',30],['wrist-flexor',20],['wrist-extensor',20]])},
+    ];
+    routines=routines.concat(office);
+    localStorage.setItem('sx-seeded-office','1');
+  }
+  // one-time seed: office routines v2 — lower/upper, two versions each, hunchback-focused (added once; won't re-add if later deleted)
+  if(!localStorage.getItem('sx-seeded-office-v2')){
+    const mkD4=(specs)=>specs.map(([id,dur])=>{const s=lib.find(l=>l.id===id);return s?{...s,qid:uid(),dur}:null;}).filter(Boolean);
+    const officeV2=[
+      {id:uid(),name:'Office · Lower A',stretches:mkD4([['deep-squat',30],['kneeling-hip-flexor',40],['standing-hamstring',35],['standing-quad',35],['pigeon',35]])},
+      {id:uid(),name:'Office · Lower B',stretches:mkD4([['couch-stretch',40],['calf-wall',30],['revolved-triangle',30],['lying-glute',35]])},
+      {id:uid(),name:'Office · Upper A — Hunchback Fix',stretches:mkD4([['chin-tuck',20],['chest-front-shoulder',40],['sphinx',60],['cow-face',30],['side-push-neck',25]])},
+      {id:uid(),name:'Office · Upper B — Hunchback Fix',stretches:mkD4([['chin-to-chest',25],['reverse-chest',40],['scapula-retraction',30],['seated-shoulder-flexor-depressor-retractor',40],['rear-deltoid',30]])},
+    ];
+    routines=routines.concat(officeV2);
+    localStorage.setItem('sx-seeded-office-v2','1');
   }
   save();
   renderRoutines();renderLib();renderSettings();
